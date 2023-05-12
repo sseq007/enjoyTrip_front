@@ -1,14 +1,23 @@
 <template>
   <div id="app">
-    <nav>
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/notice">About</router-link> -->
-    </nav>
     <router-view/>
+    <the-footer></the-footer>
   </div>
 </template>
 
+<script>
+import TheFooter from "./components/TheFooter.vue"
+
+export default {
+  components:{
+    TheFooter,
+  }
+}
+</script>
+
 <style>
+
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
