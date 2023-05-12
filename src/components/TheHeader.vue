@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column min-vh-100">
+    <div class="d-flex flex-column min-vh-80">
 	<!-- [S] navbar -->
 	<nav class="navbar navbar-expand-lg fixed-top">
 		<div class="container">
@@ -23,10 +23,11 @@
 								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">지역별여행지</p></a>
 					</li>
 					<li class="nav-item py-2" style="opacity: 80%"><i
-						class="fi fi-rr-calendar ps-3"></i> <a
+						class="fi fi-rr-calendar ps-3"></i> <router-link
+						:to="'/notice/list'"
 						class="nav-link active ps-0" aria-current="page"
-						href="" style="display: inline"><p
-								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">나의여행계획</p></a>
+						style="display: inline"><p
+								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">나의여행계획</p></router-link>
 					</li>
 
 					<li class="nav-item py-2" style="opacity: 80%"><i
@@ -43,11 +44,11 @@
 								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">여행정보공유</p></a>
 					</li>
 					<li class="nav-item py-2" style="opacity: 80%"><i
-						class="fi fi-rr-megaphone ps-3"></i> <a
+						class="fi fi-rr-megaphone ps-3"></i> <router-link
+						:to="'/notice/list'"
 						class="nav-link active ps-0" aria-current="page"
-						href=""
 						style="display: inline"><p
-								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">공지사항</p></a>
+								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">공지사항</p></router-link>
 					</li>
 				</ul>
 
@@ -80,8 +81,8 @@
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item"
 									href="">로그아웃</a></li>
-								<li><a class="dropdown-item"
-									href="">마이 페이지</a></li>
+								<li><router-link :to="'/user/userPage'" class="dropdown-item"
+									>마이 페이지</router-link></li>
 							</ul></li>
 					</ul>
 				</div>

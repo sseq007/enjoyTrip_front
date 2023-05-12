@@ -1,6 +1,6 @@
 <template>
     <div style="height: 77px">
-         <div class="mt-auto">
+        <div class="mt-auto">
             <div class="container justify-content-end align-items-center my-4">
                 <div class="row">
                     <div

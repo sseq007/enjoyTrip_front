@@ -12,9 +12,9 @@
           <div class="row">
 			<div class="col-md-7">
             </div>
-           </div>
-         </div>
-         <table class="table">
+          </div>
+        </div>
+        <table class="table">
             <thead>
                 <tr class="text-center">
                     <th>글번호</th>

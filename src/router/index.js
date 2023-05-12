@@ -4,15 +4,22 @@ import notice from '../views/notice/noticeBoard'
 import noticeWrite from '../components/notice/noticeWrite'
 import noticeModify from '../components/notice/noticeModify'
 import noticeContent from '../components/notice/noticeContent'
+import userPage from '@/components/user/userPage'
+import userDelete from '@/components/user/userDelete'
 
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: HomeView
-  // },
+  {
+    path: '/user/userPage',
+    name: 'myPage',
+    component: userPage
+  },
+  {
+    path: '/user/userDelete',
+    name: 'userDelete',
+    component: userDelete
+  },
   {
     path: '/notice/write',
     name: 'noticeWrite',

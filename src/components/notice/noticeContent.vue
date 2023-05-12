@@ -22,14 +22,12 @@
         <div>
         {{article.content}}
         </div>
-       
 	<br/>
 	
         <!-- button -->
         <div class="col text-center">
             <button type="button" class="btn btn-outline-secondary" onclick="location.href='/notice/list'">글목록</button>
             <router-link :to="'/noticemodify/' + article.articleNo" class="btn btn-outline-secondary">글수정</router-link>
-           
             <!-- <button type="button" class="btn btn-outline-secondary">글수정</button> -->
             <button type="button"  id = "btn-delete" class="btn btn-outline-secondary" @click="deleteArticle">글삭제</button>
             
