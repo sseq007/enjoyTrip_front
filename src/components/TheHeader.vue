@@ -1,5 +1,5 @@
 <template>
-    <body class="d-flex flex-column min-vh-100">
+	<body class="d-flex flex-column min-vh-100">
 	<!-- [S] navbar -->
 	<nav class="navbar navbar-expand-lg fixed-top">
 		<div class="container">
@@ -92,23 +92,14 @@
 			</div>
 		</div>
 	</nav>
+	</body>
 	<!-- [E] navbar -->
-</template>
 
-<script>
-export default {
-    
-}
-</script>
 
-<style scoped>
 
-</style>
 
 
 <!-- 로그인 기능 탑재 -->
-
-
 
 	<!-- [S] login modal-->
 	<div class="modal fade" id="loginModal" data-bs-backdrop="static"
@@ -130,7 +121,7 @@ export default {
 						<input type="hidden" name="action" value="login" />
 						<div class="mb-3 mt-3">
 							<label for="id" class="form-label">ID:</label>
-							<%
+							<!-- <%
 							String c = "";
 
 							Cookie[] cookies = request.getCookies();
@@ -142,7 +133,7 @@ export default {
 									}
 								}
 							}
-							%>
+							%> -->
 							<input type="id" class="form-control" id="login-id"
 								name="userId" placeholder="Enter ID" />
 						</div>
@@ -253,9 +244,11 @@ export default {
 			</div>
 		</div>
 	</div>
+	
 	<!-- [E] sign up modal-->
 
 	<div style="height: 77px"></div>
+</template>
 	<script>
 	/* 회원가입 창에서 프로필 바꾸는 법 */
 	$("#profile").change(function(){

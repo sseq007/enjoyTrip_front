@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+import HomeView from '../views/HomeView'
 import notice from '../views/notice/noticeBoard'
 import noticeWrite from '../components/notice/noticeWrite'
 import noticeModify from '../components/notice/noticeModify'
@@ -8,11 +10,11 @@ import noticeContent from '../components/notice/noticeContent'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: HomeView
-  // },
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView
+  },
   {
     path: '/notice/write',
     name: 'noticeWrite',
