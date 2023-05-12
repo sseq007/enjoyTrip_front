@@ -30,7 +30,8 @@
         </table>
     </div>
     <button type="button" class="btn btn-outline-secondary" style="float: right">
-        <a href="/notice/write" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</a>
+        <!-- <a href="/notice/write" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</a> -->
+        <router-link :to="'/notice/write'" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</router-link>
     </button>
 </div>
 </template>

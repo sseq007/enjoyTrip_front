@@ -1,7 +1,7 @@
 <template>
     <div class="container">
     <div>
-        <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">공지사항</h2>
+        <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">공지 사항</h2>
         <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
     </div>
 
@@ -28,9 +28,9 @@
         <!-- button -->
         <div class="col text-center">
             <button type="button" class="btn btn-outline-secondary" onclick="location.href='/notice/list'">글목록</button>
-            
+            <router-link :to="'/noticemodify/' + article.articleNo" class="btn btn-outline-secondary">글수정</router-link>
            
-            <button type="button" class="btn btn-outline-secondary">글수정</button>
+            <!-- <button type="button" class="btn btn-outline-secondary">글수정</button> -->
             <button type="button"  id = "btn-delete" class="btn btn-outline-secondary" @click="deleteArticle">글삭제</button>
             
         </div>
