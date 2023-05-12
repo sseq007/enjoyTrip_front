@@ -73,7 +73,3 @@ export default {
 };
 </script>
 
-<!-- <style>
-  @import '@/assets/css/index_style.css';
-  @import '@/assets/css/style.css';
-</style> -->

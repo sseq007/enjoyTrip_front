@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+import HomeView from '../views/HomeView'
 import notice from '../views/notice/noticeBoard'
 import noticeWrite from '../components/notice/noticeWrite'
 import noticeModify from '../components/notice/noticeModify'
@@ -11,6 +13,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+<<<<<<< HEAD
     path: '/user/userPage',
     name: 'myPage',
     component: userPage
@@ -19,6 +22,11 @@ const routes = [
     path: '/user/userDelete',
     name: 'userDelete',
     component: userDelete
+=======
+    path: '/',
+    name: 'home',
+    component: HomeView
+>>>>>>> a94056c36c0613e1ded0723d845d5700b7055da2
   },
   {
     path: '/notice/write',
