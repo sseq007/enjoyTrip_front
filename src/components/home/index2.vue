@@ -243,25 +243,25 @@
                             <div class="carousel-item active">
                                 <a href="${root }/board/hotplace/list">
                                     <img
-                                        src="${root }/assets/img/main-content-right-bottom-1.png"
+                                        src="/assets/img/main-content-right-bottom-1.png"
                                         class="d-block w-100"
                                         alt="하단이미지"
                                     />
                                 </a>
                             </div>
                             <div class="carousel-item">
-                                <a href="${root }/board/hotplace/list">
+                                <a href="/board/hotplace/list">
                                     <img
-                                        src="${root }/assets/img/main-content-right-bottom-2.png"
+                                        src="/assets/img/main-content-right-bottom-2.png"
                                         class="d-block w-100"
                                         alt="하단이미지"
                                     />
                                 </a>
                             </div>
                             <div class="carousel-item">
-                                <a href="${root }/board/hotplace/list">
+                                <a href="/board/hotplace/list">
                                     <img
-                                        src="${root }/assets/img/main-content-right-bottom-3.png"
+                                        src="/assets/img/main-content-right-bottom-3.png"
                                         class="d-block w-100"
                                         alt="하단이미지"
                                     />
@@ -269,18 +269,18 @@
                             </div>
 
                             <div class="carousel-item">
-                                <a href="${root }/board/hotplace/list">
+                                <a href="/board/hotplace/list">
                                     <img
-                                        src="${root }/assets/img/main-content-right-bottom-4.png"
+                                        src="/assets/img/main-content-right-bottom-4.png"
                                         class="d-block w-100"
                                         alt="하단이미지"
                                     />
                                 </a>
                             </div>
                             <div class="carousel-item">
-                                <a href="${root }/board/hotplace/list">
+                                <a href="/board/hotplace/list">
                                     <img
-                                        src="${root }/assets/img/main-content-right-bottom-5.png"
+                                        src="/assets/img/main-content-right-bottom-5.png"
                                         class="d-block w-100"
                                         alt="하단이미지"
                                     />
