@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr class="text-center">
     <th>{{article.articleNo}}</th>
     <th><router-link :to="'/noticeview/' + article.articleNo" style="background-color: transparent; color: #000; text-decoration-line: none">{{article.subject}}</router-link></th>
     <th>{{article.userId}}</th>

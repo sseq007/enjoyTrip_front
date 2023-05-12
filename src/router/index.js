@@ -38,7 +38,7 @@ const routes = [
     component : noticeContent
   },
   {
-    path: '/noticemodify/:articleno',
+    path: '/noticemodify/:articleNo',
     name: 'noticemodify',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

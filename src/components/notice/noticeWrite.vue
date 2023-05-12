@@ -59,13 +59,13 @@ export default {
       // TODO : 글번호에 해당하는 글정보 등록.
       console.log("글작성 하러가자!!!!");
       var formData = {
-        userId : "sseq",
+        userId : "ssafy",
         subject : this.$refs.subject.value,
         content: this.$refs.content.value
       }
       
       console.log(formData)
-    axios.post('http://localhost:9090/api/sharetravel/write', formData, {
+    axios.post('http://localhost:8080/api/sharetravel/write', formData, {
     headers: {
         'Content-Type': 'application/json'
     }

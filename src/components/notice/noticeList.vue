@@ -30,7 +30,8 @@
         </table>
     </div>
     <button type="button" class="btn btn-outline-secondary" style="float: right">
-        <a href="/notice/write" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</a>
+        <!-- <a href="/notice/write" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</a> -->
+        <router-link :to="'/notice/write'" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</router-link>
     </button>
 </div>
 </template>
@@ -53,7 +54,7 @@ export default {
     // 비동기
     // TODO : 글목록 얻기.
 
-  axios.get('http://localhost:9090/api/sharetravel/list')
+  axios.get('http://localhost:8080/api/sharetravel/list')
     .then(response => {
       console.log(response.data);
       this.articles = response.data;
@@ -72,7 +73,7 @@ export default {
 };
 </script>
 
-<style>
+<!-- <style>
   @import '@/assets/css/index_style.css';
   @import '@/assets/css/style.css';
-</style>
+</style> -->
