@@ -53,7 +53,7 @@ export default {
     // 비동기
     // TODO : 글목록 얻기.
 
-  axios.get('http://localhost:9090/api/sharetravel/list')
+  axios.get('http://localhost:8080/api/sharetravel/list')
     .then(response => {
       console.log(response.data);
       this.articles = response.data;
@@ -72,7 +72,7 @@ export default {
 };
 </script>
 
-<style>
+<!-- <style>
   @import '@/assets/css/index_style.css';
   @import '@/assets/css/style.css';
-</style>
+</style> -->

@@ -31,7 +31,7 @@
             
            
             <button type="button" class="btn btn-outline-secondary">글수정</button>
-            <button type="button"  id = "btn-delete" class="btn btn-outline-secondary" >글삭제</button>
+            <button type="button"  id = "btn-delete" class="btn btn-outline-secondary" @click="deleteArticle">글삭제</button>
             
         </div>
     </div>
@@ -50,7 +50,7 @@ export default {
   created() {
     // 비동기
     // TODO : 글번호에 해당하는 글정보 얻기.
-    axios.get(`http://localhost:9090/api/sharetravel/view/${this.$route.params.articleNo}`)
+    axios.get(`http://localhost:8080/api/sharetravel/view/${this.$route.params.articleNo}`)
     .then(response => {
       console.log(response.data);
       this.article = response.data;
@@ -62,7 +62,17 @@ export default {
   },
   methods: {
     deleteArticle(){
-     
+      axios.delete(`http://localhost:8080/api/sharetravel/delete/${this.$route.params.articleNo}`)
+    .then(response => {
+        console.log(response);
+        alert('삭제되었습니다.');
+        this.$router.push('/notice/list');
+  
+
+    })
+    .catch(error => {
+      console.log(error);
+    });
     }
   }
 
