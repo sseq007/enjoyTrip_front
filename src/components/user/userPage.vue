@@ -31,7 +31,7 @@
                                             <img src="@/assets/img/noimg.jpg" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
                                         </c:when>
                                         <c:otherwise>
-                                            <img src="@/upload/${user.profileImage}" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
+                                            <img src="" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
                                         </c:otherwise>
                                     </c:choose>
                                     

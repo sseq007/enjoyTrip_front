@@ -1,72 +1,70 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-import HomeView from '../views/HomeView'
-import notice from '../views/notice/noticeBoard'
-import noticeWrite from '../components/notice/noticeWrite'
-import noticeModify from '../components/notice/noticeModify'
-import noticeContent from '../components/notice/noticeContent'
-import userPage from '@/components/user/userPage'
-import userDelete from '@/components/user/userDelete'
+import HomeView from "../views/HomeView";
+import notice from "../views/notice/noticeBoard";
+import noticeWrite from "../components/notice/noticeWrite";
+import noticeModify from "../components/notice/noticeModify";
+import noticeContent from "../components/notice/noticeContent";
+import userPage from "@/components/user/userPage";
+import userDelete from "@/components/user/userDelete";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-<<<<<<< HEAD
-    path: '/user/userPage',
-    name: 'myPage',
-    component: userPage
+    path: "/user/userPage",
+    name: "myPage",
+    component: userPage,
   },
   {
-    path: '/user/userDelete',
-    name: 'userDelete',
-    component: userDelete
-=======
-    path: '/',
-    name: 'home',
-    component: HomeView
->>>>>>> a94056c36c0613e1ded0723d845d5700b7055da2
+    path: "/user/userDelete",
+    name: "userDelete",
+    component: userDelete,
   },
   {
-    path: '/notice/write',
-    name: 'noticeWrite',
+    path: "/",
+    name: "home",
+    component: HomeView,
+  },
+  {
+    path: "/notice/write",
+    name: "noticeWrite",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component : noticeWrite
+    component: noticeWrite,
   },
   {
-    path: '/notice/list',
-    name: 'notice',
+    path: "/notice/list",
+    name: "notice",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component : notice
+    component: notice,
   },
   {
-    path: '/noticeview/:articleNo',
-    name: 'noticeview',
+    path: "/noticeview/:articleNo",
+    name: "noticeview",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component : noticeContent
+    component: noticeContent,
   },
   {
-    path: '/noticemodify/:articleNo',
-    name: 'noticemodify',
+    path: "/noticemodify/:articleNo",
+    name: "noticemodify",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component : noticeModify
+    component: noticeModify,
   },
-  
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
