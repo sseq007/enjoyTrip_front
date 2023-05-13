@@ -26,15 +26,7 @@
                         <hr class="mb-3 mt-0" align="left" style="border: solid 2px #ffb5a7; width: 30%; opacity: 100%" />
                         <div class="mb-3 mt-3" align="center">
                                 <div class="userProfile mb-3 mt-3">
-                                    <c:choose>
-                                        <c:when test="${empty user.profileImage}">
-                                            <img src="@/assets/img/noimg.jpg" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
-                                        </c:when>
-                                        <c:otherwise>
-                                            <img src="" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
-                                        </c:otherwise>
-                                    </c:choose>
-                                    
+                                    <img v-if="member.userProfile == null" src="@/assets/img/noimg.jpg" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">                                 
                                 </div>
                                 <div>
                                     <label className="input-file-button" for="updateProfile" style="padding: 6px 25px; border-radius: 4px; border: solid 2px #ffb5a7; color: #663333 ">업로드</label>
@@ -45,26 +37,26 @@
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="up-userId" class="form-label" style="color: #663333">id:</label>
-                            <input type="text" class="form-control" id="up-userId" name="userId" value="ssafy" disabled="true"/>
+                            <input type="text" class="form-control" id="up-userId" name="userId" :value="member.userId" disabled="true"/>
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="up-userName" class="form-label" style="color: #663333">이름:</label>
-                            <input type="text" class="form-control" id="up-userName" name="userName" value="${user.userName }" />
+                            <input type="text" class="form-control" id="up-userName" name="userName" ref="userName" :value="member.userName" />
                         </div>
                         <div class="mb-3">
                             <label for="up-userPw" class="form-label" style="color: #663333">Password:</label>
-                            <input type="password" class="form-control" id="up-userPw" name="userPw" value="${user.userPw }" />
+                            <input type="password" class="form-control" id="up-userPw" name="userPw" ref="userPw" :value="member.userPw" />
                         </div>
                         <div class="form-row align-items-center">
                             <div class="col-sm-10 my-1">
                                 <label class="form-label" for="email id" style="color: #663333">Email:</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="up-emailId" name="emailId" value="${user.emailId }" />
+                                    <input type="text" class="form-control" id="up-emailId" name="emailId" ref="emailId" :value="member.emailId" />
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">@</div>
                                     </div>
-                                    <select id="up-emailDomain" class="form-control" name="emailDomain">
-                                        <option selected>${user.emailDomain }</option>
+                                    <select id="up-emailDomain" class="form-control" name="emailDomain" ref="emailDomain">
+                                        <option selected>{{member.emailDomain}}</option>
                                         <option value="naver">naver.com</option>
                                         <option value="google">gmail.com</option>
                                         <option value="daum">daum.net</option>
@@ -74,10 +66,10 @@
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="joinDate" class="form-label" style="color: #663333">등록일자:</label>
-                            <input type="text" class="form-control" id="up-joinDate" name="joinDate" value="${user.joinDate }" disabled="true"/>
+                            <input type="text" class="form-control" id="up-joinDate" name="joinDate" :value="member.joinDate" disabled="true"/>
                         </div>
                         <div style="text-align: center">
-                            <button type="button" class="btn btn-outline-secondary m-0 mt-4 mb-3" id="btn-modify">수정</button>
+                            <button type="button" class="btn btn-outline-secondary m-0 mt-4 mb-3" id="btn-modify" @click="checkValue">수정</button>
                             <button type="button" class="btn btn-outline-secondary m-0 mt-4 mb-3">취소</button>
                         </div>
                     </div>
@@ -93,58 +85,55 @@ import axios from "axios";
 export default{
     name: "userPage",
     components:{
-
     },
     data() {
         return{
-            user:{}
+            member:{}
         };
     },
     created(){
-        axios.get()
-    }
-}
+        axios.get(`http://localhost:8080/api/member/view/ssafy`)
+        .then(res => {
+            console.log(res);
+            this.member = res.data;
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    },
+    methods: {
+        checkValue(){
+            let err = true;
+            let msg = "";
+
+            err && !this.$refs.userPw.value && ((msg = "비밀번호를 입력해 주세요"), (err = false), this.$refs.userPw.focus());
+            err && !this.$refs.userName.value && ((msg = "이름을 입력해 주세요"), (err = false), this.$refs.userName.focus());
+            if (!err) alert(msg);
+            // 만약, 내용이 다 입력되어 있다면 registArticle 호출
+             else this.updateMember(); 
+        },
+        updateMember(){
+            // 비동기
+            var formdata = {
+                userId : "ssafy",
+                userName: this.$refs.userName.value,
+                userPw: this.$refs.userPw.value,
+                emailId: this.$refs.emailId.value,
+                emailDomain: this.$refs.emailDomain.value,
+            }
+            axios.put(`http://localhost:8080/api/member/modify`, formdata,{
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                console.log('수정 내용: ', res.data);
+                location.href = '/';
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        },
+    },
+};
 </script>
-
-<script>
-// 	$("#updateProfile").change(function(){
-// 	if(this.files && this.files[0]){
-// 		var reader = new FileReader;
-// 		reader.onload = function(data){
-// 			$(".userProfile img").attr("src", data.target.result);
-// 		}
-// 		reader.readAsDataURL(this.files[0]);
-// 	}
-// 	});
-
-//     document.querySelector("#btn-modify").addEventListener("click", function(){
-// 	if(!document.querySelector("#up-userName").value){
-// 		alert("이름을 입력해 주세요");
-// 		return;
-// 	}else if(!document.querySelector("#up-userPw").value){
-// 		alert("비밀번호를 입력해 주세요");
-//         return
-//     }else if(!document.querySelector("#up-emailId").value){
-//     alert("이메일 아이디를 입력해 주세요");
-// 	return
-// 	}else if(!document.querySelector("#up-emailDomain").value){
-// 		alert("이메일 도메인을 입력해 주세요");
-// 		return
-// 	}else{
-// 		$("#up-userId").attr("disabled", false);
-// 		let form = document.querySelector("#form-update");
-// 		form.setAttribute('action', '${root }/member/update');
-// 		form.submit();
-// 	}
-//     });
-//     document.querySelector("#btn-delete").addEventListener("click", function(){
-//         if(!document.querySelector("#pwdCheck").value){
-//             alert("현재 비밀번호를 입력해 주세요");
-//             return;
-//         }else if(document.querySelector("#pwdCheck").value != "${user.userPw}"){
-//             alert("현재 비밀번호와 다릅니다");
-//             return; 
-//         }else{
-//             location.href = '${root }/member/delete';
-//         }
-//     });

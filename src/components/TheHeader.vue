@@ -173,39 +173,39 @@
 						<div class="mb-3 mt-3">
 							<label for="name" class="form-label">이름:</label> <input
 								type="text" class="form-control" id="name"
-								placeholder="Enter name" name="userName"/>
+								placeholder="Enter name" name="userName" ref="userName"/>
 						</div>
 						<div class="mb-3">
 							<label for="id" class="form-label">ID:</label> <input type="text"
 								class="form-control" id="id" placeholder="Enter ID"
-								name="userId"/>
+								name="userId" ref="userId"/>
 						</div>
 						<div id="idcheck-result"></div>
 						<div class="mb-3">
 							<label for="pw" class="form-label">Password:</label> <input
 								type="password" class="form-control" id="pw"
-								placeholder="Enter password" name="userPw" />
+								placeholder="Enter password" name="userPw" ref="userPw"/>
 						</div>
 						<div class="mb-3">
 							<label for="pwCheck" class="form-label">Password check:</label> <input
 								type="password" class="form-control" id="pwCheck"
-								placeholder="비밀번호 확인" name="regipw-check"/>
+								placeholder="비밀번호 확인" name="regipw-check" ref="pwCheck"/>
 						</div>
 						<div class="form-row align-items-center">
 							<div class="col-sm-10 my-1">
 								<label class="form-label" for="emailId">Email:</label>
 								<div class="input-group">
-									<input type="text" class="form-control" id="emailId"
+									<input type="text" class="form-control" id="emailId" ref="emailId"
 										name="emailId" placeholder="이메일 아이디"/>
 									<div class="input-group-prepend">
 										<div class="input-group-text">@</div>
 									</div>
-									<select id="emailDomain" name="emailDomain"
+									<select id="emailDomain" name="emailDomain" ref="emailDomain"
 										class="form-control">
 										<option selected>도메인 선택</option>
-										<option value="naver">naver.com</option>
-										<option value="google">gmail.com</option>
-										<option value="daum">daum.net</option>
+										<option value="naver.com">naver.com</option>
+										<option value="google.com">gmail.com</option>
+										<option value="daum.net">daum.net</option>
 									</select>
 								</div>
 							</div>
@@ -216,7 +216,7 @@
 				<!-- Modal Footer -->
 				<div class="modal-footer">
 					<button type="button" id="btn-mv-join"
-						class="btn btn-outline-secondary">회원가입</button>
+						class="btn btn-outline-secondary" @click="checkValue">회원가입</button>
 				</div>
 			</div>
 		</div>
@@ -226,6 +226,63 @@
 	</div>
 </template>
 
-<style scoped>
+<script>
+import axios from "axios";
+export default {
+	name: "TheHeader",
+	components:{		
+	},
+	data(){
+		return{
+		};
+	},
+	created(){
 
+	},
+	methods:{
+		checkValue(){
+			let err = true;
+			let msg = "";
+
+			err && !this.$refs.userName.value && ((msg = "이름을 입력해 주세요"), (err = false), this.$refs.userName.focus());
+			err && !this.$refs.userId.value && ((msg = "id를 입력해주세요"), (err = false), this.$refs.userId.focus());
+            err && !this.$refs.userPw.value && ((msg = "비밀번호를 입력해 주세요"), (err = false), this.$refs.userPw.focus());
+			
+			
+			if(this.$refs.userPw.value != this.$refs.pwCheck.value){
+				err = false;
+				msg = "비밀번호를 다시 확인해 주세요";
+			}
+			if (!err) alert(msg);
+            // 만약, 내용이 다 입력되어 있다면 registArticle 호출
+             else this.registerMember(); 
+		},
+		registerMember(){
+			var formdata = {
+				userName : this.$refs.userName.value,
+				userId : this.$refs.userId.value,
+				userPw : this.$refs.userPw.value,
+				emailDomain : this.$refs.emailDomain.value,
+				emailId: this.$refs.emailId.value
+			}
+			console.log(formdata);
+			axios.post('http://localhost:8080/api/member/register', formdata,{
+				headers: {
+        			'Content-Type': 'application/json'
+   				}
+			})
+			.then(res => {
+				console.log(res);
+				location.href = '/';
+			})
+			.catch(err => {
+				console.log(err);
+			});
+		},
+	},
+};
+</script>
+
+
+<style scoped>
 </style>

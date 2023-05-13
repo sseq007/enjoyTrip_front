@@ -1,6 +1,6 @@
 <template>
     
-        <footer class="mt-auto">
+        <div class="mt-auto">
              
             <div class="container justify-content-end align-items-center my-4">
                 <div class="row">
@@ -91,7 +91,7 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
     
 </template>
 
