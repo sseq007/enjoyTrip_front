@@ -18,8 +18,7 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item py-2" style="opacity: 80%"><i
 						class="fi fi-rr-marker ps-3"></i> 
-						<router-link :to="'/'" class="nav-link active ps-0"
-						aria-current="page" rou
+						<router-link :to="'/triplocation'" class="nav-link active ps-0" aria-current="page" 
 						style="display: inline"> 
 						<p style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">지역별여행지</p></router-link>
 					</li>

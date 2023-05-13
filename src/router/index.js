@@ -3,12 +3,12 @@ import VueRouter from "vue-router";
 
 import HomeView from "../views/HomeView";
 import notice from "../views/notice/noticeBoard";
+import location from "../views/location/tripLocation";
 import noticeWrite from "../components/notice/noticeWrite";
 import noticeModify from "../components/notice/noticeModify";
 import noticeContent from "../components/notice/noticeContent";
 import userPage from "@/components/user/userPage";
 import userDelete from "@/components/user/userDelete";
-
 Vue.use(VueRouter);
 
 const routes = [
@@ -26,6 +26,11 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/triplocation",
+    name: "triplocation",
+    component: location,
   },
   {
     path: "/notice/write",
