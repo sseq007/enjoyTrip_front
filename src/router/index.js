@@ -9,6 +9,8 @@ import noticeModify from "../components/notice/noticeModify";
 import noticeContent from "../components/notice/noticeContent";
 import userPage from "@/components/user/userPage";
 import userDelete from "@/components/user/userDelete";
+import tripPartner from "../views/partner/tripPartner";
+import partnerWrite from "../components/partner/partnerWrite";
 Vue.use(VueRouter);
 
 const routes = [
@@ -63,6 +65,16 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: noticeModify,
+  },
+  {
+    path: "/trippartner",
+    name: "trippartner",
+    component: tripPartner,
+  },
+  {
+    path: "/trippartner/write",
+    name: "partnerWrite",
+    component: partnerWrite,
   },
 ];
 
