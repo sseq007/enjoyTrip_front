@@ -37,11 +37,11 @@
 								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">핫플자랑하기</p></a>
 					</li>
 					<li class="nav-item py-2" style="opacity: 80%"><i
-						class="fi fi-rr-paper-plane ps-3"></i> <a
+						class="fi fi-rr-paper-plane ps-3"></i> <router-link
 						class="nav-link active ps-0" aria-current="page"
-						href=""
+						:to="'/trippartner'"
 						style="display: inline"><p
-								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">여행정보공유</p></a>
+								style="font-family:'Noto Sans KR', sans-serif; opacity: 70%; display: inline">동행찾기</p></router-link>
 					</li>
 					<li class="nav-item py-2" style="opacity: 80%"><i
 						class="fi fi-rr-megaphone ps-3"></i> <router-link
