@@ -11,6 +11,7 @@ import userPage from "@/components/user/userPage";
 import userDelete from "@/components/user/userDelete";
 import tripPartner from "../views/partner/tripPartner";
 import partnerWrite from "../components/partner/partnerWrite";
+import partnerContent from "../components/partner/partnerContent";
 Vue.use(VueRouter);
 
 const routes = [
@@ -75,6 +76,11 @@ const routes = [
     path: "/trippartner/write",
     name: "partnerWrite",
     component: partnerWrite,
+  },
+  {
+    path: "/trippartnerview/:articleNo",
+    name: "partnerContent",
+    component: partnerContent,
   },
 ];
 

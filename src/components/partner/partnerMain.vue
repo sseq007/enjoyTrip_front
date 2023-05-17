@@ -42,50 +42,8 @@
                 </div>
                 <div style="height: 77px"></div>
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <div class="card mb-3">
-                            <!-- <img src="..." class="card-img-top" alt="Card image cap"> -->
-                            <div class="card-body">
-                                <h5 class="card-title">Card Title 1</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <a href="#" class="btn btn-outline-secondary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <div class="card mb-3">
-                            <!-- <img src="..." class="card-img-top" alt="Card image cap"> -->
-                            <div class="card-body">
-                                <h5 class="card-title">Card Title 2</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <a href="#" class="btn btn-outline-secondary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <div class="card mb-3">
-                            <!-- <img src="..." class="card-img-top" alt="Card image cap"> -->
-                            <div class="card-body">
-                                <h5 class="card-title">Card Title 3</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <a href="#" class="btn btn-outline-secondary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <div class="card mb-3">
-                            <!-- <img src="..." class="card-img-top" alt="Card image cap"> -->
-                            <div class="card-body">
-                                <h5 class="card-title">Card Title 4</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <a href="#" class="btn btn-outline-secondary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
+                    <partner-list-item v-for="article in articles" :key="article.articleNo" :article="article"> </partner-list-item>
+                    
                 </div>
                 <!-- </div> -->
 
@@ -98,11 +56,12 @@
 
 
 <script>
-
+import axios from "axios";
+import PartnerListItem from './partnerListitem.vue';
 export default {
     name: "PartnerMain",
     components: {
-
+        PartnerListItem
     },
     data() {
         return {
@@ -110,8 +69,14 @@ export default {
         };
     },
     created() {
-        // 비동기
-        // TODO : 글목록 얻기.
+        axios.get('http://localhost:8080/api/trippartner/list')
+    .then(response => {
+      console.log(response.data);
+      this.articles = response.data;
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
 
     },

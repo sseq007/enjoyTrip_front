@@ -16,8 +16,8 @@
                     <div class="list-group" id="list-tab" role="tablist" style="text-align: center;">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <a class="list-group-item list-group-item-action list-group-item-light " id="list-home-list"
-                                    data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">서울</a>
+                                <a class="list-group-item list-group-item-action list-group-item-light " id="list-seoul-list"
+                                    data-bs-toggle="list" href="#list-seoul" role="tab" aria-controls="list-seoul">서울</a>
                                 <a class="list-group-item list-group-item-action list-group-item-light"
                                     id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab"
                                     aria-controls="list-profile">인천</a>
@@ -74,24 +74,25 @@
                 </div>
 
                 <div class="col-9">
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="list-home" role="tabpanel"
-                            aria-labelledby="list-home-list">
+                    
+
                             <div class="col-8">
                                 <div class="d-flex">
                                     <select class="form-select" aria-label="Default select example">
-                                        <option selected>상세지역</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option selected>모집목적</option>
+                                        <option value="1">카플</option>
+                                        <option value="2">맛집</option>
+                                        <option value="3">기타</option>
+                                        
                                     </select>
 
                                     <!-- <label for="board-write-title" class="form-label">모집인원 </label> -->
                                     <select class="form-select ms-1" aria-label="Default select example">
                                         <option selected>모집인원</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option value="1">1명</option>
+                                        <option value="2">2명</option>
+                                        <option value="3">3명</option>
+                                        <option value="3">4명이상</option>
                                     </select>
 
                                 </div>
@@ -111,24 +112,18 @@
                             </div>
 
 
-                        </div>
-                        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                            ㅁㅇㄻㅇㄻㄹㅇㅁㄻㄴㄻㄴㄻㄴㄹㅇㄴㅁ
-                        </div>
-                        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                            ...</div>
-                        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-                            ...</div>
-                    </div>
+                       
+                        
+                    
                 </div>
             </div>
             <div style="height: 77px"></div>
             <div class="mb-3 file btn btn-lg  d-flex align-items-center justify-content-center"
                 style="width: 100%; height: 350px; overflow: hidden; background-color: white;">
-                Upload
-                <label class="m-0">
+                <!-- Upload -->
+                <!-- <label class="m-0"> -->
                     <input style="opacity: 0; text-align: center; width: 100%; height: 350px;" type="file" name="file" />
-                </label>
+                <!-- </label> -->
             </div>
             <div>
 
@@ -144,18 +139,17 @@
 
                 <textarea style="height: 450px;" class="form-control" rows="5" id="board-write-content"
                     name="board-write-content" placeholder="1. 현재 동행이 있나요? 
-                            ex) 혼자에요 / 동행 1명이 있어요 
+        ex) 혼자에요 / 동행 1명이 있어요 
      
     
-                    2.어떤 동행을 찾고 있나요? 
-                            ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
-                            ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
+2.어떤 동행을 찾고 있나요? 
+        ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
+        ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
 
 
-                    3. 원하는 여행 코스가 있다면 알려주세요!
+3. 원하는 여행 코스가 있다면 알려주세요!
 
-
-                            (1000자 이내) " ref="content"></textarea>
+        (1000자 이내) " ref="content"></textarea>
             </div>
 
             <div class="mb-3" style="margin-top: 7px;">
@@ -275,7 +269,7 @@
                         <button type="button" style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;"
                             id="btn-login" class="btn"><a class="dropdown-item"
                         data-bs-toggle="modal" data-bs-target="#partnerModal">뒤로가기 </a></button> 
-                        <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #90EE90;"
+                        <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;"
                             class="btn">작성완료</button>
 
                     </div>
