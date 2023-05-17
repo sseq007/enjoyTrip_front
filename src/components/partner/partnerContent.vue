@@ -89,7 +89,7 @@
                                     <div style="padding-top: 20px; margin-left: 25px;">
                                         <i class="fi fi-rr-bulb"></i>
                                         프로필 사진을 클릭해보세요!
-                                        <button type="button" style="width: calc(100% - 15px); height: 60px; background-color: #79CF9F; margin-top: 17px;"
+                                        <button type="button" style="width: calc(100% - 15px); height: 60px; background-color: white; margin-top: 17px;"
                             class="btn">동행 신청하기</button>
                                     </div>
                                 </div>

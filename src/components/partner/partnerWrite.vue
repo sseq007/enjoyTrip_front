@@ -5,7 +5,7 @@
 
         <div class="container">
             <div>
-                <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">여행 동행
+                <h2 style="font-family:'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">여행 동행
                     찾기</h2>
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
@@ -16,54 +16,54 @@
                     <div class="list-group" id="list-tab" role="tablist" style="text-align: center;">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <a class="list-group-item list-group-item-action list-group-item-light " id="list-seoul-list"
+                                <a class="list-group-item list-group-item-action list-group-item-light " id="seoul"
                                     data-bs-toggle="list" href="#list-seoul" role="tab" aria-controls="list-seoul">서울</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="incheon"
+                                    data-bs-toggle="list" href="#list-profile" role="tab"
                                     aria-controls="list-profile">인천</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="degeon"
+                                    data-bs-toggle="list" href="#list-messages" role="tab"
                                     aria-controls="list-messages">대전</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="dagu"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">대구</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="gwanggu"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">광주</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="busan"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">부산</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="woogsan"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">울산</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="gunggido"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">경기도</a>
 
                             </div>
-                            <div style="margin-left: 10px;">
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                            <div>
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="gangwondo"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">강원도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light " id="list-home-list"
+                                <a class="list-group-item list-group-item-action list-group-item-light " id="jungnorth"
                                     data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">충청북도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="jungsouth"
+                                    data-bs-toggle="list" href="#list-profile" role="tab"
                                     aria-controls="list-profile">충청남도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="gangnorth"
+                                    data-bs-toggle="list" href="#list-messages" role="tab"
                                     aria-controls="list-messages">경상북도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="gangsouth"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">경상남도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="zernorth"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">전라북도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="zersouth"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">전라남도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light"
-                                    id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab"
+                                <a class="list-group-item list-group-item-action list-group-item-light" id="zejudo"
+                                    data-bs-toggle="list" href="#list-settings" role="tab"
                                     aria-controls="list-settings">제주도</a>
 
                             </div>
@@ -74,47 +74,48 @@
                 </div>
 
                 <div class="col-9">
-                    
-
-                            <div class="col-8">
-                                <div class="d-flex">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>모집목적</option>
-                                        <option value="1">카플</option>
-                                        <option value="2">맛집</option>
-                                        <option value="3">기타</option>
-                                        
-                                    </select>
-
-                                    <!-- <label for="board-write-title" class="form-label">모집인원 </label> -->
-                                    <select class="form-select ms-1" aria-label="Default select example">
-                                        <option selected>모집인원</option>
-                                        <option value="1">1명</option>
-                                        <option value="2">2명</option>
-                                        <option value="3">3명</option>
-                                        <option value="3">4명이상</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                            <div class="col-8 mt-5">
-                                <label for="example-datepicker">시작일</label>
-                                <label for="example-datepicker" style="margin-left: 275px;">종료일</label>
-                                <div class="d-flex">
-                                    <b-form-datepicker id="example-datepicker" v-model="value_start"
-                                        class="mb-2"></b-form-datepicker>
-
-                                    <b-form-datepicker id="example-datepicker" v-model="value_end"
-                                        class="mb-2 ms-1"></b-form-datepicker>
 
 
-                                </div>
-                            </div>
+                    <div class="col-8">
+                        <div class="d-flex">
+                            <select class="form-select" aria-label="Default select example" v-model="purpose">
+                                <option value="" disabled selected>모집목적</option>
+                                <option value="카플">카플</option>
+                                <option value="맛집">맛집</option>
+                                <option value="기타">기타</option>
+
+                            </select>
+
+                            <!-- <label for="board-write-title" class="form-label">모집인원 </label> -->
+                            <select class="form-select ms-1" aria-label="Default select example" v-model="recruitment">
+                                <option value="" disabled selected>모집인원</option>
+                                <option value="1명">1명</option>
+                                <option value="2명">2명</option>
+                                <option value="3명">3명</option>
+                                <option value="4명">4명</option>
+                                <option value="5명이상">5명이상</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-8 mt-5">
+                        <label for="example-datepicker">시작일</label>
+                        <label for="example-datepicker" style="margin-left: 275px;">종료일</label>
+                        <div class="d-flex">
+                            <b-form-datepicker id="example-datepicker" v-model="value_start"
+                                class="mb-2"></b-form-datepicker>
+
+                            <b-form-datepicker id="example-datepicker" v-model="value_end"
+                                class="mb-2 ms-1"></b-form-datepicker>
 
 
-                       
-                        
-                    
+                        </div>
+                    </div>
+
+
+
+
+
                 </div>
             </div>
             <div style="height: 77px"></div>
@@ -122,7 +123,8 @@
                 style="width: 100%; height: 350px; overflow: hidden; background-color: white;">
                 <!-- Upload -->
                 <!-- <label class="m-0"> -->
-                    <input style="opacity: 0; text-align: center; width: 100%; height: 350px;" type="file" name="file" />
+                <input style="opacity: 0; text-align: center; width: 100%; height: 350px;" type="file" name="file"
+                    @change="handleFileUpload" />
                 <!-- </label> -->
             </div>
             <div>
@@ -139,17 +141,17 @@
 
                 <textarea style="height: 450px;" class="form-control" rows="5" id="board-write-content"
                     name="board-write-content" placeholder="1. 현재 동행이 있나요? 
-        ex) 혼자에요 / 동행 1명이 있어요 
+            ex) 혼자에요 / 동행 1명이 있어요 
      
     
-2.어떤 동행을 찾고 있나요? 
-        ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
-        ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
+    2.어떤 동행을 찾고 있나요? 
+            ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
+            ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
 
 
-3. 원하는 여행 코스가 있다면 알려주세요!
+    3. 원하는 여행 코스가 있다면 알려주세요!
 
-        (1000자 이내) " ref="content"></textarea>
+            (1000자 이내) " ref="content"></textarea>
             </div>
 
             <div class="mb-3" style="margin-top: 7px;">
@@ -211,11 +213,12 @@
 
                     <!-- Modal Footer -->
                     <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal" style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;"
-                            id="btn-login" class="btn">취소</button>
+                        <button type="button" data-bs-dismiss="modal"
+                            style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
+                            class="btn">취소</button>
                         <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;"
-                            class="btn"><a class="dropdown-item" href="#"
-                        data-bs-toggle="modal" data-bs-target="#partnerModal2">다음</a></button>
+                            class="btn"><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                data-bs-target="#partnerModal2">다음</a></button>
 
                     </div>
                 </div>
@@ -257,18 +260,18 @@
                                         </div>
                                     </button>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
-                    <!-- <a class="dropdown-item" href="#"
-                        data-bs-toggle="modal" data-bs-target="#partnerModal">작성완료</a> -->
+                <!-- <a class="dropdown-item" href="#"
+                            data-bs-toggle="modal" data-bs-target="#partnerModal">작성완료</a> -->
 
                     <!-- Modal Footer -->
                     <div class="modal-footer">
                         <button type="button" style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;"
-                            id="btn-login" class="btn"><a class="dropdown-item"
-                        data-bs-toggle="modal" data-bs-target="#partnerModal">뒤로가기 </a></button> 
+                            id="btn-login" class="btn"><a class="dropdown-item" data-bs-toggle="modal"
+                                data-bs-target="#partnerModal">뒤로가기 </a></button>
                         <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;"
                             class="btn">작성완료</button>
 
@@ -291,6 +294,11 @@ export default {
     },
     data() {
         return {
+            uploadedFile: null,
+            value_start: '',
+            value_end: '',
+            purpose: '',
+            recruitment: '',
             articles: [],
             value: '',
             maxSelection: 3,
@@ -360,8 +368,8 @@ export default {
                     active: false
                 }
             ],
-            buttons3:[
-            {
+            buttons3: [
+                {
                     id: "fun",
                     imageSrc: require('@/assets/img/answer2_img01.png'),
                     label: "즉흥적인",
@@ -395,6 +403,24 @@ export default {
             ]
         };
     },
+    watch: {
+        purpose(newValue) {
+            this.saveData();
+            console.log(newValue);
+        },
+        recruitment(newValue) {
+            this.saveData();
+            console.log(newValue);
+        },
+        value_start(newValue) {
+            this.saveData();
+            console.log(newValue);
+        },
+        value_end(newValue) {
+            this.saveData();
+            console.log(newValue);
+        },
+    },
     created() {
         // 비동기
         // TODO : 글목록 얻기.
@@ -403,6 +429,22 @@ export default {
     },
 
     methods: {
+        handleFileUpload(event) {
+            const file = event.target.files[0];
+            this.uploadedFile = file;
+            console.log(file);
+            // 파일을 데이터에 저장하거나 추가적인 처리 로직을 수행할 수 있습니다.
+        },
+        saveData() {
+            const data = {
+                purpose: this.purpose,
+                recruitment: this.recruitment,
+                startDate: this.value_start,
+                endDate: this.value_end
+            };
+            console.log(data);
+        },
+
         movepartnerList() {
 
             router.push("/trippartner")
@@ -412,41 +454,41 @@ export default {
             button.style.backgroundColor = "#3CB371";
         },
         toggleButton(button) {
-      if (button.active) {
-        button.active = false;
-        this.selectedButtons = this.selectedButtons.filter((btn) => btn !== button);
-      } else {
-        if (this.selectedButtons.length < this.maxSelection) {
-          button.active = true;
-          this.selectedButtons.push(button);
-        } else {
-          // 선택 개수가 최대 개수를 넘은 경우
-          const firstSelectedButton = this.selectedButtons[0];
-          firstSelectedButton.active = false;
-          this.selectedButtons.shift();
-          button.active = true;
-          this.selectedButtons.push(button);
+            if (button.active) {
+                button.active = false;
+                this.selectedButtons = this.selectedButtons.filter((btn) => btn !== button);
+            } else {
+                if (this.selectedButtons.length < this.maxSelection) {
+                    button.active = true;
+                    this.selectedButtons.push(button);
+                } else {
+                    // 선택 개수가 최대 개수를 넘은 경우
+                    const firstSelectedButton = this.selectedButtons[0];
+                    firstSelectedButton.active = false;
+                    this.selectedButtons.shift();
+                    button.active = true;
+                    this.selectedButtons.push(button);
+                }
+            }
+        },
+        toggleButton2(button) {
+            if (button.active) {
+                button.active = false;
+                this.selectedButtons2 = this.selectedButtons2.filter((btn) => btn !== button);
+            } else {
+                if (this.selectedButtons2.length < this.maxSelection) {
+                    button.active = true;
+                    this.selectedButtons2.push(button);
+                } else {
+                    // 선택 개수가 최대 개수를 넘은 경우
+                    const firstSelectedButton2 = this.selectedButtons2[0];
+                    firstSelectedButton2.active = false;
+                    this.selectedButtons2.shift();
+                    button.active = true;
+                    this.selectedButtons2.push(button);
+                }
+            }
         }
-      }
-    },
-    toggleButton2(button) {
-      if (button.active) {
-        button.active = false;
-        this.selectedButtons2 = this.selectedButtons2.filter((btn) => btn !== button);
-      } else {
-        if (this.selectedButtons2.length < this.maxSelection) {
-          button.active = true;
-          this.selectedButtons2.push(button);
-        } else {
-          // 선택 개수가 최대 개수를 넘은 경우
-          const firstSelectedButton2 = this.selectedButtons2[0];
-          firstSelectedButton2.active = false;
-          this.selectedButtons2.shift();
-          button.active = true;
-          this.selectedButtons2.push(button);
-        }
-      }
-    }
 
     },
 };

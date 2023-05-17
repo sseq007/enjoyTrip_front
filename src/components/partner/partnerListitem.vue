@@ -1,6 +1,7 @@
+
 <template>
     <div class="col-lg-3 col-md-4 col-sm-12">
-        <div class="card mb-3 shadow bg-body rounded" >
+        <div class="card mb-3 shadow bg-body rounded">
             <div>
                 <div class="row" style="padding-top: 8px; padding-bottom: 8px; padding-left: 14px; padding-right: 14px;">
                     <div class="col-6">
@@ -25,14 +26,31 @@
 
                     </div>
                 </div>
-                <div>
-                    <img src="@/assets/img/tourist-1.jpg" class="" style="border-radius: 5%; width: 100%; height: 144px">
+                <!-- <div class="img"> -->
+                <div  class="img-expension" @mouseenter="showDiv" @mouseleave="hideDiv">
+                   <router-link :to="'/trippartnerview/' + article.articleNo">
+                    <img src="@/assets/img/tourist-1.jpg" style="border-radius: 5%; width: 100%; height: 144px">
+                    <div v-if="isHovered" class="hover-div">
+                        <!-- Content of the div to show on hover -->
+                        <div class="row">
+                            <div class="" style="display:flex; justify-content: space-around;">
+                               
+                                <div>모집중 : {{ article.partnerCount }}명</div> 
+                                <i class="fi fi-rr-eye"> {{ article.hit }}</i>
 
+
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </router-link>
                 </div>
+                <!-- </div> -->
             </div>
             <!-- <img src="..." class="card-img-top" alt="Card image cap"> -->
             <div class="p-2">
-               
+
                 <p>
                     {{ article.subject }}
                 </p>
@@ -53,11 +71,54 @@ export default {
     name: "PartnerListItem",
     props: {
         article: Object
-    }
+    },
+    data() {
+        return {
+            isHovered: false,
+        };
+    },
+    methods: {
+        showDiv() {
+            this.isHovered = true;
+        },
+        hideDiv() {
+            this.isHovered = false;
+        },
+    },
 };
 </script>
   
-<style></style>
+<style scoped>
+.img-expension {
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    /* 부드러운 모션을 위해 추가*/
+}
+
+.img-expension:hover {
+    transform: scale(1.1);
+}
+
+.img-expension:hover .hover-div {
+    opacity: 1;
+}
+
+.hover-div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* .img {width:100%; height:144px; overflow:hidden } */
+</style>
   
   
   

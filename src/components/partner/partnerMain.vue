@@ -1,4 +1,5 @@
 
+
 <template>
     <!-- header 부분  필요-->
     <div>
@@ -15,25 +16,25 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="input-group input-group-sm">
-                            <input type="text" name="word" id="word" class="form-control" placeholder="어디로 여행?" />
+                            <input type="text" name="word" id="word" class="form-control" placeholder="어디로 여행?" style="height: 4vh;" />
                             <button id="btn-search" class="btn btn-dark" type="button">검색</button>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="d-flex">
-                            <button type="button" class="btn btn-secondary ms-5 me-1 w-50">최신순</button>
-                            <button type="button" class="btn btn-secondary  me-1 w-50">인기순</button>
-                            <button type="button" class="btn btn-secondary ms-1 me-5 w-50">모집중</button>
+                        <div class="d-flex justify-content-center" >
+                            <button type="button" class="btn btn-secondary ms-5 me-1" style="width:5vw;">최신순</button>
+                            <button type="button" class="btn btn-secondary" style="width:5vw;">인기순</button>
+                            <button type="button" class="btn btn-secondary ms-1 me-5" style="width:5vw;">모집중</button>
 
                         </div>
 
                     </div>
                         <!-- </div> -->
                   
-                    <div class="col-md-2 " style="margin-left: 80px;">
-                        <button id="btn-sortNum" class="btn btn-success" type="button">
+                    <div class="col-md-3 " style="text-align: end;">
+                        <button id="btn-sortNum" class="btn" type="button" style="background-color: white;">
                             <router-link :to="'/trippartner/write'"
-                                style="background-color: transparent; color: #fff; text-decoration-line: none">친구찾기
+                                style="text-decoration-line: none">친구찾기
                             </router-link></button>
 
 
@@ -85,4 +86,5 @@ export default {
     },
 };
 </script>
+
 
