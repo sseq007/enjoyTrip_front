@@ -96,7 +96,7 @@
 		data-bs-keyboard="false" tabindex="-1"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
+			<div class="modal-content" ref="login-modal">
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">
@@ -112,12 +112,12 @@
 						<div class="mb-3 mt-3">
 							<label for="id" class="form-label">ID:</label>
 							<input type="id" class="form-control" id="login-id"
-								name="userId" placeholder="Enter ID" />
+								name="userId" placeholder="Enter ID" v-model="user.userId" required/>
 						</div>
 						<div class="mb-3">
 							<label for="pw" class="form-label">Password:</label> <input
 								type="password" class="form-control" id="login-pw"
-								name="userPw" placeholder="Enter password" required />
+								name="userPw" placeholder="Enter password" v-model="user.userPw" required />
 						</div>
 						<div class="form-check mb-3">
 							<label class="form-check-label"> <input
@@ -131,7 +131,7 @@
 				<!-- Modal Footer -->
 				<div class="modal-footer">
 					<button type="submit" id="btn-login"
-						class="btn btn-outline-secondary">로그인</button>
+						class="btn btn-outline-secondary" @click="confirm">로그인</button>
 					<button type="button" class="btn btn-outline-secondary">아이디
 						찾기</button>
 					<button type="button" class="btn btn-outline-secondary">비밀번호
@@ -228,18 +228,51 @@
 
 <script>
 import axios from "axios";
+import { mapState, mapActions } from "vuex";
+
+const memberStore = "memberStore";
+
 export default {
 	name: "TheHeader",
 	components:{		
 	},
 	data(){
 		return{
+			user: {
+				userId: null,
+				userPw: null,
+			},
 		};
 	},
-	created(){
-
+	computed: {
+		...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
 	},
 	methods:{
+		...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
+		async confirm(){
+			// let err = true;
+			// let msg = "";
+
+			// err && !this.user.userId.value && ((msg = "id를 입력해주세요"), (err = false), this.user.userId.focus());
+            // err && !this.user.userPw.value && ((msg = "비밀번호를 입력해 주세요"), (err = false), this.user.userPw.focus());
+
+			// if (!err) alert(msg);
+            // // 만약, 내용이 다 입력되어 있다면 registArticle 호출
+            // else{
+				await this.userConfirm(this.user);
+				let token = sessionStorage.getItem("access-token");
+				console.log("1. confirm() token >>" + token);
+				if(this.isLogin){
+					await this.getUserInfo(token);
+					console.log("4. confirm() userinfo :: ", this.userInfo);
+					if(this.$route.path != "/") this.$router.push({ name: "home"});
+					this.hideModal();
+				}
+			// }
+		},
+		hideModal(){
+			this.$refs["login-modal"].hide();
+		},
 		checkValue(){
 			let err = true;
 			let msg = "";
