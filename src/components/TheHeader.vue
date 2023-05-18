@@ -94,9 +94,9 @@
 		<!-- [S] login modal-->
 	<div class="modal fade" id="loginModal" data-bs-backdrop="static"
 		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		aria-labelledby="staticBackdropLabel" aria-hidden="true" ref="loginModal">
 		<div class="modal-dialog modal-lg">
-			<div class="modal-content" ref="login-modal">
+			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">
@@ -271,7 +271,7 @@ export default {
 			// }
 		},
 		hideModal(){
-			this.$refs["login-modal"].hide();
+			this.$refs["loginModal"].modal('hide');
 		},
 		checkValue(){
 			let err = true;

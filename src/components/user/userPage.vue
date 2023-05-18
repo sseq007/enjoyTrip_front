@@ -92,7 +92,7 @@ export default{
         };
     },
     created(){
-        axios.get(`http://localhost:8080/api/member/view/ssafy`)
+        axios.get(`http://localhost:8080/api/member/view/sell`)
         .then(res => {
             console.log(res);
             this.member = res.data;
@@ -110,12 +110,12 @@ export default{
             err && !this.$refs.userName.value && ((msg = "이름을 입력해 주세요"), (err = false), this.$refs.userName.focus());
             if (!err) alert(msg);
             // 만약, 내용이 다 입력되어 있다면 registArticle 호출
-             else this.updateMember(); 
+            else this.updateMember(); 
         },
         updateMember(){
             // 비동기
             var formdata = {
-                userId : "ssafy",
+                userId : "sell",
                 userName: this.$refs.userName.value,
                 userPw: this.$refs.userPw.value,
                 emailId: this.$refs.emailId.value,
