@@ -20,5 +20,17 @@ async function logout(id, success, fail) {
     await api.get(`/api/member/logout/${id}`).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout };
+async function updateMember(user, success, fail){
+    await api.put(`/api/member/modify`, JSON.stringify(user)).then(success).catch(fail);
+}
+
+async function deleteMember(id, success, fail){
+    await api.delete(`/api/member/delete/${id}`).then(success).catch(fail);
+}
+
+async function registerMember(user, success, fail){
+    await api.post(`/api/member/register`, JSON.stringify(user)).then(success).catch(fail);
+}
+
+export { login, findById, tokenRegeneration, logout, updateMember, deleteMember, registerMember };
 

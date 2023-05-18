@@ -53,7 +53,7 @@
 				</ul>
 
 				<!-- 로그인이 되어 있지 않다면 -->
-				<div id="header_nav_confirm_off" style="display: contents">
+				<div id="header_nav_confirm_off" style="display: contents" v-if="userInfo == null">
 					<ul class="navbar-nav mb-2 mb-lg-0">
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#" role="button"
@@ -71,7 +71,7 @@
 				</div>
 
 				<!-- 로그인이 되어 있다면 -->
-				<div id="header_nav_confirm_on">
+				<div id="header_nav_confirm_on" v-else>
 					<ul class="navbar-nav mb-2 mb-lg-0">
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#" role="button"
@@ -80,7 +80,7 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item"
-									href="">로그아웃</a></li>
+									href="" @click.prevent="onClickLogout">로그아웃</a></li>
 								<li><router-link :to="'/user/userPage'" class="dropdown-item"
 									>마이 페이지</router-link></li>
 							</ul></li>
@@ -204,7 +204,7 @@
 										class="form-control">
 										<option selected>도메인 선택</option>
 										<option value="naver.com">naver.com</option>
-										<option value="google.com">gmail.com</option>
+										<option value="gmail.com">gmail.com</option>
 										<option value="daum.net">daum.net</option>
 									</select>
 								</div>
@@ -227,8 +227,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
+import { registerMember } from "@/api/member";
 
 const memberStore = "memberStore";
 
@@ -246,9 +246,10 @@ export default {
 	},
 	computed: {
 		...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
+		...mapGetters(["checkUserInfo"]),
 	},
 	methods:{
-		...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
+		...mapActions(memberStore, ["userConfirm", "getUserInfo", "userLogout"]),
 		async confirm(){
 			// let err = true;
 			// let msg = "";
@@ -288,9 +289,9 @@ export default {
 			}
 			if (!err) alert(msg);
             // 만약, 내용이 다 입력되어 있다면 registArticle 호출
-            else this.registerMember(); 
+            else this.register(); 
 		},
-		registerMember(){
+		async register(){
 			var formdata = {
 				userName : this.$refs.userName.value,
 				userId : this.$refs.userId.value,
@@ -299,18 +300,28 @@ export default {
 				emailId: this.$refs.emailId.value
 			}
 			console.log(formdata);
-			axios.post('http://localhost:8080/api/member/register', formdata,{
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
-			.then(res => {
-				console.log(res);
-				location.href = '/';
-			})
-			.catch(err => {
-				console.log(err);
-			});
+			registerMember(
+				formdata,
+				({ data }) => {
+                    let msg = "멤버 등록을 실패했습니다.";
+                    if(data.message === "success"){
+                        msg = "등록이 완료되었습니다.";
+                    }
+                    alert(msg);
+
+					location.href = "/";
+                },
+                (error) => {
+                    console.log(error);
+                }
+			);
+		},
+		onClickLogout(){
+			console.log(this.userInfo.userId);
+			this.userLogout(this.userInfo.userId);
+			sessionStorage.removeItem("access-token");
+			sessionStorage.removeItem("refresh-token");
+			if(this.$route.path != "/") this.$router.push({ name: "home"});
 		},
 	},
 };
