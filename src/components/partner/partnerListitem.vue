@@ -29,13 +29,13 @@
                 <!-- <div class="img"> -->
                 <div  class="img-expension" @mouseenter="showDiv" @mouseleave="hideDiv">
                    <router-link :to="'/trippartnerview/' + article.articleNo">
-                    <img src="@/assets/img/tourist-1.jpg" style="border-radius: 5%; width: 100%; height: 144px">
+                    <img :src="require(`@/assets/img/partnerimg/${article.partnerImage}`)" style="border-radius: 5%; width: 100%; height: 144px">
                     <div v-if="isHovered" class="hover-div">
                         <!-- Content of the div to show on hover -->
                         <div class="row">
                             <div class="" style="display:flex; justify-content: space-around;">
                                
-                                <div>모집중 : {{ article.partnerCount }}명</div> 
+                                <div>모집중 : {{ article.partnerCount }}</div> 
                                 <i class="fi fi-rr-eye"> {{ article.hit }}</i>
 
 
