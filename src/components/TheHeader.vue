@@ -255,7 +255,7 @@ export default {
 			}
 			if (!err) alert(msg);
             // 만약, 내용이 다 입력되어 있다면 registArticle 호출
-             else this.registerMember(); 
+            else this.registerMember(); 
 		},
 		registerMember(){
 			var formdata = {
@@ -268,8 +268,8 @@ export default {
 			console.log(formdata);
 			axios.post('http://localhost:8080/api/member/register', formdata,{
 				headers: {
-        			'Content-Type': 'application/json'
-   				}
+					'Content-Type': 'application/json'
+				}
 			})
 			.then(res => {
 				console.log(res);
