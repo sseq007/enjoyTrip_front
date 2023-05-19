@@ -62,8 +62,8 @@
 							class="fi fi-rr-lock ps-3 fs"></i>
 						</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#"
-								data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
+								<li><router-link :to="'/user/userLogin'" class="dropdown-item"
+								>로그인</router-link></li>
 								<li><a class="dropdown-item" href="#"
 								data-bs-toggle="modal" data-bs-target="#signUpModal">회원가입</a>
 							</li>
@@ -92,56 +92,6 @@
 	</nav>
 	<!-- [E] navbar -->
 	<div style="height: 77px"></div>
-		<!-- [S] login modal-->
-	<div class="modal fade" id="loginModal" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true" ref="loginModal">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">
-						<i class="fi fi-rr-lock ps-3 fs">Login</i>
-					</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-
-				<!-- Modal Body -->
-				<div class="modal-body">
-					<form action="" id="login-form" method="post">
-						<input type="hidden" name="action" value="login" />
-						<div class="mb-3 mt-3">
-							<label for="id" class="form-label">ID:</label>
-							<input type="id" class="form-control" id="login-id"
-								name="userId" placeholder="Enter ID" v-model="user.userId" required/>
-						</div>
-						<div class="mb-3">
-							<label for="pw" class="form-label">Password:</label> <input
-								type="password" class="form-control" id="login-pw"
-								name="userPw" placeholder="Enter password" v-model="user.userPw" required />
-						</div>
-						<div class="form-check mb-3">
-							<label class="form-check-label"> <input
-								class="form-check-input" type="checkbox" name="save-id"
-								id="save-id" value="ok" /> 아이디 저장
-							</label>
-						</div>
-					</form>
-				</div>
-
-				<!-- Modal Footer -->
-				<div class="modal-footer">
-					<button type="submit" id="btn-login"
-						class="btn btn-outline-secondary" @click="confirm">로그인</button>
-					<button type="button" class="btn btn-outline-secondary">아이디
-						찾기</button>
-					<button type="button" class="btn btn-outline-secondary">비밀번호
-						찾기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- [E] login modal-->
 
 	<!-- [S] sign up modal-->
 	<div class="modal fade" id="signUpModal" data-bs-backdrop="static"
@@ -251,30 +201,6 @@ export default {
 	},
 	methods:{
 		...mapActions(memberStore, ["userConfirm", "getUserInfo", "userLogout"]),
-		async confirm(){
-			// let err = true;
-			// let msg = "";
-
-			// err && !this.user.userId.value && ((msg = "id를 입력해주세요"), (err = false), this.user.userId.focus());
-            // err && !this.user.userPw.value && ((msg = "비밀번호를 입력해 주세요"), (err = false), this.user.userPw.focus());
-
-			// if (!err) alert(msg);
-            // // 만약, 내용이 다 입력되어 있다면 registArticle 호출
-            // else{
-				await this.userConfirm(this.user);
-				let token = sessionStorage.getItem("access-token");
-				console.log("1. confirm() token >>" + token);
-				if(this.isLogin){
-					await this.getUserInfo(token);
-					console.log("4. confirm() userinfo :: ", this.userInfo);
-					if(this.$route.path != "/") this.$router.push({ name: "home"});
-					this.hideModal();
-				}
-			// }
-		},
-		hideModal(){
-			this.$refs["loginModal"].modal('hide');
-		},
 		checkValue(){
 			let err = true;
 			let msg = "";

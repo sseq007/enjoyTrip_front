@@ -7,6 +7,7 @@ import location from "../views/location/tripLocation";
 import noticeWrite from "../components/notice/noticeWrite";
 import noticeModify from "../components/notice/noticeModify";
 import noticeContent from "../components/notice/noticeContent";
+import userLogin from "@/components/user/userLogin";
 import userPage from "@/components/user/userPage";
 import userDelete from "@/components/user/userDelete";
 import tripPartner from "../views/partner/tripPartner";
@@ -47,6 +48,11 @@ const routes = [
     name: "myPage",
     beforeEnter: onlyAuthUser,
     component: userPage,
+  },
+  {
+    path: "/user/userLogin",
+    name: "userLogin",
+    component: userLogin,
   },
   {
     path: "/user/userDelete",
