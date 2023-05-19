@@ -12,6 +12,10 @@ import userDelete from "@/components/user/userDelete";
 import tripPartner from "../views/partner/tripPartner";
 import partnerWrite from "../components/partner/partnerWrite";
 import partnerContent from "../components/partner/partnerContent";
+import hotplace from "../components/hotplace/hotplaceMain";
+import hotplaceWrite from "../components/hotplace/hotplaceWrite";
+import hotplaceContent from "../components/hotplace/hotplaceContent";
+import hotplaceModify from "../components/hotplace/hotplaceModify";
 import store from "@/store";
 
 Vue.use(VueRouter);
@@ -106,6 +110,26 @@ const routes = [
     path: "/trippartnerview/:articleNo",
     name: "partnerContent",
     component: partnerContent,
+  },
+  {
+    path: "/hotplace",
+    name: "hotplace",
+    component: hotplace,
+  },
+  {
+    path: "/hotplace/write",
+    name: "hotplaceWrite",
+    component: hotplaceWrite,
+  },
+  {
+    path: "/hotplace/modify",
+    name: "hotplaceModify",
+    component: hotplaceModify,
+  },
+  {
+    path: "/hotplace/content",
+    name: "hotplaceContent",
+    component: hotplaceContent,
   },
 ];
 

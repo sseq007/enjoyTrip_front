@@ -25,7 +25,7 @@
                         <hr class="mb-3 mt-0" align="left" style="border: solid 2px #ffb5a7; width: 30%; opacity: 100%" />
                         <div class="mb-3">
                             <label for="pwdCheck" class="form-label" style="color: #663333">Password check:</label>
-                            <input type="password" class="form-control" id="pwdCheck" placeholder="비밀번호 확인" name="pwdCheck" ref="userPw" :value="userPw"/>
+                            <input type="password" class="form-control" id="pwdCheck" placeholder="비밀번호 확인" name="pwdCheck" v-model="userPw"/>
                         </div>
 
                         <div style="text-align: center">
@@ -40,50 +40,63 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapState, mapActions } from "vuex";
+import { deleteMember } from "@/api/member";
+
+const memberStore = "memberStore";
 export default {
     name: "userDelete",
     components:{
     },
     data(){
         return{
-            article:{},
             userPw: ''
         };
     },
-    created(){
-        axios.get(`http://localhost:8080/api/member/view/ssafy`)
-        .then(response => {
-        console.log(response.data);
-        this.article = response.data;
-        })
-        .catch(error => {
-        console.log(error);
-        });
+    computed: {
+        ...mapState(memberStore, ["userInfo"]),
     },
     methods:{
-            checkValue(){
-                let err = true;
-                let msg = "";
-                console.log(this.$refs.userPw.value);
-                console.log(this.article.userPw);
-                err && !this.$refs.userPw.value && ((msg = "비밀번호를 입력해 주세요"), (err = false), this.$refs.userPw.focus());
-                if(this.$refs.userPw.value != this.article.userPw){
-                    msg = "비밀번호를 다시 확인해 주세요";
-                    err = false;
-                }
-
-                if (!err) alert(msg);
-                else this.deleteMember();
-            },
-            deleteMember(){
-                axios.delete(`http://localhost:8080/api/member/delete/ssafy`)
-                .then(res => {
-                    console.log(res);
-                    location.href = '/';
-                })
-                .catch(err => {console.log(err);});
+        ...mapActions(memberStore, ["userLogout"]),
+        checkValue(){
+            let err = true;
+            let msg = "";
+            console.log(this.userPw);
+            console.log(this.userInfo.userPw);
+            if(this.userPw != this.userInfo.userPw){
+                msg = "비밀번호를 다시 확인해 주세요";
+                err = false;
             }
-        }
+            if (!err) alert(msg);
+            else this.delete();
+        },
+        async delete(){
+            let id = this.userInfo.userId;
+            console.log(id);
+
+            deleteMember(
+                id,
+                ({data}) => {
+                    let msg = "멤버 삭제를 실패했습니다.";
+                    if(data.message === "success"){
+                        msg = "삭제가 완료되었습니다.";
+                    }
+                    alert(msg);
+
+                    this.moveMain();
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        },
+        async moveMain(){
+            console.log(this.userInfo.userId);
+			this.userLogout(this.userInfo.userId);
+			sessionStorage.removeItem("access-token");
+			sessionStorage.removeItem("refresh-token");
+            this.$router.push({ name: "home" });
+        },
+    },
 }
 </script>

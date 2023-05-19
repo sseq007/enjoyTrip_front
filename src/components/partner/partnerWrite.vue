@@ -5,7 +5,7 @@
 
         <div class="container">
             <div>
-                <h2 style="font-family:'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">여행 동행
+                <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">여행 동행
                     찾기</h2>
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
@@ -124,7 +124,7 @@
                 <!-- Upload -->
                 <!-- <label class="m-0"> -->
                 <input style="opacity: 0; text-align: center; width: 100%; height: 350px;" type="file" name="file"
-                    @change="handleFileUpload" />
+                    ref="fileInput" @change="handleFileUpload" />
                 <!-- </label> -->
             </div>
             <div>
@@ -141,144 +141,130 @@
 
                 <textarea style="height: 450px;" class="form-control" rows="5" id="board-write-content"
                     name="board-write-content" placeholder="1. 현재 동행이 있나요? 
-            ex) 혼자에요 / 동행 1명이 있어요 
+                                        ex) 혼자에요 / 동행 1명이 있어요 
      
     
-    2.어떤 동행을 찾고 있나요? 
-            ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
-            ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
+                                2.어떤 동행을 찾고 있나요? 
+                                        ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
+                                        ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
 
 
-    3. 원하는 여행 코스가 있다면 알려주세요!
+                                3. 원하는 여행 코스가 있다면 알려주세요!
 
-            (1000자 이내) " ref="content"></textarea>
+                                        (1000자 이내) " ref="content"></textarea>
             </div>
 
             <div class="mb-3" style="margin-top: 7px;">
                 <button class="btn btn-outline-secondary me-2" @click="movepartnerList"
                     style="width: calc(50% - 8px);">취소</button>
-                <button class="btn btn-outline-secondary" style="width: calc(50% - 8px);"><a class="dropdown-item" href="#"
-                        data-bs-toggle="modal" data-bs-target="#partnerModal">작성완료</a></button>
+                <!-- <button class="btn btn-outline-secondary" style="width: calc(50% - 8px);" @click="showModal">작성완료</button> -->
+                <b-button @click="showModal" class="btn me-2" style="width: calc(50% - 8px);">작성완료</b-button>
             </div>
         </div>
-        <div class="modal fade" id="partnerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <div class="container">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" style="float: right;"></button>
-                            <div class="row">
-                                <div class="d-flex justify-content-center">
-                                    <h4 class="modal-title" style="text-align: center;">
-                                        <i class="fi fi-rr-key ps-3 fs">여행 키워드 선택하기(1/2)</i>
-                                        <p class="sc-a1969d70-4 jXoitQ">어떤 여행을 계획하고 있나요?</p>
-                                        <p class="sc-a1969d70-5 eNYpGj"><span style="color: red;">* 최소 1개~ 최대 3개</span>의
-                                            키워드를 선택해주세요.</p>
-                                    </h4>
-                                </div>
-                            </div>
+        <b-modal id="modal-scrollable" size="lg" scrollable title="" v-model="modalVisible">
+
+            <template #modal-header>
+                <!-- Emulate built in modal header close button action -->
+                <div class="container">
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" style="float: right;"></button> -->
+                    <div class="row">
+                        <div class="d-flex justify-content-center">
+                            <h4 class="modal-title" style="text-align: center;">
+                                <i class="fi fi-rr-key ps-3 fs">여행 키워드 선택하기(1/2)</i>
+                                <p class="sc-a1969d70-4 jXoitQ">어떤 여행을 계획하고 있나요?</p>
+                                <p class="sc-a1969d70-5 eNYpGj"><span style="color: red;">* 최소 1개~ 최대 3개</span>의
+                                    키워드를 선택해주세요.</p>
+                            </h4>
                         </div>
                     </div>
+                </div>
+            </template>
+            <div class="container" style="height:70vh;">
 
-                    <!-- Modal Body -->
-                    <div class="modal-body" style="height: 800px;">
-                        <div class="container">
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button v-for="button in buttons" :key="button.id" :id="button.id" class="btn mb-2"
-                                        :class="{ 'btn-success': button.active }" style="width: 100%; height: 40%;"
-                                        @click="toggleButton(button)">
-                                        <div>
-                                            <img :src="button.imageSrc" class="sc-a1969d70-8 kmIVho">
-                                            <span>{{ button.label }}</span>
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button v-for="button in buttons2" :key="button.id" :id="button.id" class="btn mb-2"
-                                        :class="{ 'btn-success': button.active }" style="width: 100%; height: 40%;"
-                                        @click="toggleButton(button)">
-                                        <div>
-                                            <img :src="button.imageSrc" class="sc-a1969d70-8 kmIVho">
-                                            <span>{{ button.label }}</span>
-                                        </div>
-                                    </button>
-                                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button v-for="button in buttons" :key="button.id" :sid="button.id" class="btn mb-2"
+                            :class="{ 'btn-success': button.active }" style="width: 100%; height: 40%;"
+                            @click="toggleButton(button)">
+                            <div>
+                                <img :src="button.imageSrc" class="sc-a1969d70-8 kmIVho">
+                                <span>{{ button.label }}</span>
                             </div>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button v-for="button in buttons2" :key="button.id" :id="button.id" class="btn mb-2"
+                            :class="{ 'btn-success': button.active }" style="width: 100%; height: 40%;"
+                            @click="toggleButton(button)">
+                            <div>
+                                <img :src="button.imageSrc" class="sc-a1969d70-8 kmIVho">
+                                <span>{{ button.label }}</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <template #modal-footer="{ hide }">
+                <button type="button" @click="hide"
+                    style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
+                    class="btn">취소</button>
+                <b-button v-b-modal.modal-scrollable2
+                    style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;">다음</b-button>
+
+
+            </template>
+        </b-modal>
+
+        <b-modal id="modal-scrollable2" size="lg" scrollable title="">
+
+            <template #modal-header>
+                <div class="container">
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" style="float: right;"></button> -->
+                    <div class="row">
+                        <div class="d-flex justify-content-center">
+                            <h4 class="modal-title" style="text-align: center;">
+                                <i class="fi fi-rr-key ps-3 fs">여행 키워드 선택하기(2/2)</i>
+                                <p class="sc-a1969d70-4 jXoitQ">나는 어떤 여행자인가요?</p>
+                                <p class="sc-a1969d70-5 eNYpGj"><span style="color: red;">* 최소 1개~ 최대 3개</span>의
+                                    키워드를 선택해주세요.</p>
+                            </h4>
                         </div>
                     </div>
+                </div>
+            </template>
+            <div class="container" style="height:70vh;">
 
-                    <!-- Modal Footer -->
-                    <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal"
-                            style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
-                            class="btn">취소</button>
-                        <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;"
-                            class="btn"><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                data-bs-target="#partnerModal2">다음</a></button>
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col">
+                            <button v-for="button in buttons3" :key="button.id" :id="button.id" class="btn mb-2"
+                                :class="{ 'btn-success': button.active }" style="width: 100%; height: 40%;"
+                                @click="toggleButton2(button)">
+                                <div>
+                                    <img :src="button.imageSrc">
+                                    <span>{{ button.label }}</span>
+                                </div>
+                            </button>
+                        </div>
 
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal fade" id="partnerModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <div class="container">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" style="float: right;"></button>
-                            <div class="row">
-                                <div class="d-flex justify-content-center">
-                                    <h4 class="modal-title" style="text-align: center;">
-                                        <i class="fi fi-rr-key ps-3 fs">여행 키워드 선택하기(2/2)</i>
-                                        <p class="sc-a1969d70-4 jXoitQ">나는 어떤 여행자인가요?</p>
-                                        <p class="sc-a1969d70-5 eNYpGj"><span style="color: red;">* 최소 1개~ 최대 3개</span>의
-                                            키워드를 선택해주세요.</p>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <template #modal-footer="{ hide }">
+                <button type="button" @click="hide"
+                    style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
+                    class="btn">이전</button>
+                <button type="button"
+                    style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;" class="btn"
+                    @click="registArticle">작성완료</button>
 
-                    <!-- Modal Body -->
-                    <div class="modal-body" style="height: 800px;">
-                        <div class="container">
 
-                            <div class="row">
-                                <div class="col">
-                                    <button v-for="button in buttons3" :key="button.id" :id="button.id" class="btn mb-2"
-                                        :class="{ 'btn-success': button.active }" style="width: 100%; height: 40%;"
-                                        @click="toggleButton2(button)">
-                                        <div>
-                                            <img :src="button.imageSrc" class="sc-a1969d70-8 kmIVho">
-                                            <span>{{ button.label }}</span>
-                                        </div>
-                                    </button>
-                                </div>
+            </template>
+        </b-modal>
 
-                            </div>
-                        </div>
-                    </div>
-                <!-- <a class="dropdown-item" href="#"
-                            data-bs-toggle="modal" data-bs-target="#partnerModal">작성완료</a> -->
 
-                    <!-- Modal Footer -->
-                    <div class="modal-footer">
-                        <button type="button" style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;"
-                            id="btn-login" class="btn"><a class="dropdown-item" data-bs-toggle="modal"
-                                data-bs-target="#partnerModal">뒤로가기 </a></button>
-                        <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;"
-                            class="btn">작성완료</button>
 
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 </template>
@@ -286,7 +272,8 @@
 
 <script>
 import router from '@/router';
-
+import axios from "axios";
+// import $ from 'jquery';
 export default {
     name: "PartnerWrite",
     components: {
@@ -294,6 +281,7 @@ export default {
     },
     data() {
         return {
+            modalVisible: false,
             uploadedFile: null,
             value_start: '',
             value_end: '',
@@ -429,6 +417,14 @@ export default {
     },
 
     methods: {
+        showModal() {
+            if (this.purpose && this.recruitment && this.value_start && this.value_end && this.$refs.subject.value && this.$refs.content.value) {
+                this.modalVisible = true; // 모달 표시 여부 변경
+            } else {
+                // 필수 입력 항목이 하나 이상 누락되었을 때 처리
+                alert("필수 입력 항목을 모두 입력해주세요.");
+            }
+        },
         handleFileUpload(event) {
             const file = event.target.files[0];
             this.uploadedFile = file;
@@ -442,6 +438,7 @@ export default {
                 startDate: this.value_start,
                 endDate: this.value_end
             };
+
             console.log(data);
         },
 
@@ -488,6 +485,38 @@ export default {
                     this.selectedButtons2.push(button);
                 }
             }
+        },
+        registArticle() {
+
+
+            const formData = new FormData();
+            formData.append('userId',"ssafy");
+            formData.append('subject',this.$refs.subject.value);
+            formData.append('content',this.$refs.content.value);
+            formData.append('partnerObject', this.purpose);
+            formData.append('partnerCount',this.recruitment);
+            formData.append('startDate',this.value_start);
+            formData.append('endDate',this.value_end);
+            formData.append('file',this.uploadedFile);
+        
+            console.log(formData);
+            console.log(this.selectedButtons);
+            console.log(this.selectedButtons2);
+
+            axios.post('http://localhost:8081/api/trippartner/write', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(response => {
+                    console.log('등록 결과:', response.data);
+                    alert('글 등록이 완료되었습니다.');
+                    router.push("/trippartner");
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('글 등록에 실패하였습니다.');
+                });
         }
 
     },

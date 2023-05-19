@@ -10,7 +10,7 @@
             <div style="height: 20px;"></div>
             <div>
                 <!-- 이미지 주소 수정 필요 -->
-                <img src="@/assets/img/tourist-1.jpg" class="" style="border-radius: 5%; width: 100%; height: 400px">
+                <img :src="require(`@/assets/img/partnerimg/${article.partnerImage}`)" class="" style="border-radius: 5%; width: 100%; height: 400px">
 
             </div>
             <div style="height: 70px;"></div>

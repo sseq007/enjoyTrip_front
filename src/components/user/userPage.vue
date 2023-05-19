@@ -26,7 +26,7 @@
                         <hr class="mb-3 mt-0" align="left" style="border: solid 2px #ffb5a7; width: 30%; opacity: 100%" />
                         <div class="mb-3 mt-3" align="center">
                                 <div class="userProfile mb-3 mt-3">
-                                    <img v-if="member.userProfile == null" src="@/assets/img/noimg.jpg" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">                                 
+                                    <img v-if="userInfo.userProfile == null" src="@/assets/img/noimg.jpg" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">                                 
                                 </div>
                                 <div>
                                     <label className="input-file-button" for="updateProfile" style="padding: 6px 25px; border-radius: 4px; border: solid 2px #ffb5a7; color: #663333 ">업로드</label>
@@ -37,26 +37,26 @@
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="up-userId" class="form-label" style="color: #663333">id:</label>
-                            <input type="text" class="form-control" id="up-userId" name="userId" :value="member.userId" disabled="true"/>
+                            <input type="text" class="form-control" id="up-userId" name="userId" :value="userInfo.userId" disabled="true"/>
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="up-userName" class="form-label" style="color: #663333">이름:</label>
-                            <input type="text" class="form-control" id="up-userName" name="userName" ref="userName" :value="member.userName" />
+                            <input type="text" class="form-control" id="up-userName" name="userName" ref="userName" :value="userInfo.userName" />
                         </div>
                         <div class="mb-3">
                             <label for="up-userPw" class="form-label" style="color: #663333">Password:</label>
-                            <input type="password" class="form-control" id="up-userPw" name="userPw" ref="userPw" :value="member.userPw" />
+                            <input type="password" class="form-control" id="up-userPw" name="userPw" ref="userPw" :value="userInfo.userPw" />
                         </div>
                         <div class="form-row align-items-center">
                             <div class="col-sm-10 my-1">
                                 <label class="form-label" for="email id" style="color: #663333">Email:</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="up-emailId" name="emailId" ref="emailId" :value="member.emailId" />
+                                    <input type="text" class="form-control" id="up-emailId" name="emailId" ref="emailId" :value="userInfo.emailId" />
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">@</div>
                                     </div>
                                     <select id="up-emailDomain" class="form-control" name="emailDomain" ref="emailDomain">
-                                        <option selected>{{member.emailDomain}}</option>
+                                        <option selected>{{ userInfo.emailDomain}}</option>
                                         <option value="naver">naver.com</option>
                                         <option value="google">gmail.com</option>
                                         <option value="daum">daum.net</option>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="joinDate" class="form-label" style="color: #663333">등록일자:</label>
-                            <input type="text" class="form-control" id="up-joinDate" name="joinDate" :value="member.joinDate" disabled="true"/>
+                            <input type="text" class="form-control" id="up-joinDate" name="joinDate" :value="userInfo.joinDate" disabled="true"/>
                         </div>
                         <div style="text-align: center">
                             <button type="button" class="btn btn-outline-secondary m-0 mt-4 mb-3" id="btn-modify" @click="checkValue">수정</button>
@@ -81,27 +81,19 @@
 
 
 <script>
-import axios from "axios";
+import { mapState, mapActions } from "vuex";
+import { updateMember } from "@/api/member";
+
+const memberStore = "memberStore";
 export default{
     name: "userPage",
     components:{
     },
-    data() {
-        return{
-            member:{}
-        };
-    },
-    created(){
-        axios.get(`http://localhost:8080/api/member/view/sell`)
-        .then(res => {
-            console.log(res);
-            this.member = res.data;
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    computed: {
+        ...mapState(memberStore, ["userInfo"]),
     },
     methods: {
+        ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
         checkValue(){
             let err = true;
             let msg = "";
@@ -109,30 +101,38 @@ export default{
             err && !this.$refs.userPw.value && ((msg = "비밀번호를 입력해 주세요"), (err = false), this.$refs.userPw.focus());
             err && !this.$refs.userName.value && ((msg = "이름을 입력해 주세요"), (err = false), this.$refs.userName.focus());
             if (!err) alert(msg);
-            // 만약, 내용이 다 입력되어 있다면 registArticle 호출
-            else this.updateMember(); 
+            // 만약, 내용이 다 입력되어 있다면 update 호출
+            else this.update(); 
         },
-        updateMember(){
+        async update(){
             // 비동기
             var formdata = {
-                userId : "sell",
+                userId : this.userInfo.userId,
                 userName: this.$refs.userName.value,
                 userPw: this.$refs.userPw.value,
                 emailId: this.$refs.emailId.value,
                 emailDomain: this.$refs.emailDomain.value,
             }
-            axios.put(`http://localhost:8080/api/member/modify`, formdata,{
-                headers: {
-                    'Content-Type': 'application/json'
+            updateMember(
+                formdata,
+                ({ data }) => {
+                    let msg = "멤버 수정 시 문제가 발생했습니다.";
+                    if(data.message === "success"){
+                        msg = "수정이 완료되었습니다.";
+                    }
+                    alert(msg);
+                    
+                    this.moveMain();
+                },
+                (error) => {
+                    console.log(error);
                 }
-            })
-            .then(res => {
-                console.log('수정 내용: ', res.data);
-                location.href = '/';
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            );
+        },
+        async moveMain(){
+            let token = sessionStorage.getItem("access-token");
+            await this.getUserInfo(token);
+            this.$router.push({ name: "home" });
         },
     },
 };
