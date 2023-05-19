@@ -51,7 +51,10 @@
 						style="display: inline"><p
 								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">공지사항</p></router-link>
 					</li>
+					<li class="nav-item py-2" style="opacity: 80%; margin-left: 50vh;" @click="openModal"><i class="fi fi-rr-envelope"></i>
+					</li>
 				</ul>
+
 
 				<!-- 로그인이 되어 있지 않다면 -->
 				<div id="header_nav_confirm_off" style="display: contents" v-if="userInfo == null">
@@ -88,8 +91,13 @@
 					</ul>
 				</div>
 			</div>
+			
 		</div>
+		
 	</nav>
+	<b-modal id="modal-scrollable" size="sm" scrollable title="" v-model="modalVisible" no-fade style="background-color: transparent;">
+        
+            </b-modal>
 	<!-- [E] navbar -->
 	<div style="height: 77px"></div>
 
@@ -172,7 +180,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- [E] sign up modal-->
 
 	</div>
 </template>
@@ -193,13 +200,20 @@ export default {
 				userId: null,
 				userPw: null,
 			},
+			modalVisible: false,
 		};
 	},
 	computed: {
 		...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
 		...mapGetters(["checkUserInfo"]),
 	},
-	methods:{
+	methods: {
+		openModal() {
+      this.modalVisible = true;
+    },
+    closeModal() {
+      this.modalVisible = false;
+    },
 		...mapActions(memberStore, ["userConfirm", "getUserInfo", "userLogout"]),
 		checkValue(){
 			let err = true;
