@@ -33,15 +33,16 @@
         </div>
         <div style="display: flex; margin-top: 15px; margin-left: 5%">
             <button class="button" style="height: 60px; width: 420px; background-color: transparent; border-radius: 20px; opacity: 60%; border:4px solid #85c6d7;">
-                <span style="font-family: 'Nixgon, sans-serif; color: #85c6d7; font-weight:600; font-size: 30px">JOIN</span>
+                <span style="font-family: 'Nixgon, sans-serif; color: #85c6d7; font-weight:600; font-size: 30px">FIND PW</span>
             </button>
         </div>
         <div style="display: flex; margin-top: 15px; margin-left: 5%">
-            <button class="button" style="height: 60px; width: 200px; background-color: transparent; border-radius: 20px; opacity: 60%; border:4px solid #85c6d7;">
+            <button class="button" style="height: 60px; width: 200px; background-color: transparent; border-radius: 20px; 
+            opacity: 60%; border:4px solid #85c6d7;" @click="moveRegister()">
                 <span style="font-family: 'Nixgon, sans-serif; color: #85c6d7; font-weight:600; font-size: 30px">JOIN</span>
             </button>
             <button class="button" style="margin-left: 20px; height: 60px; width: 200px; background-color: transparent; border-radius: 20px; opacity: 60%; border:4px solid #85c6d7;">
-                <span style="font-family: 'Nixgon, sans-serif; color: #85c6d7; font-weight:600; font-size: 30px">JOIN</span>
+                <span style="font-family: 'Nixgon, sans-serif; color: #85c6d7; font-weight:600; font-size: 30px">KAKAO</span>
             </button>
         </div>
     </div>
@@ -76,6 +77,9 @@ export default {
 				this.$router.push({ name: "home"});
 			}
 		},
+        moveRegister(){
+            this.$router.push({name: "userRegister"});
+        },
     }
     
 }
