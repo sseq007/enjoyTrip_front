@@ -8,6 +8,7 @@ import noticeWrite from "../components/notice/noticeWrite";
 import noticeModify from "../components/notice/noticeModify";
 import noticeContent from "../components/notice/noticeContent";
 import userLogin from "@/components/user/userLogin";
+import userRegister from "@/components/user/userRegister";
 import userPage from "@/components/user/userPage";
 import userDelete from "@/components/user/userDelete";
 import tripPartner from "../views/partner/tripPartner";
@@ -53,6 +54,11 @@ const routes = [
     path: "/user/userLogin",
     name: "userLogin",
     component: userLogin,
+  },
+  {
+    path: "/user/userRegister",
+    name: "userRegister",
+    component: userRegister,
   },
   {
     path: "/user/userDelete",
