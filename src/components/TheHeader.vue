@@ -31,10 +31,11 @@
 					</li>
 
 					<li class="nav-item py-2" style="opacity: 80%"><i
-						class="fi fi-rr-heart ps-3"></i> <a class="nav-link active ps-0"
-						aria-current="page" href=""
+						class="fi fi-rr-heart ps-3"></i> <router-link
+						class="nav-link active ps-0"
+						aria-current="page" :to="'/hotplace'"
 						style="display: inline"><p
-								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">핫플자랑하기</p></a>
+								style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">핫플자랑하기</p></router-link>
 					</li>
 					<li class="nav-item py-2" style="opacity: 80%"><i
 						class="fi fi-rr-paper-plane ps-3"></i> <router-link
@@ -94,9 +95,9 @@
 		<!-- [S] login modal-->
 	<div class="modal fade" id="loginModal" data-bs-backdrop="static"
 		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		aria-labelledby="staticBackdropLabel" aria-hidden="true" ref="loginModal">
 		<div class="modal-dialog modal-lg">
-			<div class="modal-content" ref="login-modal">
+			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title">
@@ -272,7 +273,7 @@ export default {
 			// }
 		},
 		hideModal(){
-			this.$refs["login-modal"].hide();
+			this.$refs["loginModal"].modal('hide');
 		},
 		checkValue(){
 			let err = true;
