@@ -101,7 +101,7 @@ export default{
         if(this.userInfo.profileImage == null){
             this.image = require('@/assets/img/noimg.jpg');
         }else{
-            this.image = require('@/assets/img/img.jpg');
+            this.image = "http://localhost:8081/upload/" + this.userInfo.profileImage;
         }
     },
     computed: {
