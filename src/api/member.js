@@ -1,4 +1,5 @@
 import { apiInstance } from "./index.js";
+import axios from "axios";
 
 const api = apiInstance();
 
@@ -20,8 +21,12 @@ async function logout(id, success, fail) {
     await api.get(`/api/member/logout/${id}`).then(success).catch(fail);
 }
 
-async function updateMember(user, success, fail){
-    await api.put(`/api/member/modify`, JSON.stringify(user)).then(success).catch(fail);
+async function updateMember(user, success, fail) {
+    axios.put('http://localhost:8081/api/member/modify', user, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }).then(success).catch(fail);
 }
 
 async function deleteMember(id, success, fail){

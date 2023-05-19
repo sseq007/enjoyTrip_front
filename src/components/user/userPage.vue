@@ -26,11 +26,12 @@
                         <hr class="mb-3 mt-0" align="left" style="border: solid 2px #ffb5a7; width: 30%; opacity: 100%" />
                         <div class="mb-3 mt-3" align="center">
                                 <div class="userProfile mb-3 mt-3">
-                                    <img v-if="userInfo.userProfile == null" src="@/assets/img/noimg.jpg" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">                                 
+                                    <img v-if="userInfo.profileImage == null" :src="image" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
+                                    <img v-else :src="image" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
                                 </div>
                                 <div>
                                     <label className="input-file-button" for="updateProfile" style="padding: 6px 25px; border-radius: 4px; border: solid 2px #ffb5a7; color: #663333 ">업로드</label>
-                                    <input type="file" id="updateProfile" name="file" accept=".jpg, .png, .jpeg" value="" style="display: none"/>
+                                    <input ref="image" type="file" id="updateProfile" name="file" accept=".jpg, .png, .jpeg" value="" style="display: none" @change="imageChange()"/>
                                 </div>
                                 
                                 
@@ -83,11 +84,25 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import { updateMember } from "@/api/member";
+// import router from '@/router';
+// import axios from "axios";
 
 const memberStore = "memberStore";
 export default{
     name: "userPage",
     components:{
+    },
+    data(){
+        return{
+            image : '',
+        }
+    },
+    created(){
+        if(this.userInfo.profileImage == null){
+            this.image = require('@/assets/img/noimg.jpg');
+        }else{
+            this.image = require('@/assets/img/img.jpg');
+        }
     },
     computed: {
         ...mapState(memberStore, ["userInfo"]),
@@ -104,15 +119,27 @@ export default{
             // 만약, 내용이 다 입력되어 있다면 update 호출
             else this.update(); 
         },
+        imageChange(){
+            // console.log(this.$refs['image'].files[0]);
+            // console.log(this.$refs.image.files[0]);
+            var image = this.$refs['image'].files[0];
+            const url = URL.createObjectURL(image);
+            this.image = url;
+            console.log(url);           
+        },
         async update(){
             // 비동기
-            var formdata = {
-                userId : this.userInfo.userId,
-                userName: this.$refs.userName.value,
-                userPw: this.$refs.userPw.value,
-                emailId: this.$refs.emailId.value,
-                emailDomain: this.$refs.emailDomain.value,
+            const formdata = new FormData();
+            formdata.append('userId', this.userInfo.userId);
+            formdata.append('userName', this.$refs.userName.value);
+            formdata.append('userPw', this.$refs.userPw.value);
+            formdata.append('emailId', this.$refs.emailId.value);
+            formdata.append('emailDomain', this.$refs.emailDomain.value);
+            formdata.append('file', this.$refs.image.files[0]);
+            for (let key of formdata.keys()) {
+                console.log(key, ":", formdata.get(key));
             }
+
             updateMember(
                 formdata,
                 ({ data }) => {
