@@ -10,7 +10,8 @@
             <div style="height: 20px;"></div>
             <div>
                 <!-- 이미지 주소 수정 필요 -->
-                <img :src="require(`@/assets/img/partnerimg/${article.partnerImage}`)" class="" style="border-radius: 5%; width: 100%; height: 400px">
+                <img :src="require(`@/assets/img/partnerimg/${article.partnerImage}`)" class=""
+                    style="border-radius: 5%; width: 100%; height: 400px">
 
             </div>
             <div style="height: 70px;"></div>
@@ -24,7 +25,7 @@
                         <div class="col-11">
 
                             <h2>{{ article.subject }}</h2>
-                            <div class="border border-white mt-5">
+                            <div class="" style="border: 3px solid rgb(255, 181, 167); border-radius: 10px;">
                                 <div
                                     style="padding-left: 30px; padding-top: 20px; padding-right: 30px; padding-bottom: 20px;">
                                     <div class="d-flex">
@@ -46,8 +47,10 @@
                     </div>
                     <div style="margin-top: 40px;">
                         <!-- 키워드 선택한거 가져오자 -->
-                        <div>함께 관광 여행을 떠나려고 해요.</div>
-                        <div>저는 사진 찍는 여행자에요</div>
+                        <div>함께 <span v-for="keyword in keywordOne" :key="keyword" style="color: #80B5ff;">{{ keyword.label
+                        }}, </span> 여행을 떠나려고 해요.</div>
+                        <div>저는 <span v-for="keyword in keywordTwo" :key="keyword" style="color: #80B5ff;">{{ keyword.label
+                        }}, </span>여행자에요</div>
 
 
                     </div>
@@ -72,7 +75,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="border border-white">
+                    <div class="" style="border: 3px solid rgb(255, 181, 167); border-radius: 10px;">
                         <div style="padding-left: 20px; padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
 
                             <div class="row">
@@ -82,15 +85,16 @@
                                             style="padding:4px; border-radius: 40%; width: 58px; height: 58px; margin-left: 25px;">
 
                                         <div style="margin-left: 15px;">
-                                            <h5>SSAFY</h5>
+                                            <h5>{{ article.userId }}</h5>
                                             <div>40대 남성 대한민국</div>
                                         </div>
                                     </div>
                                     <div style="padding-top: 20px; margin-left: 25px;">
                                         <i class="fi fi-rr-bulb"></i>
                                         프로필 사진을 클릭해보세요!
-                                        <button type="button" style="width: calc(100% - 15px); height: 60px; background-color: white; margin-top: 17px;"
-                            class="btn">동행 신청하기</button>
+                                        <button type="button"
+                                            style="width: calc(100% - 15px); height: 60px; background-color: white; margin-top: 17px;"
+                                            class="btn" @click="showModal">동행 신청하기</button>
                                     </div>
                                 </div>
 
@@ -107,6 +111,64 @@
 
 
 
+            <b-modal id="modal-scrollable" size="lg" scrollable title="" v-model="modalVisible">
+                <template #modal-header>
+                    <!-- Emulate built in modal header close button action -->
+                    <div class="container">
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" style="float: right;"></button> -->
+                        <div class="row">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="modal-title" style="text-align: center;">
+                                    <i class="fi fi-rr-envelope"> 쪽지를 보내봐요</i>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div class="container" style="height:62vh; padding: 4vh;">
+
+                    <div class="row mb-5">
+
+                        <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; margin-bottom: 3vh;">동행 정보</h2>
+                        <div class="d-flex mb-3">
+
+                            <img src="@/assets/img/user.png" style="width: 3vh; height: 3vh;">
+                            <div style="margin-left: 2vh; font-size: 2vh;">{{ article.userId }}</div>
+                        </div>
+                        <div class="d-flex mb-3">
+
+                            <img src="@/assets/img/marker.png" style="width: 3vh; height: 3vh;">
+                            <div style="margin-left: 2vh; font-size: 2vh;">{{ article.location }}</div>
+                        </div>
+                        <div class="d-flex mb-3">
+
+                            <img src="@/assets/img/user-add.png" style="width: 3vh; height: 3vh;">
+                            <div style="margin-left: 2vh; font-size: 2vh;">{{ article.partnerCount }}</div>
+                        </div>
+                        <div class="d-flex mb-3">
+
+                            <img src="@/assets/img/calendar.png" style="width: 3vh; height: 3vh;">
+                            <div style="margin-left: 2vh; font-size: 2vh;"> {{ article.startDate.substring(5) }} ~ {{
+                                article.endDate.substring(5) }} </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <b-form-textarea id="textarea" v-model="text" placeholder="궁금한점 쪽지로 보내보세요.." rows="9"
+                            ></b-form-textarea>
+                    </div>
+                </div>
+                <template #modal-footer="{ hide }">
+                <button type="button" @click="hide"
+                    style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
+                    class="btn">취소</button>
+                <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;" class="btn"
+                    @click="registNote">보내기</button>
+
+
+            </template>
+            </b-modal>
         </div>
 
 
@@ -115,12 +177,20 @@
 
 <script>
 import axios from "axios";
-
+import { mapState } from "vuex";
+const memberStore = "memberStore";
 export default {
     name: "PartnerView",
+    computed: {
+        ...mapState(memberStore, ["userInfo"]),
+    },
     data() {
         return {
-            article: []
+            modalVisible: false,
+            article: [],
+            keywordOne: [],
+            keywordTwo: [],
+            text:"",
         };
     },
     created() {
@@ -133,9 +203,38 @@ export default {
                 console.log(error);
             });
 
+        axios.get(`http://localhost:8080/api/trippartner/keyword/${this.$route.params.articleNo}`)
+            .then(response => {
+                console.log(response.data);
+                this.keywordOne = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        axios.get(`http://localhost:8080/api/trippartner/keyword2/${this.$route.params.articleNo}`)
+            .then(response => {
+                console.log(response.data);
+                this.keywordTwo = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
     },
     methods: {
+        showModal() {
+            // console.log(this.userInfo.userId);
+            if (this.userInfo.userId != null) {
+                this.modalVisible = true; // 모달 표시 여부 변경
+            }
+            //  else {
+            //     alert("로그인을 해주세요");
+            //     console.log("쪽지할려면 로그인 해");
+            // }
+        },
+        registNote(){
 
+        }
     }
 
 

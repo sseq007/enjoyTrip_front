@@ -141,17 +141,17 @@
 
                 <textarea style="height: 450px;" class="form-control" rows="5" id="board-write-content"
                     name="board-write-content" placeholder="1. 현재 동행이 있나요? 
-                                        ex) 혼자에요 / 동행 1명이 있어요 
+                                                    ex) 혼자에요 / 동행 1명이 있어요 
      
     
-                                2.어떤 동행을 찾고 있나요? 
-                                        ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
-                                        ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
+                                            2.어떤 동행을 찾고 있나요? 
+                                                    ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
+                                                    ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
 
 
-                                3. 원하는 여행 코스가 있다면 알려주세요!
+                                            3. 원하는 여행 코스가 있다면 알려주세요!
 
-                                        (1000자 이내) " ref="content"></textarea>
+                                                    (1000자 이내) " ref="content"></textarea>
             </div>
 
             <div class="mb-3" style="margin-top: 7px;">
@@ -179,7 +179,7 @@
                     </div>
                 </div>
             </template>
-            <div class="container" style="height:70vh;">
+            <div class="container" style="height:70vh; ">
 
                 <div class="row">
                     <div class="col-md-6">
@@ -255,8 +255,7 @@
                 <button type="button" @click="hide"
                     style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
                     class="btn">이전</button>
-                <button type="button"
-                    style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;" class="btn"
+                <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;" class="btn"
                     @click="registArticle">작성완료</button>
 
 
@@ -273,14 +272,22 @@
 <script>
 import router from '@/router';
 import axios from "axios";
+
+import { mapState } from "vuex";
 // import $ from 'jquery';
+
+const memberStore = "memberStore";
 export default {
     name: "PartnerWrite",
     components: {
 
     },
+    computed: {
+        ...mapState(memberStore, ["userInfo"]),
+    },
     data() {
         return {
+            articleno: '',
             modalVisible: false,
             uploadedFile: null,
             value_start: '',
@@ -410,8 +417,14 @@ export default {
         },
     },
     created() {
-        // 비동기
-        // TODO : 글목록 얻기.
+        axios.get(`http://localhost:8080/api/trippartner/findarticleno/`)
+            .then(response => {
+                
+                this.articleno = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
 
 
     },
@@ -490,16 +503,16 @@ export default {
 
 
             const formData = new FormData();
-            formData.append('userId',"ssafy");
-            formData.append('subject',this.$refs.subject.value);
-            formData.append('content',this.$refs.content.value);
+            formData.append('userId', this.userInfo.userId);
+            formData.append('subject', this.$refs.subject.value);
+            formData.append('content', this.$refs.content.value);
             formData.append('partnerObject', this.purpose);
-            formData.append('partnerCount',this.recruitment);
-            formData.append('startDate',this.value_start);
-            formData.append('endDate',this.value_end);
-            formData.append('file',this.uploadedFile);
-        
-            console.log(formData);
+            formData.append('partnerCount', this.recruitment);
+            formData.append('startDate', this.value_start);
+            formData.append('endDate', this.value_end);
+            formData.append('file', this.uploadedFile);
+
+            
             console.log(this.selectedButtons);
             console.log(this.selectedButtons2);
 
@@ -509,13 +522,36 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log('등록 결과:', response.data);
-                    alert('글 등록이 완료되었습니다.');
-                    router.push("/trippartner");
+                    const sendData = {
+                        articleNo: response.data.articleNo,
+                        keywordOne: this.selectedButtons,
+                        keywordTwo: this.selectedButtons2
+                    }
+                    console.log("sendData는 과연"+sendData.articleNo);
+                    console.log("이 글 번호는 맞춰봐 " + response.data.articleNo);
+                    axios.post('http://localhost:8081/api/trippartner/write/keyword', sendData, {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(response2 => {
+                            console.log('키워드 결과:', response2.data);
+                            // alert('글 등록이 완료되었습니다.');
+
+
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            alert('키워드 등록에 실패하였습니다.');
+                        });
+
+
+                    alert('동행찾기 글 등록이 완료되었습니다.');
+                    router.push(`/trippartnerview/${response.data.articleNo}`);
                 })
                 .catch(error => {
                     console.log(error);
-                    alert('글 등록에 실패하였습니다.');
+                    alert('동행찾기 글 등록에 실패하였습니다.');
                 });
         }
 

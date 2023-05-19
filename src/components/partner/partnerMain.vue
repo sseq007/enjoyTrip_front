@@ -59,11 +59,13 @@
 <script>
 import axios from "axios";
 import PartnerListItem from './partnerListitem.vue';
+
 export default {
     name: "PartnerMain",
     components: {
         PartnerListItem
     },
+    
     data() {
         return {
             articles: []

@@ -10,7 +10,7 @@
                                 style="padding:4px; border-radius: 40%; width: 40px; height: 40px; margin-right: 8px; ">
 
                             <div>
-                                <div>SSAFY</div>
+                                <div>{{article.userId}}</div>
                                 <div style="color: #80B5ff;">40대 남성</div>
                             </div>
                         </div>
@@ -20,7 +20,7 @@
                         <div>
                             <i class="fi fi-rr-calendar-days">여행 기간</i>
                             <div style="color: #25E09A;">
-                                {{ article.startDate }}-{{ article.endDate }}
+                                {{ article.startDate.substring(5)}} ~ {{ article.endDate.substring(5)}}
                             </div>
                         </div>
 
