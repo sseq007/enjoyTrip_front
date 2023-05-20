@@ -3,12 +3,11 @@ import VueRouter from "vue-router";
 
 import HomeView from "../views/HomeView";
 import notice from "../views/notice/noticeBoard";
+import note from "../views/note/noteBoard";
 import location from "../views/location/tripLocation";
 import noticeWrite from "../components/notice/noticeWrite";
 import noticeModify from "../components/notice/noticeModify";
 import noticeContent from "../components/notice/noticeContent";
-import userLogin from "@/components/user/userLogin";
-import userRegister from "@/components/user/userRegister";
 import userPage from "@/components/user/userPage";
 import userDelete from "@/components/user/userDelete";
 import tripPartner from "../views/partner/tripPartner";
@@ -18,6 +17,7 @@ import hotplace from "../components/hotplace/hotplaceMain";
 import hotplaceWrite from "../components/hotplace/hotplaceWrite";
 import hotplaceContent from "../components/hotplace/hotplaceContent";
 import hotplaceModify from "../components/hotplace/hotplaceModify";
+
 import store from "@/store";
 
 Vue.use(VueRouter);
@@ -49,16 +49,6 @@ const routes = [
     name: "myPage",
     beforeEnter: onlyAuthUser,
     component: userPage,
-  },
-  {
-    path: "/user/userLogin",
-    name: "userLogin",
-    component: userLogin,
-  },
-  {
-    path: "/user/userRegister",
-    name: "userRegister",
-    component: userRegister,
   },
   {
     path: "/user/userDelete",
@@ -142,6 +132,11 @@ const routes = [
     path: "/hotplace/content",
     name: "hotplaceContent",
     component: hotplaceContent,
+  },
+  {
+    path: "/note/list",
+    name: "noteMain",
+    component: note,
   },
 ];
 

@@ -29,7 +29,8 @@
                 <!-- <div class="img"> -->
                 <div  class="img-expension" @mouseenter="showDiv" @mouseleave="hideDiv">
                    <router-link :to="'/trippartnerview/' + article.articleNo">
-                    <img :src="require(`@/assets/img/partnerimg/${article.partnerImage}`)" style="border-radius: 5%; width: 100%; height: 144px">
+                    <!-- <img :src="require(`@/assets/img/partnerimg/${article.partnerImage}`)" style="border-radius: 5%; width: 100%; height: 144px"> -->
+                    <img :src="'http://localhost:8081/upload/' + article.partnerImage" style="border-radius: 5%; width: 100%; height: 144px">
                     <div v-if="isHovered" class="hover-div">
                         <!-- Content of the div to show on hover -->
                         <div class="row">

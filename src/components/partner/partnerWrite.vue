@@ -141,17 +141,17 @@
 
                 <textarea style="height: 450px;" class="form-control" rows="5" id="board-write-content"
                     name="board-write-content" placeholder="1. 현재 동행이 있나요? 
-                                                    ex) 혼자에요 / 동행 1명이 있어요 
+                                                        ex) 혼자에요 / 동행 1명이 있어요 
      
     
-                                            2.어떤 동행을 찾고 있나요? 
-                                                    ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
-                                                    ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
+                                                2.어떤 동행을 찾고 있나요? 
+                                                        ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
+                                                        ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
 
 
-                                            3. 원하는 여행 코스가 있다면 알려주세요!
+                                                3. 원하는 여행 코스가 있다면 알려주세요!
 
-                                                    (1000자 이내) " ref="content"></textarea>
+                                                        (1000자 이내) " ref="content"></textarea>
             </div>
 
             <div class="mb-3" style="margin-top: 7px;">
@@ -417,14 +417,14 @@ export default {
         },
     },
     created() {
-        axios.get(`http://localhost:8080/api/trippartner/findarticleno/`)
-            .then(response => {
-                
-                this.articleno = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        // axios.get(`http://localhost:8080/api/trippartner/findarticleno/`)
+        //     .then(response => {
+
+        //         this.articleno = response.data;
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
 
 
     },
@@ -512,7 +512,8 @@ export default {
             formData.append('endDate', this.value_end);
             formData.append('file', this.uploadedFile);
 
-            
+            // console.log(this.userInfo.userId);
+
             console.log(this.selectedButtons);
             console.log(this.selectedButtons2);
 
@@ -527,7 +528,7 @@ export default {
                         keywordOne: this.selectedButtons,
                         keywordTwo: this.selectedButtons2
                     }
-                    console.log("sendData는 과연"+sendData.articleNo);
+                    console.log("sendData는 과연" + sendData.articleNo);
                     console.log("이 글 번호는 맞춰봐 " + response.data.articleNo);
                     axios.post('http://localhost:8081/api/trippartner/write/keyword', sendData, {
                         headers: {
@@ -545,9 +546,12 @@ export default {
                             alert('키워드 등록에 실패하였습니다.');
                         });
 
-
+                    console.log(response);
                     alert('동행찾기 글 등록이 완료되었습니다.');
-                    router.push(`/trippartnerview/${response.data.articleNo}`);
+
+                    router.push(`/trippartnerview/${response.data.articleNo}`).then(() => {
+                        location.reload() // 페이지 새로고침
+                    })
                 })
                 .catch(error => {
                     console.log(error);
