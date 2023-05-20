@@ -4,10 +4,13 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView";
 import notice from "../views/notice/noticeBoard";
 import note from "../views/note/noteBoard";
+import noteContent from "@/components/note/noteContent";
 import location from "../views/location/tripLocation";
 import noticeWrite from "../components/notice/noticeWrite";
 import noticeModify from "../components/notice/noticeModify";
 import noticeContent from "../components/notice/noticeContent";
+import userLogin from "@/components/user/userLogin";
+import userRegister from "@/components/user/userRegister";
 import userPage from "@/components/user/userPage";
 import userDelete from "@/components/user/userDelete";
 import tripPartner from "../views/partner/tripPartner";
@@ -56,6 +59,17 @@ const routes = [
     beforeEnter: onlyAuthUser,
     component: userDelete,
   },
+  {
+    path: "/user/userLogin",
+    name: "userLogin",
+    component: userLogin,
+  },
+  {
+    path: "/user/userRegister",
+    name: "userRegister",
+    component: userRegister,
+  },
+
   {
     path: "/",
     name: "home",
@@ -137,6 +151,14 @@ const routes = [
     path: "/note/list",
     name: "noteMain",
     component: note,
+  },
+  {
+    path: "/user/note/:noteNo",
+    name: "noteiew",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: noteContent,
   },
 ];
 

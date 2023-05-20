@@ -10,7 +10,7 @@
             <div style="height: 20px;"></div>
             <div>
                 <!-- 이미지 주소 수정 필요 -->
-                <img :src="'http://localhost:8081/upload/' + article.partnerImage" class=""
+                <img  :src="'http://localhost:8081/upload/' + article.partnerImage" class=""
                     style="border-radius: 5%; width: 100%; height: 400px">
 
             </div>
@@ -155,19 +155,19 @@
                     </div>
 
                     <div class="row">
-                        <b-form-textarea id="textarea" v-model="text" placeholder="궁금한점 쪽지로 보내보세요.."
-                            rows="9"></b-form-textarea>
+                        <b-form-textarea id="textarea" v-model="text" placeholder="궁금한점 쪽지로 보내보세요.." rows="9"
+                            ></b-form-textarea>
                     </div>
                 </div>
                 <template #modal-footer="{ hide }">
-                    <button type="button" @click="hide"
-                        style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
-                        class="btn">취소</button>
-                    <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;"
-                        class="btn" @click="registNote">보내기</button>
+                <button type="button" @click="hide"
+                    style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
+                    class="btn">취소</button>
+                <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;" class="btn"
+                    @click="registNote">보내기</button>
 
 
-                </template>
+            </template>
             </b-modal>
         </div>
 
@@ -190,7 +190,7 @@ export default {
             article: [],
             keywordOne: [],
             keywordTwo: [],
-            text: "",
+            text:"",
         };
     },
     created() {
@@ -223,17 +223,24 @@ export default {
     },
     methods: {
         showModal() {
-            // console.log(this.userInfo.userId);
-            if (this.userInfo.userId != null) {
-                this.modalVisible = true; // 모달 표시 여부 변경
+            console.log(this.userInfo);
+            console.log(this.article.userId);
+          
+            if (this.userInfo != null) {
+                if (this.article.userId != this.userInfo.userId) {
+                    this.modalVisible = true;
+                }
+                else {
+                    alert("쪽지를 보낼 수 없습니다");
+                    
+                }
             }
-            //  else {
-            //     alert("로그인을 해주세요");
-            //     console.log("쪽지할려면 로그인 해");
-            // }
+            else {
+                this.modalVisible = false; // 모달 표시 여부 변경
+                alert("로그인을 해주세요");
+            }
         },
-        registNote() {
-
+        registNote(){
             var formData = {
                 fromuserId: this.userInfo.userId,
                 touserId: this.article.userId,
@@ -249,12 +256,14 @@ export default {
                 .then(response => {
                     console.log('쪽지 결과:', response.data);
                     alert('쪽지가 전송되었습니다.');
-                    // location.href = '/notice/list';
+                    this.modalVisible = false;
                 })
                 .catch(error => {
                     console.log(error);
                     alert('쪽지 전송이 실패하였습니다.');
                 });
+        
+
         }
     }
 

@@ -47,34 +47,28 @@
 						<!-- <li class="nav-item py-2" style="opacity: 80%; margin-left: 50vh;" @click="openModal"><i class="fi fi-rr-envelope"></i>
 					</li> -->
 					</ul>
-
+					<div class="notification-badge" style="margin-right: 43vh; margin-top: 1vh;">1</div>
 					<div style="margin-right: 3vh;">
 						<b-dropdown size="lg" right text="Right align" variant="link" toggle-class="text-decoration-none"
-							no-caret scrollable no-scrollbar>
+							no-caret scrollable>
 							<template #button-content>
 								<i class="fi fi-rr-envelope"></i>
 							</template>
-							<b-dropdown-item>
-								<div class="container">
-									<h5 class="mb-4" style="text-align: center;">
+							<div class="container">
+								<div class="d-flex" style="justify-content: center; ">
+									
+									<h5 class="mb-4" style="text-align: center; margin-right: 1vh;">
 										쪽지
-
-
 									</h5>
-									<div style="height: 25vh; width: 55vh;overflow-y: auto;">
-										<!-- 스크롤 가능한 컨텐츠 내용 -->
-										<note-list-item v-for="note in notes" :key="note.noteNo" :note="note" ></note-list-item>
-										
-
-
-									</div>
-
-
+									<div class="notification-badge2" >1</div>
 								</div>
-
-							</b-dropdown-item>
+								<div style="height: 25vh; width: 50vh; overflow-y: auto;">
+								<note-list-item v-for="note in notes" :key="note.noteNo" :note="note" ></note-list-item>
+								</div>
+							</div>
 						</b-dropdown>
 					</div>
+					
 
 					<!-- 로그인이 되어 있지 않다면 -->
 					<div id="header_nav_confirm_off" style="display: contents" v-if="userInfo == null">
@@ -202,7 +196,6 @@ const memberStore = "memberStore";
 export default {
 	name: "TheHeader",
 	components: {
-		// eslint-disable-next-line vue/no-unused-components
 		noteListItem
 	},
 	data() {
@@ -291,4 +284,33 @@ export default {
 };
 </script>
 
+<style scoped>
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notification-badge2 {
 
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 23px;
+  height: 23px;
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
