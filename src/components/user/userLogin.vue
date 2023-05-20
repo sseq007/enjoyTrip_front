@@ -2,7 +2,7 @@
     <div style="background-image:url('../assets/img/loginDiv.png');
     background-repeat: no-repeat;
     background-size: contain;
-    height: 700px; width: 100%; margin-top: 100px; margin-left: 250px;">
+    height: 700px; margin-top: 100px; margin-left: 250px;">
         <div style="margin-left: 5%; padding-top: 1px">
             <h2 style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 100px; font-weight: 600; " class="m-0 mt-5">LOGIN</h2>
             <hr class="mb-3 mt-0" align="left" style="border: solid 5px #85c6d7; width: 20%" />
