@@ -73,9 +73,9 @@
                     -webkit-appearance: none;"
                     required>
                         <option disabled selected style="display: none;">성별 선택</option>
-                        <option value="male" style="background-color: #FFE4E0;
+                        <option value="남자" style="background-color: #FFE4E0;
                         font-family: 'Nixgon, sans-serif; font-weight:600; color: #939393;">남자</option>
-                        <option value="female" style="background-color: #FFE4E0;
+                        <option value="여자" style="background-color: #FFE4E0;
                         font-family: 'Nixgon, sans-serif; font-weight:600; color: #939393;">여자</option>
                     </select>
                 </div>
