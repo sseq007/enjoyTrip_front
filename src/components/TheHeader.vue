@@ -47,7 +47,7 @@
 						<!-- <li class="nav-item py-2" style="opacity: 80%; margin-left: 50vh;" @click="openModal"><i class="fi fi-rr-envelope"></i>
 					</li> -->
 					</ul>
-					<div class="notification-badge" style="margin-right: 43vh; margin-top: 1vh;">1</div>
+					<div class="notification-badge" style="margin-right: 43vh; margin-top: 1vh;" v-if="userInfo !== null">{{ isreadCount}}</div>
 					<div style="margin-right: 3vh;">
 						<b-dropdown size="lg" right text="Right align" variant="link" toggle-class="text-decoration-none"
 							no-caret scrollable>
@@ -58,11 +58,11 @@
 								<div class="d-flex" style="justify-content: center; ">
 									
 									<h5 class="mb-4" style="text-align: center; margin-right: 1vh;">
-										쪽지
+										<strong>쪽지</strong>
 									</h5>
-									<div class="notification-badge2" >1</div>
+									<div class="notification-badge2" v-if="userInfo !== null">{{ isreadCount}}</div>
 								</div>
-								<div style="height: 25vh; width: 50vh; overflow-y: auto;">
+								<div style="height: 35vh; width: 50vh; overflow-y: auto;">
 								<note-list-item v-for="note in notes" :key="note.noteNo" :note="note" ></note-list-item>
 								</div>
 							</div>
@@ -205,7 +205,8 @@ export default {
 				userPw: null,
 			},
 			modalVisible: false,
-			notes: []
+			notes: [],
+			isreadCount:''
 		};
 	},
 	created() {
@@ -213,6 +214,16 @@ export default {
 			.then(response => {
 				console.log(response.data);
 				this.notes = response.data;
+			})
+			.catch(error => {
+				console.log(error);
+			});
+
+			axios.get(`http://localhost:8080/api/note/countisread/${this.userInfo.userId}`)
+			.then(response => {
+				this.isreadCount = response.data;
+				console.log("isReadcount"+response.data);
+				
 			})
 			.catch(error => {
 				console.log(error);

@@ -32,10 +32,8 @@
                         <!-- </div> -->
                   
                     <div class="col-md-3 " style="text-align: end;">
-                        <button id="btn-sortNum" class="btn" type="button" style="background-color: white;">
-                            <router-link :to="'/trippartner/write'"
-                                style="text-decoration-line: none">친구찾기
-                            </router-link></button>
+                        <button id="btn-sortNum" class="btn" type="button" style="background-color: white;" @click="movePartner">
+                            동행 찾기</button>
 
 
                     </div>
@@ -59,13 +57,17 @@
 <script>
 import axios from "axios";
 import PartnerListItem from './partnerListitem.vue';
-
+import { mapState } from "vuex";
+import router from "@/router";
+const memberStore = "memberStore";
 export default {
     name: "PartnerMain",
     components: {
         PartnerListItem
     },
-    
+    computed: {
+        ...mapState(memberStore, ["userInfo"]),
+    },
     data() {
         return {
             articles: []
@@ -85,6 +87,14 @@ export default {
     },
     methods: {
 
+        movePartner() {
+            if (this.userInfo == null) {
+                alert("로그인이 필요한 기능입니다");
+            } else {
+                router.push('/trippartner/write')
+            }
+            
+        }
     },
 };
 </script>

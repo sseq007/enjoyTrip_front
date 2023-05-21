@@ -1,7 +1,7 @@
 
 <template>
     <div class="col-lg-3 col-md-4 col-sm-12">
-        <div class="card mb-3 shadow bg-body rounded">
+        <div class="card mb-3 shadow bg-gray rounded" :style="{'background-color': article.end ? '#ffe4e0' : '#c4c4c4' }">
             <div>
                 <div class="row" style="padding-top: 8px; padding-bottom: 8px; padding-left: 14px; padding-right: 14px;">
                     <div class="col-6">
@@ -28,9 +28,14 @@
                 </div>
                 <!-- <div class="img"> -->
                 <div  class="img-expension" @mouseenter="showDiv" @mouseleave="hideDiv">
-                   <router-link :to="'/trippartnerview/' + article.articleNo">
+                   <router-link :to="'/trippartnerview/' + article.articleNo" style="text-decoration: none;">
                     <!-- <img :src="require(`@/assets/img/partnerimg/${article.partnerImage}`)" style="border-radius: 5%; width: 100%; height: 144px"> -->
                     <img :src="'http://localhost:8081/upload/' + article.partnerImage" style="border-radius: 5%; width: 100%; height: 144px">
+                                 
+                    <div class="d-flex" style="position: absolute; top: 15%; left: 16%; transform: translate(-50%, -50%); background-color: white; padding: 8px; border-radius: 1vh; fon">
+                        <img src="@/assets/img/marker.png" style="width: 2vh; height: 2vh;">
+        <div style="font-size: 11px;">{{ article.location }}</div>
+      </div>
                     <div v-if="isHovered" class="hover-div">
                         <!-- Content of the div to show on hover -->
                         <div class="row">

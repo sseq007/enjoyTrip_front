@@ -10,7 +10,7 @@
             <div style="height: 20px;"></div>
             <div>
                 <!-- 이미지 주소 수정 필요 -->
-                <img  :src="'http://localhost:8081/upload/' + article.partnerImage" class=""
+                <img :src="'http://localhost:8081/upload/' + article.partnerImage" class=""
                     style="border-radius: 5%; width: 100%; height: 400px">
 
             </div>
@@ -23,8 +23,25 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-11">
+                            <div class="d-flex" style="justify-content: space-between;">
+                                <h2>{{ article.subject }}</h2>
+                                <div>
+                                    <div class="d-flex">
+                                        <h2>{{ checked }}</h2>
+                                        <div>
+                                            <div class="form-check form-switch" style="margin-left: 1vh;"
+                                                v-if="userInfo.userId == article.userId">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    id="flexSwitchCheckChecked" :checked="this.article.end"
+                                                    style="width: 6vh; height: 3vh;" @change="toggleSwitch">
+                                            </div>
+                                        </div>
 
-                            <h2>{{ article.subject }}</h2>
+
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="" style="border: 3px solid rgb(255, 181, 167); border-radius: 10px;">
                                 <div
                                     style="padding-left: 30px; padding-top: 20px; padding-right: 30px; padding-bottom: 20px;">
@@ -64,7 +81,8 @@
                     <div style="margin-top: 100px;">
                         <!-- 키워드 선택한거 가져오자 -->
                         <div class="d-flex">
-                            <div style="margin-right: 10px;">{{ article.registerTime }}</div>
+                            <div style="margin-right: 10px;">{{ article.registerTime.substring(0, 10) }} {{
+                                article.registerTime.substring(11, 16) }}</div>
                             <div style="margin-right: 10px;">조회수 {{ article.hit }}</div>
                             <div><a href="">신고하기</a></div>
 
@@ -155,19 +173,19 @@
                     </div>
 
                     <div class="row">
-                        <b-form-textarea id="textarea" v-model="text" placeholder="궁금한점 쪽지로 보내보세요.." rows="9"
-                            ></b-form-textarea>
+                        <b-form-textarea id="textarea" v-model="text" placeholder="궁금한점 쪽지로 보내보세요.."
+                            rows="9"></b-form-textarea>
                     </div>
                 </div>
                 <template #modal-footer="{ hide }">
-                <button type="button" @click="hide"
-                    style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
-                    class="btn">취소</button>
-                <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;" class="btn"
-                    @click="registNote">보내기</button>
+                    <button type="button" @click="hide"
+                        style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
+                        class="btn">취소</button>
+                    <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;"
+                        class="btn" @click="registNote">보내기</button>
 
 
-            </template>
+                </template>
             </b-modal>
         </div>
 
@@ -186,18 +204,29 @@ export default {
     },
     data() {
         return {
+            checked: '',
+            check: true,
             modalVisible: false,
             article: [],
             keywordOne: [],
             keywordTwo: [],
-            text:"",
+            text: "",
         };
     },
     created() {
+        
+       
         axios.get(`http://localhost:8080/api/trippartner/view/${this.$route.params.articleNo}`)
             .then(response => {
                 console.log(response.data);
                 this.article = response.data;
+                if (this.article.end) {
+            // console.log(this.article.end),
+            this.checked='모집중'
+        } else[
+            console.log(this.article.end),
+            this.checked='모집종료'
+        ]
             })
             .catch(error => {
                 console.log(error);
@@ -222,17 +251,65 @@ export default {
 
     },
     methods: {
+        toggleSwitch() {
+           
+            var formData = {
+                articleNo: this.article.articleNo,
+                // fromuserId: this.note.touserId,
+                // touserId: this.note.fromuserId,
+                // content: this.note.content,
+                isEnd: this.article.end
+            }
+            this.article.end = !this.article.end;
+            if (this.article.end) {
+                this.checked = "모집중";
+                 axios.put('http://localhost:8080/api/trippartner/updateisendOn', formData, {
+
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    console.log('updateisendOn 결과:', response.data);
+                    console.log("이글의 모집은"+this.article.end);
+                    // location.href = `/user/note/${this.note.noteNo}`;
+                    
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('updateisendOn update 실패하였습니다.');
+                });
+                
+            } else {
+                this.checked="모집종료"
+                 axios.put('http://localhost:8080/api/trippartner/updateisendOff', formData, {
+
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    console.log('updateisendOff 결과:', response.data);
+                    console.log("이글의 모집은"+this.article.end);
+                    // location.href = `/user/note/${this.note.noteNo}`;
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('updateisendOff update 실패하였습니다.');
+                });
+            }
+        },
         showModal() {
             console.log(this.userInfo);
             console.log(this.article.userId);
-          
+
             if (this.userInfo != null) {
                 if (this.article.userId != this.userInfo.userId) {
                     this.modalVisible = true;
                 }
                 else {
                     alert("쪽지를 보낼 수 없습니다");
-                    
+
                 }
             }
             else {
@@ -240,7 +317,7 @@ export default {
                 alert("로그인을 해주세요");
             }
         },
-        registNote(){
+        registNote() {
             var formData = {
                 fromuserId: this.userInfo.userId,
                 touserId: this.article.userId,
@@ -262,7 +339,7 @@ export default {
                     console.log(error);
                     alert('쪽지 전송이 실패하였습니다.');
                 });
-        
+
 
         }
     }

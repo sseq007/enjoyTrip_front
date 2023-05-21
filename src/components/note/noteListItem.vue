@@ -1,11 +1,10 @@
 
 <template>
+    <b-dropdown-item style="  padding: 1vh;  margin-bottom: 1vh;">
 
-    <b-dropdown-item style=" border:1px solid red; padding: 1vh; border-radius: 1vh; margin-bottom: 1vh;">
-								
-							
-        <div class="row mb-4" @click="navigateToPage" >
-            
+
+        <div class="row mb-4" @click="navigateToPage">
+
             <div class="col-2">
                 <img src="@/assets/img/noimg.jpg" class="profile_image"
                     style=" border-radius: 40%; width: 6vh; margin-right: 8px; ">
@@ -14,12 +13,13 @@
             <div class="col-10">
                 <div class="row">
                     <div class="d-flex" style="justify-content: space-between;">
-                        <div class="mb-1">{{ note.fromuserId}}</div>
-                        <div>{{ note.registerTime.substring(0, 10) }} {{
-                    note.registerTime.substring(11, 16) }}</div>
+                        <div class="mb-1" :class="{ 'text-blur': note.read }"><strong> {{ note.fromuserId }}</strong>
+                        </div>
+                        <div :class="{ 'text-blur': note.read }"><strong>{{ note.registerTime.substring(0, 10) }} {{
+                            note.registerTime.substring(11, 16) }}</strong></div>
 
                     </div>
-                    <div>{{ note.content}}</div>
+                    <div :class="{ 'text-blur': note.read }"><strong>{{ note.content.substring(0,28)}}....</strong></div>
                 </div>
 
             </div>
@@ -35,6 +35,7 @@
   
   
 <script>
+import axios from "axios";
 // import router from "@/router";
 export default {
     name: "noteListItem",
@@ -47,8 +48,31 @@ export default {
     },
     methods: {
         navigateToPage() {
+            var formData = {
+                noteNo: this.note.noteNo,
+                fromuserId: this.note.touserId,
+                touserId: this.note.fromuserId,
+                content: this.note.content,
+                isRead: this.note.isRead
+            }
+            console.log(this.note.noteId);
+            axios.put('http://localhost:8080/api/note/updateisread', formData, {
+
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    console.log('isReadupdate등록 결과:', response.data);
+                    location.href = `/user/note/${this.note.noteNo}`;
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('isRead update 실패하였습니다.');
+                });
+
             // router.push(`/user/note/${this.note.noteNo}`)
-            location.href = `/user/note/${this.note.noteNo}`;
+
         }
 
     },
@@ -56,7 +80,16 @@ export default {
 </script>
   
   
-  
+<style scoped>
+.unread-note {
+
+    border: 1px solid red;
+    border-radius: 1vh;
+}
+.text-blur {
+  opacity: 0.5; /* 텍스트를 흐리게 만들기 위한 opacity 값 설정 */
+}
+</style>
   
   
   

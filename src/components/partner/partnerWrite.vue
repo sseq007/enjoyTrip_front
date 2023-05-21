@@ -4,6 +4,11 @@
     <div>
 
         <div class="container">
+            <div v-if="isLoading" class="spinner-container">
+                <b-spinner label="Spinning" ></b-spinner>
+                <div>잠시만 기다려주세요</div>
+
+            </div>
             <div>
                 <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">여행 동행
                     찾기</h2>
@@ -14,57 +19,91 @@
                 <div class="col-2">
 
                     <div class="list-group" id="list-tab" role="tablist" style="text-align: center;">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex">
                             <div>
-                                <a class="list-group-item list-group-item-action list-group-item-light " id="seoul"
-                                    data-bs-toggle="list" href="#list-seoul" role="tab" aria-controls="list-seoul">서울</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="incheon"
-                                    data-bs-toggle="list" href="#list-profile" role="tab"
-                                    aria-controls="list-profile">인천</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="degeon"
-                                    data-bs-toggle="list" href="#list-messages" role="tab"
-                                    aria-controls="list-messages">대전</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="dagu"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">대구</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="gwanggu"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">광주</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="busan"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">부산</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="woogsan"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">울산</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="gunggido"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">경기도</a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '서울시' }" @click="selectTab('서울시')" href="#list-seoul"
+                                    role="tab" aria-controls="list-seoul">
+                                    서울
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '인천시' }" @click="selectTab('인천시')" href="#list-profile"
+                                    role="tab" aria-controls="list-profile">
+                                    인천
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '대전시' }" @click="selectTab('대전시')" href="#list-messages"
+                                    role="tab" aria-controls="list-messages">
+                                    대전
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '대구시' }" @click="selectTab('대구시')" href="#list-settings"
+                                    role="tab" aria-controls="list-settings">
+                                    대구
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '광주시' }" @click="selectTab('광주시')" href="#list-settings"
+                                    role="tab" aria-controls="list-settings">
+                                    광주
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '부산시' }" @click="selectTab('부산시')" href="#list-settings"
+                                    role="tab" aria-controls="list-settings">
+                                    부산
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '울산시' }" @click="selectTab('울산시')" href="#list-settings"
+                                    role="tab" aria-controls="list-settings">
+                                    울산
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '경기도' }" @click="selectTab('경기도')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
+                                    경기도
+                                </a>
 
                             </div>
                             <div>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="gangwondo"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">강원도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light " id="jungnorth"
-                                    data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">충청북도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="jungsouth"
-                                    data-bs-toggle="list" href="#list-profile" role="tab"
-                                    aria-controls="list-profile">충청남도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="gangnorth"
-                                    data-bs-toggle="list" href="#list-messages" role="tab"
-                                    aria-controls="list-messages">경상북도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="gangsouth"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">경상남도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="zernorth"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">전라북도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="zersouth"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">전라남도</a>
-                                <a class="list-group-item list-group-item-action list-group-item-light" id="zejudo"
-                                    data-bs-toggle="list" href="#list-settings" role="tab"
-                                    aria-controls="list-settings">제주도</a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '강원도' }" @click="selectTab('강원도')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
+                                    강원도
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '충청북도' }" @click="selectTab('충청북도')" href="#list-home"
+                                    role="tab" aria-controls="list-home">
+                                    충청북도
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '충청남도' }" @click="selectTab('충청남도')"
+                                    href="#list-profile" role="tab" aria-controls="list-profile">
+                                    충청남도
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '경상북도' }" @click="selectTab('경상북도')"
+                                    href="#list-messages" role="tab" aria-controls="list-messages">
+                                    경상북도
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '경상남도' }" @click="selectTab('경상남도')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
+                                    경상남도
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '전라북도' }" @click="selectTab('전라남도')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
+                                    전라북도
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '전라남도' }" @click="selectTab('전라남도')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
+                                    전라남도
+                                </a>
+                                <a class="list-group-item list-group-item-action list-group-item-light"
+                                    :class="{ active: selectedTab === '제주도' }" @click="selectTab('제주도')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
+                                    제주도
+                                </a>
 
                             </div>
                         </div>
@@ -98,15 +137,16 @@
 
                         </div>
                     </div>
+                    
                     <div class="col-8 mt-5">
                         <label for="example-datepicker">시작일</label>
                         <label for="example-datepicker" style="margin-left: 275px;">종료일</label>
                         <div class="d-flex">
                             <b-form-datepicker id="example-datepicker" v-model="value_start"
-                                class="mb-2"></b-form-datepicker>
+                                class="mb-2" :min="today"></b-form-datepicker>
 
                             <b-form-datepicker id="example-datepicker" v-model="value_end"
-                                class="mb-2 ms-1"></b-form-datepicker>
+                                class="mb-2 ms-1" :min="today"></b-form-datepicker>
 
 
                         </div>
@@ -141,17 +181,17 @@
 
                 <textarea style="height: 450px;" class="form-control" rows="5" id="board-write-content"
                     name="board-write-content" placeholder="1. 현재 동행이 있나요? 
-                                                        ex) 혼자에요 / 동행 1명이 있어요 
+                                                                ex) 혼자에요 / 동행 1명이 있어요 
      
     
-                                                2.어떤 동행을 찾고 있나요? 
-                                                        ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
-                                                        ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
+                                                        2.어떤 동행을 찾고 있나요? 
+                                                                ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
+                                                                ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
 
 
-                                                3. 원하는 여행 코스가 있다면 알려주세요!
+                                                        3. 원하는 여행 코스가 있다면 알려주세요!
 
-                                                        (1000자 이내) " ref="content"></textarea>
+                                                                (1000자 이내) " ref="content"></textarea>
             </div>
 
             <div class="mb-3" style="margin-top: 7px;">
@@ -263,7 +303,7 @@
         </b-modal>
 
 
-
+        
 
     </div>
 </template>
@@ -287,6 +327,9 @@ export default {
     },
     data() {
         return {
+            today: new Date().toISOString().split('T')[0],
+            isLoading: false,
+            selectedTab: '',
             articleno: '',
             modalVisible: false,
             uploadedFile: null,
@@ -430,8 +473,12 @@ export default {
     },
 
     methods: {
+        selectTab(tab) {
+            this.selectedTab = tab;
+            console.log("내가 선택한 지역은" + this.selectedTab)
+        },
         showModal() {
-            if (this.purpose && this.recruitment && this.value_start && this.value_end && this.$refs.subject.value && this.$refs.content.value) {
+            if (this.purpose && this.recruitment && this.value_start && this.value_end && this.$refs.subject.value && this.$refs.content.value&& this.selectedTab) {
                 this.modalVisible = true; // 모달 표시 여부 변경
             } else {
                 // 필수 입력 항목이 하나 이상 누락되었을 때 처리
@@ -504,6 +551,7 @@ export default {
 
             const formData = new FormData();
             formData.append('userId', this.userInfo.userId);
+            formData.append('location', this.selectedTab);
             formData.append('subject', this.$refs.subject.value);
             formData.append('content', this.$refs.content.value);
             formData.append('partnerObject', this.purpose);
@@ -537,7 +585,12 @@ export default {
                     })
                         .then(response2 => {
                             console.log('키워드 결과:', response2.data);
-                            // alert('글 등록이 완료되었습니다.');
+                            alert('글 등록이 완료되었습니다.');
+                            this.isLoading = true;
+                            router.push(`/trippartnerview/${response.data.articleNo}`).then(() => {
+                                // location.reload() // 페이지 새로고침
+                                this.isLoading = false;
+                            })
 
 
                         })
@@ -547,11 +600,8 @@ export default {
                         });
 
                     console.log(response);
-                    alert('동행찾기 글 등록이 완료되었습니다.');
+                    // alert('동행찾기 글 등록이 완료되었습니다.');
 
-                    router.push(`/trippartnerview/${response.data.articleNo}`).then(() => {
-                        location.reload() // 페이지 새로고침
-                    })
                 })
                 .catch(error => {
                     console.log(error);
@@ -562,3 +612,12 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>

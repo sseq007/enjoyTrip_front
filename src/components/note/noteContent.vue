@@ -2,7 +2,7 @@
     <div class="container">
         <div style="margin-bottom: 5vh;">
 
-            <h2 style="font-family:'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">쪽지 보기</h2>
+            <h2 style="font-family:'Black Han Sans',sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">쪽지 보기</h2>
             <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
         </div>
         <div class="row mb-5">
