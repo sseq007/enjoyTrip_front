@@ -34,7 +34,11 @@ async function deleteMember(id, success, fail){
 }
 
 async function registerMember(user, success, fail){
-    await api.post(`/api/member/register`, JSON.stringify(user)).then(success).catch(fail);
+    axios.post('http://localhost:8081/api/member/register', user, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }).then(success).catch(fail);
 }
 
 export { login, findById, tokenRegeneration, logout, updateMember, deleteMember, registerMember };

@@ -83,7 +83,7 @@
                     <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 20px; font-weight: 600;">
                         * 생년월일
                     </label>
-                    <input type="date" style="margin-top: 8px; font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 60%; 
+                    <input type="date" v-model="birth" style="margin-top: 8px; font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 60%; 
                     width:760px; height:55px; padding-left: 15px; padding-right: 15px; background-color: transparent;
                     border:4px solid #85c6d7; float:left; font-size: 28px" placeholder="Nickname"
                     required/>
@@ -93,7 +93,7 @@
                         * 이메일
                     </label>
                     <div style="display: flex; margin-top: 8px;">
-                        <input type="text" style="font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 60%; 
+                        <input type="text" v-model="emailId" style="font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 60%; 
                         width:250px; height:55px; padding-left: 15px; background-color: transparent;
                         border:4px solid #85c6d7; float:left; font-size: 28px" placeholder="example"
                         required/>
@@ -179,11 +179,17 @@ export default {
             formdata.append('userId', this.userId);
             formdata.append('userName', this.userName);
             formdata.append('userPw', this.userPw);
+            formdata.append('userNickname', this.userNickname);
             formdata.append('gender', this.$refs.gender.value);
+            formdata.append('birth', this.birth);
             formdata.append('emailId', this.emailId);
             formdata.append('emailDomain', this.$refs.emailDomain.value);
             formdata.append('file', this.$refs.image.files[0]);
-			console.log(formdata);
+
+            for (let key of formdata.keys()) {
+                console.log(key, ":", formdata.get(key));
+            }
+
 			registerMember(
 				formdata,
 				({ data }) => {
