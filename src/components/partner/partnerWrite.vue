@@ -160,12 +160,13 @@
             </div>
             <div style="height: 77px"></div>
             <div class="mb-3 file btn btn-lg  d-flex align-items-center justify-content-center"
-                style="width: 100%; height: 350px; overflow: hidden; background-color: white;">
+                style="width: 100%; height: 350px; overflow: hidden; background-color: white; position: relative;">
                 <!-- Upload -->
                 <!-- <label class="m-0"> -->
                 <input style="opacity: 0; text-align: center; width: 100%; height: 350px;" type="file" name="file"
                     ref="fileInput" @change="handleFileUpload" />
                 <!-- </label> -->
+                <img src="@/assets/img/picture.png" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 9vh;" >
             </div>
             <div>
 
@@ -588,7 +589,7 @@ export default {
                             alert('글 등록이 완료되었습니다.');
                             this.isLoading = true;
                             router.push(`/trippartnerview/${response.data.articleNo}`).then(() => {
-                                // location.reload() // 페이지 새로고침
+                                location.reload() // 페이지 새로고침
                                 this.isLoading = false;
                             })
 

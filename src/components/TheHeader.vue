@@ -17,7 +17,7 @@
 						<li class="nav-item py-2" style="opacity: 80%"><i class="fi fi-rr-marker ps-3"></i>
 							<router-link :to="'/triplocation'" class="nav-link active ps-0" aria-current="page"
 								style="display: inline">
-								<p style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">지역별여행지</p>
+								<p style="font-family:'Noto Sans KR', sans-serif; opacity: 70%; display: inline">지역별여행지</p>
 							</router-link>
 						</li>
 						<li class="nav-item py-2" style="opacity: 80%"><i class="fi fi-rr-calendar ps-3"></i> <router-link
@@ -47,7 +47,7 @@
 						<!-- <li class="nav-item py-2" style="opacity: 80%; margin-left: 50vh;" @click="openModal"><i class="fi fi-rr-envelope"></i>
 					</li> -->
 					</ul>
-					<div class="notification-badge" style="margin-right: 43vh; margin-top: 1vh;" v-if="userInfo !== null">{{ isreadCount}}</div>
+					<div class="notification-badge" style="margin-right: 43vh; margin-top: 1vh;" v-if="userInfo !== null&&isreadCount!==0">{{ isreadCount}}</div>
 					<div style="margin-right: 3vh;">
 						<b-dropdown size="lg" right text="Right align" variant="link" toggle-class="text-decoration-none"
 							no-caret scrollable>
@@ -60,7 +60,7 @@
 									<h5 class="mb-4" style="text-align: center; margin-right: 1vh;">
 										<strong>쪽지</strong>
 									</h5>
-									<div class="notification-badge2" v-if="userInfo !== null">{{ isreadCount}}</div>
+									<div class="notification-badge2" v-if="userInfo !== null&&isreadCount!==0">{{ isreadCount}}</div>
 								</div>
 								<div style="height: 35vh; width: 50vh; overflow-y: auto;">
 								<note-list-item v-for="note in notes" :key="note.noteNo" :note="note" ></note-list-item>

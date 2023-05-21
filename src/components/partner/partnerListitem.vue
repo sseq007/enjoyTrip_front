@@ -1,7 +1,7 @@
 
 <template>
     <div class="col-lg-3 col-md-4 col-sm-12">
-        <div class="card mb-3 shadow bg-gray rounded" :style="{'background-color': article.end ? '#ffe4e0' : '#c4c4c4' }">
+        <div class="card mb-3 shadow bg-gray rounded" :style="{ 'background-color': article.end ? '#ffe4e0' : '#c4c4c4' }">
             <div>
                 <div class="row" style="padding-top: 8px; padding-bottom: 8px; padding-left: 14px; padding-right: 14px;">
                     <div class="col-6">
@@ -10,7 +10,7 @@
                                 style="padding:4px; border-radius: 40%; width: 40px; height: 40px; margin-right: 8px; ">
 
                             <div>
-                                <div>{{article.userId}}</div>
+                                <div>{{ article.userId }}</div>
                                 <div style="color: #80B5ff;">40대 남성</div>
                             </div>
                         </div>
@@ -20,37 +20,43 @@
                         <div>
                             <i class="fi fi-rr-calendar-days">여행 기간</i>
                             <div style="color: #25E09A;">
-                                {{ article.startDate.substring(5)}} ~ {{ article.endDate.substring(5)}}
+                                {{ article.startDate.substring(5) }} ~ {{ article.endDate.substring(5) }}
                             </div>
                         </div>
 
                     </div>
                 </div>
                 <!-- <div class="img"> -->
-                <div  class="img-expension" @mouseenter="showDiv" @mouseleave="hideDiv">
-                   <router-link :to="'/trippartnerview/' + article.articleNo" style="text-decoration: none;">
-                    <!-- <img :src="require(`@/assets/img/partnerimg/${article.partnerImage}`)" style="border-radius: 5%; width: 100%; height: 144px"> -->
-                    <img :src="'http://localhost:8081/upload/' + article.partnerImage" style="border-radius: 5%; width: 100%; height: 144px">
-                                 
-                    <div class="d-flex" style="position: absolute; top: 15%; left: 16%; transform: translate(-50%, -50%); background-color: white; padding: 8px; border-radius: 1vh; fon">
-                        <img src="@/assets/img/marker.png" style="width: 2vh; height: 2vh;">
-        <div style="font-size: 11px;">{{ article.location }}</div>
-      </div>
-                    <div v-if="isHovered" class="hover-div">
-                        <!-- Content of the div to show on hover -->
-                        <div class="row">
-                            <div class="" style="display:flex; justify-content: space-around;">
-                               
-                                <div>모집중 : {{ article.partnerCount }}</div> 
-                                <i class="fi fi-rr-eye"> {{ article.hit }}</i>
+                <div class="img-expension" @mouseenter="showDiv" @mouseleave="hideDiv">
+                    <router-link :to="'/trippartnerview/' + article.articleNo" style="text-decoration: none;">
+                        <!-- <img :src="require(`@/assets/img/partnerimg/${article.partnerImage}`)" style="border-radius: 5%; width: 100%; height: 144px"> -->
+                        <img :src="'http://localhost:8081/upload/' + article.partnerImage"
+                            style="border-radius: 5%; width: 100%; height: 144px">
+
+                        <div class="d-flex"
+                            style="position: absolute; top: 15%; left: 16%; transform: translate(-50%, -50%); background-color: white; padding: 8px; border-radius: 1vh; fon">
+                            <img src="@/assets/img/marker.png" style="width: 2vh; height: 2vh;">
+                            <div style="font-size: 11px;">{{ article.location }}</div>
+                        </div>
+                        <div v-if="isHovered" class="hover-div">
+                            <!-- Content of the div to show on hover -->
+                            <div class="row">
+                                <div class="" style="display:flex; justify-content: space-around;">
+
+                                    <div>모집중 : {{ article.partnerCount }}</div>
+                                    <div class="d-flex">
+
+                                        <i class="fi fi-rr-eye" style="margin-right: 2vh;"> {{ article.hit }}</i>
+                                        <i class="fi fi-rr-paper-plane" style="margin-right: 2vh;">{{ sendcount }}</i>
+
+                                    </div>
+
+                                </div>
 
 
                             </div>
-                            
-
                         </div>
-                    </div>
-                </router-link>
+                    </router-link>
                 </div>
                 <!-- </div> -->
             </div>
@@ -73,15 +79,30 @@
   
   
 <script>
+import axios from "axios";
 export default {
     name: "PartnerListItem",
     props: {
-        article: Object
+        article: Object,
+        
     },
     data() {
         return {
             isHovered: false,
+            sendcount:''
         };
+    },
+    created() {
+        axios.get(`http://localhost:8080/api/note/countsend/${this.article.articleNo}`)
+            .then(response => {
+                console.log(response.data);
+                this.sendcount = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+
     },
     methods: {
         showDiv() {

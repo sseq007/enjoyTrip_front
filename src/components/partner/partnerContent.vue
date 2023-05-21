@@ -8,15 +8,16 @@
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
             <div style="height: 20px;"></div>
+            <div style="background-color: #ffe4e0; padding: 4vh; border-radius: 2vh;">
             <div>
                 <!-- 이미지 주소 수정 필요 -->
                 <img :src="'http://localhost:8081/upload/' + article.partnerImage" class=""
-                    style="border-radius: 5%; width: 100%; height: 400px">
+                    style="border-radius: 1vh; width: 100%; height: 400px">
 
             </div>
             <div style="height: 70px;"></div>
-        </div>
-        <div class="container">
+        
+      
 
             <div class="row">
 
@@ -27,7 +28,7 @@
                                 <h2>{{ article.subject }}</h2>
                                 <div>
                                     <div class="d-flex">
-                                        <h2>{{ checked }}</h2>
+                                        <h2 style="font-family: 'Nixgon, sans-serif; font-weight:300;">{{ checked }}</h2>
                                         <div>
                                             <div class="form-check form-switch" style="margin-left: 1vh;"
                                                 v-if="userInfo.userId == article.userId">
@@ -64,9 +65,9 @@
                     </div>
                     <div style="margin-top: 40px;">
                         <!-- 키워드 선택한거 가져오자 -->
-                        <div>저는 <span v-for="keyword in keywordOne" :key="keyword" style="color: #80B5ff;">{{ keyword.label
+                        <div>저는 <span v-for="keyword in keywordOne" :key="keyword" style="color: #85c6d7; font-family: 'Nixgon, sans-serif; font-weight:600;">{{ keyword.label
                         }}, </span> 여행을 떠나려고 해요.</div>
-                        <div>저는 <span v-for="keyword in keywordTwo" :key="keyword" style="color: #80B5ff;">{{ keyword.label
+                        <div>저는 <span v-for="keyword in keywordTwo" :key="keyword" style="color: #85c6d7; font-family: 'Nixgon, sans-serif; font-weight:600;">{{ keyword.label
                         }}, </span>여행자에요</div>
 
 
@@ -143,7 +144,7 @@
                         </div>
                     </div>
                 </template>
-                <div class="container" style="height:62vh; padding: 4vh;">
+                
 
                     <div class="row mb-5">
 
@@ -176,7 +177,7 @@
                         <b-form-textarea id="textarea" v-model="text" placeholder="궁금한점 쪽지로 보내보세요.."
                             rows="9"></b-form-textarea>
                     </div>
-                </div>
+                
                 <template #modal-footer="{ hide }">
                     <button type="button" @click="hide"
                         style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
@@ -187,8 +188,8 @@
 
                 </template>
             </b-modal>
+            </div>
         </div>
-
 
     </div>
 </template>
@@ -320,6 +321,7 @@ export default {
         registNote() {
             var formData = {
                 fromuserId: this.userInfo.userId,
+                articleNo:this.article.articleNo,
                 touserId: this.article.userId,
                 content: this.text
             }
