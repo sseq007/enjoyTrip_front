@@ -46,26 +46,41 @@
         <div class="container">
             <div>
                 <h2 style="font-family: 'Black Han Sans', sans-serif;
-                                                                    opacity: 75%;
-                                                                    font-size: 50px;
-                                                                " class="m-0 mt-5">
+                                                                                        opacity: 75%;
+                                                                                        font-size: 50px;
+                                                                                    " class="m-0 mt-5">
                     나의 여행 계획
                 </h2>
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
         </div>
         <div>
-            <div class="row" style="margin-top: 5vh; padding: 1vh;">
+            <div class="row" style="margin-top: 10vh; padding: 3vh; background-color: #ffe4e0;">
 
-                <div class="col-md-3">
-                    <form class="d-flex my-3" @submit="search" role="search">
-                        <!-- <select id="search-area" class="form-select me-2">
-                    <option value="0" selected>검색 할 지역 선택</option>
-                </select> -->
-                        <select id="search-area" class="form-select me-2" @change="handleAreaChange">
+                <div class="col-md-3" style=" width: 56vh;">
+                    <div style="margin-bottom: 3vh;">
+
+                        <select id="search-area" class="form-select me-2" @change="handleAreaChange" v-model="selectarea">
                             <option value="0" selected>검색 할 지역 선택</option>
                             <option v-for="area in areas" :value="area.code" :key="area.code">{{ area.name }}</option>
                         </select>
+
+                    </div>
+
+                    <div class="d-flex">
+                        <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2"
+                            :min="today"></b-form-datepicker>
+
+                        <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2 ms-1"
+                            :min="today"></b-form-datepicker>
+
+
+                    </div>
+                    <form class="d-flex my-3" @submit="search" role="search">
+
+                        <!-- <select id="search-area" class="form-select me-2">
+                    <option value="0" selected>검색 할 지역 선택</option>
+                </select> -->
                         <select id="search-content-id" class="form-select me-2">
                             <option value="0" selected>관광지 유형</option>
                             <option value="12">관광지</option>
@@ -78,23 +93,59 @@
                             <option value="39">음식점</option>
                         </select>
                         <input id="search-keyword" class="form-control me-2" type="search" placeholder="검색어"
-                            aria-label="검색어" />
-                        <button id="btn-search" class="btn btn-outline-success" type="button" @click="search">
+                            aria-label="검색어" style="width: 26vh; text-align: center;" />
+                        <button id="btn-search" class="btn btn-outline-success" type="button" @click="search"
+                            style="width: 15vh; ">
                             검색
                         </button>
                     </form>
 
+                    <div style="overflow-y: scroll; max-height: 50vh;">
+                        <table class="table table-striped" v-show="showTable">
+                            <thead>
+                                <tr>
+                                    <th>대표이미지</th>
+                                    <th>관광지명</th>
+                                    <th>주소</th>
+                                    <!-- <th class="table_riches">위도</th>
+                                <th class="table_riches">경도</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="trip-list">
+                                <tr v-for="area in trips" :key="area.title" @click="moveCenter(area.mapy, area.mapx)">
+                                    <td><img :src="area.firstimage" width="100px"></td>
+                                    <td>{{ area.title }}</td>
+                                    <td>{{ area.addr1 }} {{ area.addr2 }}</td>
+                                    <!-- <td class="table_riches">{{ area.mapy }}</td>
+                                <td class="table_riches">{{ area.mapx }}</td> -->
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
                 </div>
-                <div class="col-md-6" style="margin-top: 2vh;">
-                    <div id="map" style="width: 100%; height: 60vh"></div>
+                <div class="col-md-6">
+                    <div id="map" style="width: 100%; height: 70vh; border-radius: 1vh;"></div>
                     <!-- kakao map end -->
-                    <div class="mt-5" style="background-color: #ffffffb0; width: 100%">
+                    <!-- <div class="mt-5" style="background-color: #ffffffb0; width: 100%"> -->
+
+                </div>
+
+
+                <div class="col-md-2" style="width: 46vh;">
+                    <div class="row">
+                        <strong style="text-align: center; font-size: 3vh; margin-bottom: 3vh;">{{ selectedAreaName }}</strong>
+                        <div v-if="value_start && value_end" style="text-align: center; font-size: 3vh;">
+                            {{ getDurationInDays(value_start, value_end) }}일
+                        </div>
+
 
                     </div>
-                    <div class="col-md-3">
 
 
-                    </div>
+
+
+
 
                 </div>
                 <!-- [S] 관광지 검색 -->
@@ -104,32 +155,12 @@
 
 
 
-                <table class="table table-striped" v-show="showTable">
-                    <thead>
-                        <tr>
-                            <th>대표이미지</th>
-                            <th>관광지명</th>
-                            <th>주소</th>
-                            <th class="table_riches">위도</th>
-                            <th class="table_riches">경도</th>
-                        </tr>
-                    </thead>
-                    <tbody id="trip-list">
-                        <tr v-for="area in trips" :key="area.title" @click="moveCenter(area.mapy, area.mapx)">
-                            <td><img :src="area.firstimage" width="100px"></td>
-                            <td>{{ area.title }}</td>
-                            <td>{{ area.addr1 }} {{ area.addr2 }}</td>
-                            <td class="table_riches">{{ area.mapy }}</td>
-                            <td class="table_riches">{{ area.mapx }}</td>
-                        </tr>
-                    </tbody>
-
-                </table>
 
 
-            </div>
 
-        
+        </div>
+
+
 
 
     </div>
@@ -142,6 +173,9 @@ export default {
     name: "travelPlanWrite",
     data() {
         return {
+            selectarea: '',
+            value_start: '',
+            value_end: '',
             contentTypeId: 0,
             serviceKey: "lFRXRzaJlF6qZGI0Tx1HIXfLfwHwxUJs%2F5A375BAuh3QwK%2BWqFcxTjr4rIdc0o5uDqny0%2BPkTx6r3fetGeb3ig%3D%3D", // Set your service key here
             showTable: false,
@@ -151,16 +185,23 @@ export default {
             selectedArea: '0',
             selectedType: '0',
             searchKeyword: '',
-            areas: []
+            areas: [],
+            today: new Date().toISOString().split('T')[0],
         };
     },
     created() {
 
     },
+    computed: {
+        selectedAreaName() {
+            const selectedArea = this.areas.find(area => area.code === this.selectarea);
+            return selectedArea ? selectedArea.name : '';
+        }
+    },
     mounted() {
         this.map = new window.kakao.maps.Map(document.getElementById("map"), {
             center: new window.kakao.maps.LatLng(37.500613, 127.036431),
-            level: 5
+            level: 10
         });
         const areaUrl =
             "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
@@ -173,6 +214,13 @@ export default {
         console.log(this.data);
     },
     methods: {
+        getDurationInDays(start, end) {
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+      const timeDifference = endDate.getTime() - startDate.getTime();
+      const durationInDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
+      return durationInDays;
+    },
         search() {
             let searchUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${this.serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
 
