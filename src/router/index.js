@@ -16,10 +16,12 @@ import userDelete from "@/components/user/userDelete";
 import tripPartner from "../views/partner/tripPartner";
 import partnerWrite from "../components/partner/partnerWrite";
 import partnerContent from "../components/partner/partnerContent";
+import partnerModify from "../components/partner/partnerModify";
 import hotplace from "../components/hotplace/hotplaceMain";
 import hotplaceWrite from "../components/hotplace/hotplaceWrite";
 import hotplaceContent from "../components/hotplace/hotplaceContent";
 import hotplaceModify from "../components/hotplace/hotplaceModify";
+import travelplanWrite from "../components/travelplan/travelplanWrite";
 
 import store from "@/store";
 
@@ -128,6 +130,11 @@ const routes = [
     component: partnerContent,
   },
   {
+    path: "/trippartnermodfiy/:articleNo",
+    name: "partnerModify",
+    component: partnerModify,
+  },
+  {
     path: "/hotplace",
     name: "hotplace",
     component: hotplace,
@@ -161,6 +168,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: noteContent,
+  },
+  {
+    path: "/travelplan/write",
+    name: "travelplan",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: travelplanWrite,
   },
 ];
 

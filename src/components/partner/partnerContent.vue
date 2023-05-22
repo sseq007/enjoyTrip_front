@@ -9,83 +9,95 @@
             </div>
             <div style="height: 20px;"></div>
             <div style="background-color: #ffe4e0; padding: 4vh; border-radius: 2vh;">
-            <div>
-                <!-- 이미지 주소 수정 필요 -->
-                <img :src="'http://localhost:8081/upload/' + article.partnerImage" class=""
-                    style="border-radius: 1vh; width: 100%; height: 400px">
+                <div>
+                    <!-- 이미지 주소 수정 필요 -->
+                    <img :src="'http://localhost:8081/upload/' + article.partnerImage" class=""
+                        style="border-radius: 1vh; width: 100%; height: 400px">
 
-            </div>
-            <div style="height: 70px;"></div>
-        
-      
+                </div>
+                <div style="height: 70px;"></div>
 
-            <div class="row">
 
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-11">
-                            <div class="d-flex" style="justify-content: space-between;">
-                                <h2>{{ article.subject }}</h2>
-                                <div>
-                                    <div class="d-flex">
-                                        <h2 style="font-family: 'Nixgon, sans-serif; font-weight:300;">{{ checked }}</h2>
-                                        <div>
-                                            <div class="form-check form-switch" style="margin-left: 1vh;"
-                                                v-if="userInfo.userId == article.userId">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                    id="flexSwitchCheckChecked" :checked="this.article.end"
-                                                    style="width: 6vh; height: 3vh;" @change="toggleSwitch">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-11">
+                                <div class="d-flex" style="justify-content: space-between;">
+                                    <h2>{{ article.subject }}</h2>
+                                    <div>
+                                        <div class="d-flex">
+                                            <h2 style="font-family: 'Nixgon, sans-serif; font-weight:300;">{{ checked }}
+                                            </h2>
+                                            <div>
+                                                <div class="form-check form-switch" style="margin-left: 1vh;"
+                                                    v-if="userInfo.userId == article.userId">
+                                                    <input class="form-check-input" type="checkbox" role="switch"
+                                                        id="flexSwitchCheckChecked" :checked="this.article.end"
+                                                        style="width: 6vh; height: 3vh;" @change="toggleSwitch">
+                                                </div>
                                             </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="" style="border: 3px solid rgb(255, 181, 167); border-radius: 10px;">
+                                    <div
+                                        style="padding-left: 30px; padding-top: 20px; padding-right: 30px; padding-bottom: 20px;">
+                                        <div class="d-flex">
+                                            <p style="margin-right: 8px;">지역</p>
+                                            <span style="margin-right: 8px;">{{ article.location }}</span>
+                                            <p style="margin-right: 8px;">모집인원 </p>
+                                            <span>{{ article.partnerCount }}</span>
+
+                                        </div>
+                                        <div>
+                                            <i class="fi fi-rr-calendar-days" style="margin-right: 2px;"></i>
+                                            {{ article.startDate }} ~ {{ article.endDate }}
                                         </div>
 
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="" style="border: 3px solid rgb(255, 181, 167); border-radius: 10px;">
-                                <div
-                                    style="padding-left: 30px; padding-top: 20px; padding-right: 30px; padding-bottom: 20px;">
-                                    <div class="d-flex">
-                                        <p style="margin-right: 8px;">지역</p>
-                                        <span style="margin-right: 8px;">{{ article.location }}</span>
-                                        <p style="margin-right: 8px;">모집인원 </p>
-                                        <span>{{ article.partnerCount }}</span>
-
-                                    </div>
-                                    <div>
-                                        <i class="fi fi-rr-calendar-days" style="margin-right: 2px;"></i>
-                                        {{ article.startDate }} ~ {{ article.endDate }}
                                     </div>
 
                                 </div>
-
                             </div>
                         </div>
-                    </div>
-                    <div style="margin-top: 40px;">
-                        <!-- 키워드 선택한거 가져오자 -->
-                        <div>저는 <span v-for="keyword in keywordOne" :key="keyword" style="color: #85c6d7; font-family: 'Nixgon, sans-serif; font-weight:600;">{{ keyword.label
-                        }}, </span> 여행을 떠나려고 해요.</div>
-                        <div>저는 <span v-for="keyword in keywordTwo" :key="keyword" style="color: #85c6d7; font-family: 'Nixgon, sans-serif; font-weight:600;">{{ keyword.label
-                        }}, </span>여행자에요</div>
+                        <div style="margin-top: 40px;">
+                            <!-- 키워드 선택한거 가져오자 -->
+                            <div>저는 <span v-for="keyword in keywordOne" :key="keyword"
+                                    style="color: #85c6d7; font-family: 'Nixgon, sans-serif; font-weight:600;">{{
+                                        keyword.label
+                                    }}, </span> 여행을 떠나려고 해요.</div>
+                            <div>저는 <span v-for="keyword in keywordTwo" :key="keyword"
+                                    style="color: #85c6d7; font-family: 'Nixgon, sans-serif; font-weight:600;">{{
+                                        keyword.label
+                                    }}, </span>여행자에요</div>
 
 
-                    </div>
-                    <div style="margin-top: 40px;">
-                        <!-- 키워드 선택한거 가져오자 -->
-                        <div>{{ article.content }}</div>
+                        </div>
+                        <div style="margin-top: 40px;">
+                            <!-- 키워드 선택한거 가져오자 -->
+                            <div>{{ article.content }}</div>
 
 
 
-                    </div>
-                    <div style="margin-top: 100px;">
-                        <!-- 키워드 선택한거 가져오자 -->
-                        <div class="d-flex">
-                            <div style="margin-right: 10px;">{{ article.registerTime.substring(0, 10) }} {{
-                                article.registerTime.substring(11, 16) }}</div>
-                            <div style="margin-right: 10px;">조회수 {{ article.hit }}</div>
-                            <div><a href="">신고하기</a></div>
+                        </div>
+                        <div style="margin-top: 100px;">
+                            <!-- 키워드 선택한거 가져오자 -->
+                            <div class="d-flex">
+                                <div style="margin-right: 10px;">{{ article.registerTime.substring(0, 10) }} {{
+                                    article.registerTime.substring(11, 16) }}</div>
+                                <div style="margin-right: 10px;">조회수 {{ article.hit }}</div>
+                                <div style="margin-right: 10px;" v-if="userInfo.userId === article.userId"><strong> <router-link :to="'/trippartnermodfiy/' + article.articleNo" style="text-decoration: none; color: inherit;">글수정</router-link></strong>
+                                </div>
+                            
+                            <div style="margin-right: 10px;" v-if="userInfo.userId === article.userId">
+                                <strong> <a href="#" @click="deleteArticle"
+                                        style="text-decoration: none; color: inherit;">삭제하기</a></strong>
+                            </div>
+                            <div><a href="" style="text-decoration: none;">신고하기</a></div>
 
                         </div>
 
@@ -144,40 +156,39 @@
                         </div>
                     </div>
                 </template>
-                
 
-                    <div class="row mb-5">
 
-                        <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; margin-bottom: 3vh;">동행 정보</h2>
-                        <div class="d-flex mb-3">
+                <div class="row mb-5">
 
-                            <img src="@/assets/img/user.png" style="width: 3vh; height: 3vh;">
-                            <div style="margin-left: 2vh; font-size: 2vh;">{{ article.userId }}</div>
-                        </div>
-                        <div class="d-flex mb-3">
+                    <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; margin-bottom: 3vh;">동행 정보</h2>
+                    <div class="d-flex mb-3">
 
-                            <img src="@/assets/img/marker.png" style="width: 3vh; height: 3vh;">
-                            <div style="margin-left: 2vh; font-size: 2vh;">{{ article.location }}</div>
-                        </div>
-                        <div class="d-flex mb-3">
+                        <img src="@/assets/img/user.png" style="width: 3vh; height: 3vh;">
+                        <div style="margin-left: 2vh; font-size: 2vh;">{{ article.userId }}</div>
+                    </div>
+                    <div class="d-flex mb-3">
 
-                            <img src="@/assets/img/user-add.png" style="width: 3vh; height: 3vh;">
-                            <div style="margin-left: 2vh; font-size: 2vh;">{{ article.partnerCount }}</div>
-                        </div>
-                        <div class="d-flex mb-3">
+                        <img src="@/assets/img/marker.png" style="width: 3vh; height: 3vh;">
+                        <div style="margin-left: 2vh; font-size: 2vh;">{{ article.location }}</div>
+                    </div>
+                    <div class="d-flex mb-3">
 
-                            <img src="@/assets/img/calendar.png" style="width: 3vh; height: 3vh;">
-                            <div style="margin-left: 2vh; font-size: 2vh;"> {{ article.startDate.substring(5) }} ~ {{
-                                article.endDate.substring(5) }} </div>
-                        </div>
+                        <img src="@/assets/img/user-add.png" style="width: 3vh; height: 3vh;">
+                        <div style="margin-left: 2vh; font-size: 2vh;">{{ article.partnerCount }}</div>
+                    </div>
+                    <div class="d-flex mb-3">
 
+                        <img src="@/assets/img/calendar.png" style="width: 3vh; height: 3vh;">
+                        <div style="margin-left: 2vh; font-size: 2vh;"> {{ article.startDate.substring(5) }} ~ {{
+                            article.endDate.substring(5) }} </div>
                     </div>
 
-                    <div class="row">
-                        <b-form-textarea id="textarea" v-model="text" placeholder="궁금한점 쪽지로 보내보세요.."
-                            rows="9"></b-form-textarea>
-                    </div>
-                
+                </div>
+
+                <div class="row">
+                    <b-form-textarea id="textarea" v-model="text" placeholder="궁금한점 쪽지로 보내보세요.." rows="9"></b-form-textarea>
+                </div>
+
                 <template #modal-footer="{ hide }">
                     <button type="button" @click="hide"
                         style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
@@ -188,11 +199,10 @@
 
                 </template>
             </b-modal>
-            </div>
         </div>
-
     </div>
-</template>
+
+</div></template>
 
 <script>
 import axios from "axios";
@@ -215,19 +225,19 @@ export default {
         };
     },
     created() {
-        
-       
+
+
         axios.get(`http://localhost:8080/api/trippartner/view/${this.$route.params.articleNo}`)
             .then(response => {
                 console.log(response.data);
                 this.article = response.data;
                 if (this.article.end) {
-            // console.log(this.article.end),
-            this.checked='모집중'
-        } else[
-            console.log(this.article.end),
-            this.checked='모집종료'
-        ]
+                    // console.log(this.article.end),
+                    this.checked = '모집중'
+                } else[
+                    console.log(this.article.end),
+                    this.checked = '모집종료'
+                ]
             })
             .catch(error => {
                 console.log(error);
@@ -252,8 +262,24 @@ export default {
 
     },
     methods: {
+        deleteArticle() {
+            if (confirm("삭제 하시겠습니까?")) {
+                
+                axios.delete(`http://localhost:8080/api/trippartner/delete/${this.$route.params.articleNo}`)
+                    .then(response => {
+                        console.log(response);
+                        alert('삭제되었습니다.');
+                        this.$router.push('/trippartner');
+    
+    
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        },
         toggleSwitch() {
-           
+
             var formData = {
                 articleNo: this.article.articleNo,
                 // fromuserId: this.note.touserId,
@@ -264,40 +290,40 @@ export default {
             this.article.end = !this.article.end;
             if (this.article.end) {
                 this.checked = "모집중";
-                 axios.put('http://localhost:8080/api/trippartner/updateisendOn', formData, {
+                axios.put('http://localhost:8080/api/trippartner/updateisendOn', formData, {
 
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => {
-                    console.log('updateisendOn 결과:', response.data);
-                    console.log("이글의 모집은"+this.article.end);
-                    // location.href = `/user/note/${this.note.noteNo}`;
-                    
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
-                .catch(error => {
-                    console.log(error);
-                    alert('updateisendOn update 실패하였습니다.');
-                });
-                
+                    .then(response => {
+                        console.log('updateisendOn 결과:', response.data);
+                        console.log("이글의 모집은" + this.article.end);
+                        // location.href = `/user/note/${this.note.noteNo}`;
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('updateisendOn update 실패하였습니다.');
+                    });
+
             } else {
-                this.checked="모집종료"
-                 axios.put('http://localhost:8080/api/trippartner/updateisendOff', formData, {
+                this.checked = "모집종료"
+                axios.put('http://localhost:8080/api/trippartner/updateisendOff', formData, {
 
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => {
-                    console.log('updateisendOff 결과:', response.data);
-                    console.log("이글의 모집은"+this.article.end);
-                    // location.href = `/user/note/${this.note.noteNo}`;
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
-                .catch(error => {
-                    console.log(error);
-                    alert('updateisendOff update 실패하였습니다.');
-                });
+                    .then(response => {
+                        console.log('updateisendOff 결과:', response.data);
+                        console.log("이글의 모집은" + this.article.end);
+                        // location.href = `/user/note/${this.note.noteNo}`;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('updateisendOff update 실패하였습니다.');
+                    });
             }
         },
         showModal() {
@@ -321,7 +347,7 @@ export default {
         registNote() {
             var formData = {
                 fromuserId: this.userInfo.userId,
-                articleNo:this.article.articleNo,
+                articleNo: this.article.articleNo,
                 touserId: this.article.userId,
                 content: this.text
             }

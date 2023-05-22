@@ -46,8 +46,8 @@
                                     <div>모집중 : {{ article.partnerCount }}</div>
                                     <div class="d-flex">
 
-                                        <i class="fi fi-rr-eye" style="margin-right: 2vh;"> {{ article.hit }}</i>
-                                        <i class="fi fi-rr-paper-plane" style="margin-right: 2vh;">{{ sendcount }}</i>
+                                        <i class="fi fi-rr-eye" style="margin-right: 1vh;"> {{ article.hit }}</i>
+                                        <i class="fi fi-rr-paper-plane" style="margin-right: 3vh;">{{ sendcount }}</i>
 
                                     </div>
 
