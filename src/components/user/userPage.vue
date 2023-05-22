@@ -60,10 +60,16 @@
                             <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 17px; font-weight: 600;">
                                 * 닉네임
                             </label>
-                            <input type="text" style="margin-top: 4px; font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 80%; border-radius: 5px;
-                            width:100%; height:45px; padding-left: 15px; background-color: transparent;
-                            border:4px solid #ffb5a7; float:left; font-size: 20px" ref="userNickname" :value="userInfo.userNickname"
-                            required/>
+                            <div style="display: flex; margin-top: 4px;">
+                                <input type="text" style=" font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 80%; border-radius: 5px;
+                                width:65%; height:45px; padding-left: 15px; background-color: transparent;
+                                border:4px solid #ffb5a7; float:left; font-size: 20px" ref="userNickname" :value="userInfo.userNickname"
+                                required/>
+                                <button class="button" style="margin-left: 10px; height: 45px; width: 35%; background-color: transparent; border-radius: 20px; 
+                                    opacity: 80%; border:4px solid #ffb5a7;">
+                                        <span style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px;">중복 확인</span>
+                                </button>
+                            </div>
                         </div>
                         <div style="display: flex; flex-direction: column; margin-top: 15px; height: 80px;">
                             <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 17px; font-weight: 600;">
@@ -103,15 +109,15 @@
                                 * 이메일
                             </label>
                             <div style="display: flex; margin-top: 8px;">
-                                <input type="text" style="font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 80%; border-radius: 5px;
+                                <input type="text" style="font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 80%; border-radius: 5px 0px 0px 5px;
                                 width:250px; height:45px; padding-left: 15px; background-color: transparent;
                                 border:4px solid #ffb5a7; float:left; font-size: 20px" ref="emailId" :value="userInfo.emailId"
                                 required/>
                                 <div style="width:45px; height:45px; opacity: 80%; background-color: #ffb5a7;">
-                                    <label style="font-family: 'Nixgon, sans-serif; font-weight:600; font-size: 35px; color: #FFE4E0; padding-left: 5px;">@</label>
+                                    <label style="font-family: 'Nixgon, sans-serif; font-weight:600; font-size: 35px; color: #FFE4E0; padding-left: 5px; padding-bottom: 50px;">@</label>
                                 </div>
-                                <select style="font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 80%; 
-                                width:300px; height:45px; padding-left: 15px; background-color: transparent; appearance: none; border-radius: 5px;
+                                <select ref="emailDomain" style="font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 80%; 
+                                width:300px; height:45px; padding-left: 15px; background-color: transparent; appearance: none; border-radius: 0px 5px 5px 0px;
                                 border:4px solid #ffb5a7; float:left; font-size: 20px; outline: 0 none; -moz-appearance: none;
                                 -webkit-appearance: none;"
                                 required>
@@ -137,11 +143,11 @@
                         </div>
                         <div style="text-align: center; margin-top: 30px;">
                             <button type="button" style="margin-right: 30px; height: 55px; width: 145px; background-color: transparent; border-radius: 20px; 
-                            opacity: 80%; border:4px solid #ffb5a7;class=" id="btn-modify" @click="checkValue">
+                            opacity: 80%; border:4px solid #ffb5a7;" id="btn-modify" @click="checkValue">
                                 <span style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px;">수정</span>
                             </button>
                             <button type="button" style=" height: 55px; width: 145px; background-color: transparent; border-radius: 20px; 
-                            opacity: 80%; border:4px solid #ffb5a7;class=" id="btn-modify" @click="checkValue">
+                            opacity: 80%; border:4px solid #ffb5a7;">
                                 <span style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px;">취소</span>
                             </button>
                         </div>
@@ -205,9 +211,13 @@ export default{
             formdata.append('userId', this.userInfo.userId);
             formdata.append('userName', this.$refs.userName.value);
             formdata.append('userPw', this.$refs.userPw.value);
+            formdata.append('userNickname', this.$refs.userNickname.value);
+            formdata.append('gender', this.$refs.gender.value);
+            formdata.append('birth', this.$refs.birth.value);
             formdata.append('emailId', this.$refs.emailId.value);
             formdata.append('emailDomain', this.$refs.emailDomain.value);
             formdata.append('file', this.$refs.image.files[0]);
+
             for (let key of formdata.keys()) {
                 console.log(key, ":", formdata.get(key));
             }
