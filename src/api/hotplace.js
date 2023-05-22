@@ -11,12 +11,12 @@ function writeHotplace(hotplace, success, fail) {
     }).then(success).catch(fail);
 }
 
-function getArticle(articleno, success, fail) {
-    api.get(`/api/hotplace/view/${articleno}`).then(success).catch(fail);
+function getHotplace(articleNo, success, fail) {
+    api.get(`/api/hotplace/view/${articleNo}`).then(success).catch(fail);
 }
 
-function listArticle(param, success, fail) {
-    api.get(`/api/hotplace/list`, { params: param }).then(success).catch(fail);
+function listHotplace(success, fail) {
+    api.get(`/api/hotplace/list`).then(success).catch(fail);
 }
 
-export { writeHotplace, getArticle, listArticle };
+export { writeHotplace, getHotplace, listHotplace };

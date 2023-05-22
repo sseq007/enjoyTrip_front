@@ -13,28 +13,42 @@
                     <div><p style="font-family: 'Noto Sans KR', sans-serif; opacity: 75%">다녀왔던 여행지 중 좋았던 곳의 사진을 보여 주세요!</p></div>
                     <div v-if="userInfo != null" style="float: left;"><button type="button" class="btn btn-outline-secondary mb-3" style="text-align:right; align-items: right"  @click="moveWrite()">글쓰기</button></div>
                     </div>            
-                
-            </div>
-    </div>
+                    <div style="display: flex; flex-wrap: wrap;">
+                        <hotplace-list-item v-for="hotplace in hotplaces" :key="hotplace.articleNo" :hotplace="hotplace">
+                        </hotplace-list-item>
+                    </div>
+                </div>
+        </div>
 </template>
 
 <script>
-//import HotplaceListItem from './hotplaceListItem.vue';
+import HotplaceListItem from './hotplaceListItem.vue';
+import { listHotplace } from '@/api/hotplace';
 import { mapState } from "vuex";
 
 const memberStore = "memberStore";
 export default {
     name: "hotplaceList",
     components: {
-        //HotplaceListItem
+        HotplaceListItem
     },
     computed: {
         ...mapState(memberStore, ["userInfo"]),
     },
     data(){
         return{
-
+            hotplaces: [],
         }
+    },
+    created(){
+        listHotplace(
+            ({data}) => {
+                this.hotplaces = data;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     },
     methods:{
         moveWrite(){

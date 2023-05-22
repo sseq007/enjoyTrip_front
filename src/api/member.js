@@ -12,6 +12,10 @@ async function findById(id, success, fail) {
     await api.get(`/api/member/view/${id}`).then(success).catch(fail);
 }
 
+async function getUser(id, success, fail) {
+    await api.get(`/api/member/detail/${id}`).then(success).catch(fail);
+}
+
 async function tokenRegeneration(user, success, fail) {
     api.defaults.headers["refresh-token"] = sessionStorage.getItem("refresh-token"); //axios header에 refresh-token 셋팅
     await api.post(`/api/member/refresh`, user).then(success).catch(fail);
@@ -41,5 +45,5 @@ async function registerMember(user, success, fail){
     }).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout, updateMember, deleteMember, registerMember };
+export { login, findById, tokenRegeneration, logout, updateMember, deleteMember, registerMember, getUser };
 
