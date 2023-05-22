@@ -135,11 +135,13 @@ const routes = [
   {
     path: "/hotplace/write",
     name: "hotplaceWrite",
+    beforeEnter: onlyAuthUser,
     component: hotplaceWrite,
   },
   {
     path: "/hotplace/modify",
     name: "hotplaceModify",
+    beforeEnter: onlyAuthUser,
     component: hotplaceModify,
   },
   {

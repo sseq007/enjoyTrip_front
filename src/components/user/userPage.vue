@@ -26,8 +26,7 @@
                         <hr class="mb-3 mt-0" align="left" style="border: solid 2px #ffb5a7; width: 30%; opacity: 100%" />
                         <div class="mb-3 mt-3" align="center" style="position: relative">
                                 <div class="userProfile mb-3 mt-3">
-                                    <img v-if="userInfo.profileImage == null" :src="image" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
-                                    <img v-else :src="image" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
+                                    <img :src="image" class="profile_image" style="border-radius: 40%; width: 250px; height: 250px">
                                 </div>
                                 <div>
                                     <label className="input-file-button" for="updateProfile" style="left: 400px; bottom: 0px; height: 60px; width: 60px; background-color: #FFE4E0; border-radius: 40%;
@@ -122,9 +121,12 @@
                                 -webkit-appearance: none;"
                                 required>
                                     <option selected style="display: none;">{{ userInfo.emailDomain}}</option>
-                                    <option value="naver.com">naver.com</option>
-                                    <option value="gmail.com">gmail.com</option>
-                                    <option value="daum.net">daum.net</option>
+                                    <option value="naver.com" style="background-color: #FFE4E0;
+                                    font-family: 'Nixgon, sans-serif; font-weight:600; color: #939393;">naver.com</option>
+                                    <option value="gmail.com" style="background-color: #FFE4E0;
+                                    font-family: 'Nixgon, sans-serif; font-weight:600; color: #939393;">gmail.com</option>
+                                    <option value="daum.net" style="background-color: #FFE4E0;
+                                    font-family: 'Nixgon, sans-serif; font-weight:600; color: #939393;">daum.net</option>
                                 </select>
                                 <button class="button" style="margin-left: 10px; height: 45px; width: 145px; background-color: transparent; border-radius: 20px; 
                                 opacity: 80%; border:4px solid #ffb5a7;">
@@ -246,3 +248,8 @@ export default{
     },
 };
 </script>
+
+<style scoped>
+input:focus {outline: 2px solid #85c6d7;}
+select:focus {outline: 2px solid #85c6d7;}
+</style>
