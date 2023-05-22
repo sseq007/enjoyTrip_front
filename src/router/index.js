@@ -146,13 +146,13 @@ const routes = [
     component: hotplaceWrite,
   },
   {
-    path: "/hotplace/modify",
+    path: "/hotplaceModify/:articleNo",
     name: "hotplaceModify",
     beforeEnter: onlyAuthUser,
     component: hotplaceModify,
   },
   {
-    path: "/hotplace/content",
+    path: "/hotplace/:articleNo",
     name: "hotplaceContent",
     component: hotplaceContent,
   },

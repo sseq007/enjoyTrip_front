@@ -12,7 +12,7 @@
                 <label style="font-family: 'Nixgon, sans-serif; color: #000000; opacity: 60%;
                 font-size: 20px; font-weight: 600; margin-left: 2px;">{{ hotplace.heart_count }}</label>
             </div>
-            <div v-else>
+            <div v-else style="display: flex;">
                 <div @click="likePost">
                     <label style="font-size: 22px;">❤️</label>
                     <label style="font-size: 22px;">🤍</label>

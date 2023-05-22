@@ -19,4 +19,8 @@ function listHotplace(success, fail) {
     api.get(`/api/hotplace/list`).then(success).catch(fail);
 }
 
-export { writeHotplace, getHotplace, listHotplace };
+function deleteHotplace(articleNo, success, fail) {
+    api.delete(`/api/hotplace/delete/${articleNo}`).then(success).catch(fail);
+}
+
+export { writeHotplace, getHotplace, listHotplace, deleteHotplace };

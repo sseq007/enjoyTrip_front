@@ -8,7 +8,7 @@
                     <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
                 </div>
                 
-                <div>
+                <div style="margin-bottom: 5%;">
                     <div style="display: flex">
                     <div><p style="font-family: 'Noto Sans KR', sans-serif; opacity: 75%">다녀왔던 여행지 중 좋았던 곳의 사진을 보여 주세요!</p></div>
                     <div v-if="userInfo != null" style="float: left;"><button type="button" class="btn btn-outline-secondary mb-3" style="text-align:right; align-items: right"  @click="moveWrite()">글쓰기</button></div>
