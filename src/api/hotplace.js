@@ -11,6 +11,14 @@ function writeHotplace(hotplace, success, fail) {
     }).then(success).catch(fail);
 }
 
+function modifyHotplace(hotplace, success, fail) {
+    axios.put('http://localhost:8081/api/hotplace/update', hotplace, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }).then(success).catch(fail);
+}
+
 function getHotplace(articleNo, success, fail) {
     api.get(`/api/hotplace/view/${articleNo}`).then(success).catch(fail);
 }
@@ -23,4 +31,4 @@ function deleteHotplace(articleNo, success, fail) {
     api.delete(`/api/hotplace/delete/${articleNo}`).then(success).catch(fail);
 }
 
-export { writeHotplace, getHotplace, listHotplace, deleteHotplace };
+export { writeHotplace, modifyHotplace, getHotplace, listHotplace, deleteHotplace };

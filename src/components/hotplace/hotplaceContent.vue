@@ -1,10 +1,10 @@
 <template>
     <div style="margin: auto; margin-top: 100px; margin-bottom: 100px; width: 50%; height: auto; border: 3px solid #ffb5a7; border-radius: 10px; background-color: #ffe4e0; " class="text-center">
-            <nav class="navbar navbar-expand-sm" style="background-color: #ffb5a7; font-family: 'Black Han Sans', sans-serif; opacity: 75%; text-align: center; font-size: 20px;">
+            <nav class="navbar navbar-expand-sm" style="width: 100%; background-color: #ffb5a7; font-family: 'Black Han Sans', sans-serif; opacity: 75%; text-align: center; font-size: 20px;">
                 <div class="collpase navbar-collapse height: 80px; width: 100%;">
                     <ul class="navbar-nav">
                         <img :src="profileImage" style="border-radius: 50%; width: 80px; height: 80px; margin-left: 30%; margin-top: 1%; margin-bottom: 1%;">
-                        <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 30px; width: 100px; font-weight: 600; margin-top: 20px; margin-left: 15px;"
+                        <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 30px; width: 100%; font-weight: 600; margin-top: 20px; margin-left: 15px;"
                         >{{this.user.userNickname}}</label>
                     </ul>
                 </div>
