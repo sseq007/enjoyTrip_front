@@ -107,7 +107,7 @@ export default {
         };
     },
     created() {
-        axios.get(`http://localhost:8080/api/note/view/${this.$route.params.noteNo}`)
+        axios.get(`http://192.168.208.62:8080/api/note/view/${this.$route.params.noteNo}`)
             .then(response => {
                 this.note = response.data;
                 console.log("쪽지보기 내용정보" + this.note.content);
@@ -130,7 +130,7 @@ export default {
         },
         deleteNote() {
             if (confirm("정말로 삭제하시겠습니까?")) {
-                axios.delete(`http://localhost:8080/api/note/delete/${this.$route.params.noteNo}`)
+                axios.delete(`http://192.168.208.62:8080/api/note/delete/${this.$route.params.noteNo}`)
                     .then(response => {
                         console.log(response);
                         alert('삭제되었습니다.');
@@ -147,13 +147,14 @@ export default {
         },
         registNote(){
             var formData = {
+                articleNo: this.note.articleNo,
                 fromuserId: this.userInfo.userId,
                 touserId: this.note.fromuserId,
                 content: this.text
             }
 
             console.log(formData)
-            axios.post('http://localhost:8080/api/note/write', formData, {
+            axios.post('http://192.168.208.62:8080/api/note/write', formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

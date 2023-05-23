@@ -461,7 +461,7 @@ export default {
         },
     },
     created() {
-        axios.get(`http://localhost:8080/api/trippartner/view/${this.$route.params.articleNo}`)
+        axios.get(`http://192.168.208.62:8080/api/trippartner/view/${this.$route.params.articleNo}`)
     .then(response => {
       console.log(response.data);
         this.article = response.data;
@@ -572,7 +572,7 @@ export default {
             console.log(this.selectedButtons);
             console.log(this.selectedButtons2);
 
-            axios.put('http://localhost:8081/api/trippartner/modify', formData, {
+            axios.put('http://192.168.208.62:8081/api/trippartner/modify', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -585,7 +585,7 @@ export default {
                     }
                     console.log("sendData는 과연" + sendData.articleNo);
                     console.log("이 글 번호는 맞춰봐 " + response.data.articleNo);
-                    axios.put('http://localhost:8081/api/trippartner/modify/keyword', sendData, {
+                    axios.put('http://192.168.208.62:8081/api/trippartner/modify/keyword', sendData, {
                         headers: {
                             'Content-Type': 'application/json'
                         }

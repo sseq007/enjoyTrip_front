@@ -48,7 +48,7 @@ export default {
   created() {
     // 비동기
     // TODO : 글번호에 해당하는 글정보 얻기.
-    axios.get(`http://localhost:8080/api/sharetravel/view/${this.$route.params.articleNo}`)
+    axios.get(`http://192.168.208.62:8080/api/sharetravel/view/${this.$route.params.articleNo}`)
     .then(response => {
       console.log(response.data);
       this.article = response.data;
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     deleteArticle(){
-      axios.delete(`http://localhost:8080/api/sharetravel/delete/${this.$route.params.articleNo}`)
+      axios.delete(`http://192.168.208.62:8080/api/sharetravel/delete/${this.$route.params.articleNo}`)
     .then(response => {
         console.log(response);
         alert('삭제되었습니다.');

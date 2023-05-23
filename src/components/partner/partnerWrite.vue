@@ -15,7 +15,7 @@
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
             <div style="height: 20px"></div>
-            <div class="row p-3" style="background-color: whitesmoke">
+            <div class="row p-3" style="background-color: whitesmoke; border-radius: 1vh;" >
                 <div class="col-2">
 
                     <div class="list-group" id="list-tab" role="tablist" style="text-align: center;">
@@ -90,7 +90,7 @@
                                     경상남도
                                 </a>
                                 <a class="list-group-item list-group-item-action list-group-item-light"
-                                    :class="{ active: selectedTab === '전라북도' }" @click="selectTab('전라남도')"
+                                    :class="{ active: selectedTab === '전라북도' }" @click="selectTab('전라북도')"
                                     href="#list-settings" role="tab" aria-controls="list-settings">
                                     전라북도
                                 </a>
@@ -119,7 +119,7 @@
                         <div class="d-flex">
                             <select class="form-select" aria-label="Default select example" v-model="purpose">
                                 <option value="" disabled selected>모집목적</option>
-                                <option value="카플">카플</option>
+                                <option value="카풀">카풀</option>
                                 <option value="맛집">맛집</option>
                                 <option value="기타">기타</option>
 
@@ -160,14 +160,10 @@
             </div>
             <div style="height: 77px"></div>
             <div class="mb-3 file btn btn-lg  d-flex align-items-center justify-content-center"
-                style="width: 100%; height: 350px; overflow: hidden; background-color: white; position: relative;">
-                <!-- Upload -->
-                <!-- <label class="m-0"> -->
-                <input style="opacity: 0; text-align: center; width: 100%; height: 350px;" type="file" name="file"
-                    ref="fileInput" @change="handleFileUpload" />
-                <!-- </label> -->
-                <img src="@/assets/img/picture.png" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 9vh;" >
-            </div>
+     style="width: 100%; height: 350px; overflow: hidden; background-color: white; position: relative;">
+  <input style="opacity: 0; text-align: center; width: 100%; height: 350px;" type="file" name="file" ref="fileInput" @change="handleFileUpload" />
+  <img src="@/assets/img/picture.png" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 9vh;" @click="clickFileInput">
+</div>
             <div>
 
 
@@ -175,24 +171,23 @@
                     placeholder="ex) 12월 3박4일 제주 바다 보러갈 동행 3명 구해요" name="board-write-title" ref="userid" />
 
                 <input type="text" class="form-control" id="board-write-title"
-                    placeholder="ex) 12월 3박4일 제주 바다 보러갈 동행 3명 구해요" name="board-write-title" ref="subject" />
+                    placeholder="ex) 6월 1일 제주에서 카풀 할 동행 3명 구해요" name="board-write-title" ref="subject" />
             </div>
             <div style="height: 40px"></div>
             <div class="mb-3">
 
                 <textarea style="height: 450px;" class="form-control" rows="5" id="board-write-content"
                     name="board-write-content" placeholder="1. 현재 동행이 있나요? 
-                                                                ex) 혼자에요 / 동행 1명이 있어요 
+        ex) 혼자에요 / 동행 1명이 있어요 
      
     
-                                                        2.어떤 동행을 찾고 있나요? 
-                                                                ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
-                                                                ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
+2.어떤 동행을 찾고 있나요? 
+        ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
+        ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
 
 
-                                                        3. 원하는 여행 코스가 있다면 알려주세요!
-
-                                                                (1000자 이내) " ref="content"></textarea>
+3. 원하는 여행 코스가 있다면 알려주세요!
+    (1000자 이내) " ref="content"></textarea>
             </div>
 
             <div class="mb-3" style="margin-top: 7px;">
@@ -461,7 +456,7 @@ export default {
         },
     },
     created() {
-        // axios.get(`http://localhost:8080/api/trippartner/findarticleno/`)
+        // axios.get(`http://192.168.208.62:8080/api/trippartner/findarticleno/`)
         //     .then(response => {
 
         //         this.articleno = response.data;
@@ -474,6 +469,9 @@ export default {
     },
 
     methods: {
+        clickFileInput() {
+    this.$refs.fileInput.click();
+  },
         selectTab(tab) {
             this.selectedTab = tab;
             console.log("내가 선택한 지역은" + this.selectedTab)
@@ -566,7 +564,7 @@ export default {
             console.log(this.selectedButtons);
             console.log(this.selectedButtons2);
 
-            axios.post('http://localhost:8081/api/trippartner/write', formData, {
+            axios.post('http://192.168.208.62:8081/api/trippartner/write', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -579,7 +577,7 @@ export default {
                     }
                     console.log("sendData는 과연" + sendData.articleNo);
                     console.log("이 글 번호는 맞춰봐 " + response.data.articleNo);
-                    axios.post('http://localhost:8081/api/trippartner/write/keyword', sendData, {
+                    axios.post('http://192.168.208.62:8081/api/trippartner/write/keyword', sendData, {
                         headers: {
                             'Content-Type': 'application/json'
                         }

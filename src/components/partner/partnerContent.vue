@@ -11,7 +11,7 @@
             <div style="background-color: #ffe4e0; padding: 4vh; border-radius: 2vh;">
                 <div>
                     <!-- 이미지 주소 수정 필요 -->
-                    <img :src="'http://localhost:8081/upload/' + article.partnerImage" class=""
+                    <img :src="'http://192.168.208.62:8081/upload/' + article.partnerImage" class=""
                         style="border-radius: 1vh; width: 100%; height: 400px">
 
                 </div>
@@ -116,8 +116,8 @@
                                             style="padding:4px; border-radius: 40%; width: 58px; height: 58px; margin-left: 25px;">
 
                                         <div style="margin-left: 15px;">
-                                            <h5>{{ article.userId }}</h5>
-                                            <div>40대 남성 대한민국</div>
+                                            <h5>{{  user.userNickname }}</h5>
+                                            <div>{{  user.age }}대 {{  user.gender }} 대한민국</div>
                                         </div>
                                     </div>
                                     <div style="padding-top: 20px; margin-left: 25px;">
@@ -222,12 +222,13 @@ export default {
             keywordOne: [],
             keywordTwo: [],
             text: "",
+            user:[]
         };
     },
     created() {
 
 
-        axios.get(`http://localhost:8080/api/trippartner/view/${this.$route.params.articleNo}`)
+        axios.get(`http://192.168.208.62:8080/api/trippartner/view/${this.$route.params.articleNo}`)
             .then(response => {
                 console.log(response.data);
                 this.article = response.data;
@@ -238,12 +239,21 @@ export default {
                     console.log(this.article.end),
                     this.checked = '모집종료'
                 ]
+                axios.get(`http://192.168.208.62:8080/api/trippartner/user/${this.article.userId}`)
+            .then(response => {
+                this.user = response.data;
+                console.log("user 정보는"+this.user);
+
+            })
+            .catch(error => {
+                console.log(error);
+            });
             })
             .catch(error => {
                 console.log(error);
             });
 
-        axios.get(`http://localhost:8080/api/trippartner/keyword/${this.$route.params.articleNo}`)
+        axios.get(`http://192.168.208.62:8080/api/trippartner/keyword/${this.$route.params.articleNo}`)
             .then(response => {
                 console.log(response.data);
                 this.keywordOne = response.data;
@@ -251,7 +261,7 @@ export default {
             .catch(error => {
                 console.log(error);
             });
-        axios.get(`http://localhost:8080/api/trippartner/keyword2/${this.$route.params.articleNo}`)
+        axios.get(`http://192.168.208.62:8080/api/trippartner/keyword2/${this.$route.params.articleNo}`)
             .then(response => {
                 console.log(response.data);
                 this.keywordTwo = response.data;
@@ -259,13 +269,14 @@ export default {
             .catch(error => {
                 console.log(error);
             });
+            
 
     },
     methods: {
         deleteArticle() {
             if (confirm("삭제 하시겠습니까?")) {
                 
-                axios.delete(`http://localhost:8080/api/trippartner/delete/${this.$route.params.articleNo}`)
+                axios.delete(`http://192.168.208.62:8080/api/trippartner/delete/${this.$route.params.articleNo}`)
                     .then(response => {
                         console.log(response);
                         alert('삭제되었습니다.');
@@ -290,7 +301,7 @@ export default {
             this.article.end = !this.article.end;
             if (this.article.end) {
                 this.checked = "모집중";
-                axios.put('http://localhost:8080/api/trippartner/updateisendOn', formData, {
+                axios.put('http://192.168.208.62:8080/api/trippartner/updateisendOn', formData, {
 
                     headers: {
                         'Content-Type': 'application/json'
@@ -309,7 +320,7 @@ export default {
 
             } else {
                 this.checked = "모집종료"
-                axios.put('http://localhost:8080/api/trippartner/updateisendOff', formData, {
+                axios.put('http://192.168.208.62:8080/api/trippartner/updateisendOff', formData, {
 
                     headers: {
                         'Content-Type': 'application/json'
@@ -353,7 +364,7 @@ export default {
             }
 
             console.log(formData)
-            axios.post('http://localhost:8080/api/note/write', formData, {
+            axios.post('http://192.168.208.62:8080/api/note/write', formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

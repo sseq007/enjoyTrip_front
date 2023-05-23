@@ -54,7 +54,7 @@ export default {
     // 비동기
     // TODO : 글목록 얻기.
 
-//   axios.get('http://localhost:8080/api/sharetravel/list')
+//   axios.get('http://192.168.208.62:8080/api/sharetravel/list')
 //     .then(response => {
 //       console.log(response.data);
 //       this.articles = response.data;
@@ -66,7 +66,7 @@ export default {
   methods: {
     movePage() {
 
-      // location.href="http://localhost:8080/boardwrite"
+      // location.href="http://192.168.208.62:8080/boardwrite"
 
     },
   },

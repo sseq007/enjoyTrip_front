@@ -80,7 +80,7 @@ export default {
         };
     },
     created() {
-        axios.get('http://localhost:8080/api/trippartner/list')
+        axios.get('http://192.168.208.62:8080/api/trippartner/list')
             .then(response => {
                 console.log(response.data);
                 this.articles = response.data;
@@ -97,7 +97,7 @@ export default {
            this.check = !this.check;
            if (this.check) {
                this.checked = "모집중";
-               axios.get('http://localhost:8080/api/trippartner/liston')
+               axios.get('http://192.168.208.62:8080/api/trippartner/liston')
                 .then(response => {
                     console.log(response.data);
                     this.articles = response.data;
@@ -108,7 +108,7 @@ export default {
                
            } else {
                this.checked="모집종료"
-               axios.get('http://localhost:8080/api/trippartner/listoff')
+               axios.get('http://192.168.208.62:8080/api/trippartner/listoff')
                 .then(response => {
                     console.log(response.data);
                     this.articles = response.data;
@@ -120,7 +120,7 @@ export default {
        },
         newest() {
             if (this.check) {
-                axios.get('http://localhost:8080/api/trippartner/listnewon')
+                axios.get('http://192.168.208.62:8080/api/trippartner/listnewon')
                 .then(response => {
                     console.log(response.data);
                     this.articles = response.data;
@@ -129,7 +129,7 @@ export default {
                     console.log(error);
                 });
             } else {
-                axios.get('http://localhost:8080/api/trippartner/listnewoff')
+                axios.get('http://192.168.208.62:8080/api/trippartner/listnewoff')
                 .then(response => {
                     console.log(response.data);
                     this.articles = response.data;
@@ -142,7 +142,7 @@ export default {
         },
         hit() {
             if (this.check) {
-                axios.get('http://localhost:8080/api/trippartner/listhiton')
+                axios.get('http://192.168.208.62:8080/api/trippartner/listhiton')
                     .then(response => {
                         console.log(response.data);
                         this.articles = response.data;
@@ -151,7 +151,7 @@ export default {
                         console.log(error);
                     });
             } else {
-                axios.get('http://localhost:8080/api/trippartner/listhitoff')
+                axios.get('http://192.168.208.62:8080/api/trippartner/listhitoff')
                     .then(response => {
                         console.log(response.data);
                         this.articles = response.data;

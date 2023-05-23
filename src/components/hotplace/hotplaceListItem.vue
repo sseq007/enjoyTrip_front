@@ -54,7 +54,7 @@ export default {
                     if(this.user.profileImage == null){
                         this.profileImage = require('@/assets/img/none_profile_image.jpg');
                     }else{
-                        this.profileImage = "http://localhost:8081/upload/" + this.user.profileImage;
+                        this.profileImage = "http://192.168.208.62:8081/upload/" + this.user.profileImage;
                     }
                 }
             },
@@ -64,7 +64,7 @@ export default {
         );
 
         
-        this.mainImage = "http://localhost:8081/upload/" + this.hotplace.imageName;
+        this.mainImage = "http://192.168.208.62:8081/upload/" + this.hotplace.imageName;
     },
     methods: {
         alarmLogin(){

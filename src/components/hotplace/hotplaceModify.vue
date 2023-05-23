@@ -104,7 +104,7 @@ export default {
             this.$route.params.articleNo,
             ({data}) => {
                 this.hotplace = data;
-                this.image = "http://localhost:8081/upload/" + this.hotplace.imageName;
+                this.image = "http://192.168.208.62:8081/upload/" + this.hotplace.imageName;
                 this.sido_code = this.hotplace.sido_code;
                 this.subject = this.hotplace.subject;
                 this.content = this.hotplace.content;

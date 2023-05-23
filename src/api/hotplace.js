@@ -4,7 +4,7 @@ import axios from "axios";
 const api = apiInstance();
 
 function writeHotplace(hotplace, success, fail) {
-    axios.post('http://localhost:8081/api/hotplace/write', hotplace, {
+    axios.post('http://192.168.208.62:8081/api/hotplace/write', hotplace, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
@@ -12,7 +12,7 @@ function writeHotplace(hotplace, success, fail) {
 }
 
 function modifyHotplace(hotplace, success, fail) {
-    axios.put('http://localhost:8081/api/hotplace/update', hotplace, {
+    axios.put('http://192.168.208.62:8081/api/hotplace/update', hotplace, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

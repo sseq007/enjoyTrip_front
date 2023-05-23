@@ -26,7 +26,7 @@ async function logout(id, success, fail) {
 }
 
 async function updateMember(user, success, fail) {
-    axios.put('http://localhost:8081/api/member/modify', user, {
+    axios.put('http://192.168.208.62:8081/api/member/modify', user, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
@@ -38,7 +38,7 @@ async function deleteMember(id, success, fail){
 }
 
 async function registerMember(user, success, fail){
-    axios.post('http://localhost:8081/api/member/register', user, {
+    axios.post('http://192.168.208.62:8081/api/member/register', user, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

@@ -56,7 +56,7 @@ export default {
                 isRead: this.note.isRead
             }
             console.log(this.note.noteId);
-            axios.put('http://localhost:8080/api/note/updateisread', formData, {
+            axios.put('http://192.168.208.62:8080/api/note/updateisread', formData, {
 
                 headers: {
                     'Content-Type': 'application/json'

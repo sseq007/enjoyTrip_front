@@ -65,7 +65,7 @@ export default {
       }
       
       console.log(formData)
-    axios.post('http://localhost:8080/api/sharetravel/write', formData, {
+    axios.post('http://192.168.208.62:8080/api/sharetravel/write', formData, {
     headers: {
         'Content-Type': 'application/json'
     }

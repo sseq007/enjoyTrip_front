@@ -38,7 +38,7 @@ export default {
   created() {
     // 비동기
     // TODO : 글목록 얻기.
-    axios.get(`http://localhost:8080/api/sharetravel/view/${this.$route.params.articleNo}`)
+    axios.get(`http://192.168.208.62:8080/api/sharetravel/view/${this.$route.params.articleNo}`)
     .then(response => {
       console.log(response.data);
       this.article = response.data;
@@ -73,7 +73,7 @@ export default {
       }
       
       console.log(formData)
-    axios.put('http://localhost:8080/api/sharetravel/modify', formData, {
+    axios.put('http://192.168.208.62:8080/api/sharetravel/modify', formData, {
     headers: {
         'Content-Type': 'application/json'
     }

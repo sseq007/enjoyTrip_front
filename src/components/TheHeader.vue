@@ -131,7 +131,7 @@ export default {
 		};
 	},
 	created() {
-		axios.get(`http://localhost:8080/api/note/list/${this.userInfo.userId}`)
+		axios.get(`http://192.168.208.62:8080/api/note/list/${this.userInfo.userId}`)
 			.then(response => {
 				console.log(response.data);
 				this.notes = response.data;
@@ -140,7 +140,7 @@ export default {
 				console.log(error);
 			});
 
-			axios.get(`http://localhost:8080/api/note/countisread/${this.userInfo.userId}`)
+			axios.get(`http://192.168.208.62:8080/api/note/countisread/${this.userInfo.userId}`)
 			.then(response => {
 				this.isreadCount = response.data;
 				console.log("isReadcount"+response.data);

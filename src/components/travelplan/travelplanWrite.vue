@@ -46,9 +46,9 @@
         <div class="container">
             <div>
                 <h2 style="font-family: 'Black Han Sans', sans-serif;
-                                                                                        opacity: 75%;
-                                                                                        font-size: 50px;
-                                                                                    " class="m-0 mt-5">
+                                                                                                            opacity: 75%;
+                                                                                                            font-size: 50px;
+                                                                                                        " class="m-0 mt-5">
                     나의 여행 계획
                 </h2>
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
@@ -93,7 +93,7 @@
                             <option value="39">음식점</option>
                         </select>
                         <input id="search-keyword" class="form-control me-2" type="search" placeholder="검색어"
-                            aria-label="검색어" style="width: 26vh; text-align: center;" />
+                            aria-label="검색어" style="width: 26vh;" />
                         <button id="btn-search" class="btn btn-outline-success" type="button" @click="search"
                             style="width: 15vh; ">
                             검색
@@ -113,9 +113,11 @@
                             </thead>
                             <tbody id="trip-list">
                                 <tr v-for="area in trips" :key="area.title" @click="moveCenter(area.mapy, area.mapx)">
+
                                     <td><img :src="area.firstimage" width="100px"></td>
                                     <td>{{ area.title }}</td>
                                     <td>{{ area.addr1 }} {{ area.addr2 }}</td>
+                                    <td><button class="btn btn-secondary" style="width: 7vh;">추가</button></td>
                                     <!-- <td class="table_riches">{{ area.mapy }}</td>
                                 <td class="table_riches">{{ area.mapx }}</td> -->
                                 </tr>
@@ -132,16 +134,58 @@
                 </div>
 
 
-                <div class="col-md-2" style="width: 46vh;">
+                <div class="col-md-2" style="width: 43vh;">
                     <div class="row">
-                        <strong style="text-align: center; font-size: 3vh; margin-bottom: 3vh;">{{ selectedAreaName }}</strong>
-                        <div v-if="value_start && value_end" style="text-align: center; font-size: 3vh;">
-                            {{ getDurationInDays(value_start, value_end) }}일
+                        <strong style="text-align: center; font-size: 3vh; margin-bottom: 3vh;">{{ selectedAreaName
+                        }}</strong>
+                        <div v-if="value_start && value_end"
+                            style="text-align: center; font-size: 3vh; margin-bottom: 3vh;">
+                            {{ getDurationInDays(value_start, value_end) }} Day
                         </div>
 
 
                     </div>
+                    <select class="form-select me-2" style="margin-bottom: 2vh;" v-model="selectedDay"
+                        @change="handleOptionChange">
+                        <option value="0" selected>일차순</option>
+                        <option v-for="day in saveDay" :key="day" :value="day">{{ day }}일차</option>
+                    </select>
+                    <div class="card mb-3 shadow bg-gray rounded">
 
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="@/assets/img/noimg.jpg" class="profile_image"
+                                    style="padding:4px; border-radius: 40%; width: 40px; height: 40px; margin-right: 8px; ">
+
+
+                            </div>
+
+                            <div class="col-8">
+
+
+                                <div>1231</div>
+                                <div>23131313</div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div v-for="trip in savedTrips[0]" :key="trip.title"
+                        class="card mb-3 shadow bg-gray rounded">
+                        <div class="row">
+                            <div class="col-4">
+                                <img :src="trip.image" class="profile_image"
+                                    style="padding:4px; border-radius: 40%; width: 40px; height: 40px; margin-right: 8px;">
+                            </div>
+                            <div class="col-8">
+                                <div>{{ trip.title }}</div>
+                                <div>{{ trip.address }}</div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -187,6 +231,10 @@ export default {
             searchKeyword: '',
             areas: [],
             today: new Date().toISOString().split('T')[0],
+            selectedTrip: null, // 선택한 여행지 데이터
+            savedTrips: [],
+            selectedDay: null,
+            saveDay: '',
         };
     },
     created() {
@@ -201,7 +249,7 @@ export default {
     mounted() {
         this.map = new window.kakao.maps.Map(document.getElementById("map"), {
             center: new window.kakao.maps.LatLng(37.500613, 127.036431),
-            level: 10
+            level: 9
         });
         const areaUrl =
             "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
@@ -214,13 +262,39 @@ export default {
         console.log(this.data);
     },
     methods: {
+        handleOptionChange() {
+            console.log('옵션 변경:', this.selectedDay);
+
+
+            console.log('저장된 여행지 개수:', this.savedTrips);
+        },
+        saveTrip(area, index) {
+            if (index != 0) {
+                const prevSavedTrips = this.savedTrips[index - 1];
+
+                if (!prevSavedTrips.includes(area)) {
+                    prevSavedTrips.push(area);
+                    console.log('저장된 여행지:', this.savedTrips);
+                }
+            }
+
+            if (!this.savedTrips[index - 1].includes(area)) {
+                this.savedTrips[index - 1].push(area);
+                console.log('저장된 여행지:', this.savedTrips);
+
+            }
+
+
+        },
         getDurationInDays(start, end) {
-      const startDate = new Date(start);
-      const endDate = new Date(end);
-      const timeDifference = endDate.getTime() - startDate.getTime();
-      const durationInDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
-      return durationInDays;
-    },
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+            const timeDifference = endDate.getTime() - startDate.getTime();
+            const durationInDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
+            this.saveDay = durationInDays + 1;
+            this.savedTrips = new Array(durationInDays + 1).fill(0).map(() => new Array());
+            return durationInDays + 1;
+        },
         search() {
             let searchUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${this.serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
 
@@ -263,6 +337,7 @@ export default {
         },
         moveCenter(lat, lng) {
             this.map.setCenter(new window.kakao.maps.LatLng(lat, lng));
+            this.map.level = 3;
         },
         makeOption(data) {
             this.areas = data.response.body.items.item;
