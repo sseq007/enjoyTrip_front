@@ -21,7 +21,7 @@
 							</router-link>
 						</li>
 						<li class="nav-item py-2" style="opacity: 80%"><i class="fi fi-rr-calendar ps-3"></i> <router-link
-								:to="'/notice/list'" class="nav-link active ps-0" aria-current="page"
+								:to="'/travelplan/list'" class="nav-link active ps-0" aria-current="page"
 								style="display: inline">
 								<p style="font-family: 'Noto Sans KR', sans-serif; opacity: 70%; display: inline">나의여행계획</p>
 							</router-link>

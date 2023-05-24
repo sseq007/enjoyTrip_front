@@ -590,6 +590,7 @@ export default {
                                 location.reload() // 페이지 새로고침
                                 this.isLoading = false;
                             })
+                            // router.go(`/trippartnerview/${response.data.articleNo}`);
 
 
                         })
