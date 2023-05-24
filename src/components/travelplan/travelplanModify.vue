@@ -43,161 +43,145 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="container">
-            <div>
-                <h2 style="font-family: 'Black Han Sans', sans-serif;
-                                                                                                                                                    opacity: 75%;
-                                                                                                                                                    font-size: 50px;
-                                                                                                                                                "
-                    class="m-0 mt-5">
-                    나의 여행 계획
-                </h2>
-                <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
-            </div>
-
-        </div> -->
+        
         <div>
             
 
 
-                <div class="row" >
+            <div class="row" style="  background-color: #ffe4e0; height: 90vh;" >
 
-                    <div class="col-md-3">
-                        <div style="margin-left: 1vh;">
-                            <div style="margin-bottom: 3vh; margin-top: 2vh;">
+                <div class="col-md-3">
+                    <div style="margin-left: 1vh;">
+                        <div style="margin-bottom: 3vh; margin-top: 2vh;">
 
-                                <select id="search-area" class="form-select" @change="handleAreaChange"
-                                    v-model="selectarea">
-                                    <option value="0" selected>검색 할 지역 선택</option>
-                                    <option v-for="area in areas" :value="area.code" :key="area.code">{{ area.name }}
-                                    </option>
-                                </select>
+                            <select id="search-area" class="form-select" @change="handleAreaChange"
+                                v-model="selectarea">
+                                <option value="0" selected>검색 할 지역 선택</option>
+                                <option v-for="area in areas" :value="area.code" :key="area.code">{{ area.name }}
+                                </option>
+                            </select>
 
-                            </div>
-
-                            <div class="d-flex">
-                                <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2" :min="today"
-                                    date-format="MM-dd"></b-form-datepicker>
-
-                                <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2"
-                                    :min="value_start" date-format="MM-dd"></b-form-datepicker>
-
-
-                            </div>
-                            <form class="d-flex my-3" @submit="search" role="search">
-
-                                <!-- <select id="search-area" class="form-select me-2">
-                    <option value="0" selected>검색 할 지역 선택</option>
-                </select> -->
-                                <select id="search-content-id" class="form-select me-2">
-                                    <option value="0" selected>관광지 유형</option>
-                                    <option value="12">관광지</option>
-                                    <option value="14">문화시설</option>
-                                    <option value="15">축제공연행사</option>
-                                    <option value="25">여행코스</option>
-                                    <option value="28">레포츠</option>
-                                    <option value="32">숙박</option>
-                                    <option value="38">쇼핑</option>
-                                    <option value="39">음식점</option>
-                                </select>
-                                <input id="search-keyword" class="form-control me-2" type="search" placeholder="검색어"
-                                    aria-label="검색어" style="width: 26vh;" />
-                                <button id="btn-search" class="btn btn-outline-success" type="button" @click="search"
-                                    style="width: 15vh; ">
-                                    검색
-                                </button>
-                            </form>
-
-                            <div style="overflow-y: scroll; max-height: 70vh; ">
-                                <table class="table table-striped" v-show="showTable">
-                                    <thead>
-                                        <tr>
-                                            <th>대표이미지</th>
-                                            <th>관광지명</th>
-                                            <th>주소</th>
-                                            <!-- <th class="table_riches">위도</th>
-                                <th class="table_riches">경도</th> -->
-                                        </tr>
-                                    </thead>
-                                    <tbody id="trip-list">
-                                        <tr v-for="area in trips" :key="area.title"
-                                            @click="moveCenter(area.mapy, area.mapx)">
-
-                                            <td><img :src="area.firstimage" width="100px"></td>
-                                            <td>{{ area.title }}</td>
-                                            <td>{{ area.addr1 }} {{ area.addr2 }}</td>
-                                            <td><button class="btn btn-secondary" style="width: 7vh;"
-                                                    @click="saveTrip(area)">추가</button></td>
-                                            <!-- <td class="table_riches">{{ area.mapy }}</td>
-                                <td class="table_riches">{{ area.mapx }}</td> -->
-                                        </tr>
-                                    </tbody>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div id="map" style="width: 100%; height: 100%;"></div>
-
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="row">
-                            <div style="overflow-y: scroll; height: 90vh;">
-                                <draggable v-model="savedTrips" @end="onDragEnd">
-                                    <div v-for="(area, index) in savedTrips" :key="area.title"
-                                        class="card mb-3 shadow bg-gray rounded" style="margin-top: 2vh;">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <img :src="area.firstimage" class="profile_image"
-                                                    style="border-radius: 1vh; width: 12vh; height: 10vh;">
-                                            </div>
-                                            <div class="col-8" style="padding: 1vh;">
-                                                <div class="d-flex" style="justify-content: space-between;">
-                                                    <div style="margin-bottom: 1vh;"><strong>{{ area.title }}</strong></div>
-                                                    <button class="btn" @click="removeTrip(index)"><img
-                                                            src="@/assets/img/sub.png" style="width: 3vh;"></button>
-
-                                                </div>
-                                                <div>{{ area.addr1 }}</div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </draggable>
-
-                            </div>
                         </div>
 
+                        <div class="d-flex">
+                            <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2" :min="today"
+                                date-format="MM-dd"></b-form-datepicker>
+
+                            <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2"
+                                :min="value_start" date-format="MM-dd"></b-form-datepicker>
 
 
+                        </div>
+                        <form class="d-flex my-3" @submit="search" role="search">
 
+                            <!-- <select id="search-area" class="form-select me-2">
+                <option value="0" selected>검색 할 지역 선택</option>
+            </select> -->
+                            <select id="search-content-id" class="form-select me-2">
+                                <option value="0" selected>관광지 유형</option>
+                                <option value="12">관광지</option>
+                                <option value="14">문화시설</option>
+                                <option value="15">축제공연행사</option>
+                                <option value="25">여행코스</option>
+                                <option value="28">레포츠</option>
+                                <option value="32">숙박</option>
+                                <option value="38">쇼핑</option>
+                                <option value="39">음식점</option>
+                            </select>
+                            <input id="search-keyword" class="form-control me-2" type="search" placeholder="검색어"
+                                aria-label="검색어" style="width: 26vh;" />
+                            <button id="btn-search" class="btn btn-outline-success" type="button" @click="search"
+                                style="width: 15vh; ">
+                                검색
+                            </button>
+                        </form>
+
+                        <div style="overflow-y: scroll; max-height: 70vh; ">
+                            <table class="table table-striped" v-show="showTable">
+                                <thead>
+                                    <tr>
+                                        <th>대표이미지</th>
+                                        <th>관광지명</th>
+                                        <th>주소</th>
+                                        <!-- <th class="table_riches">위도</th>
+                            <th class="table_riches">경도</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody id="trip-list">
+                                    <tr v-for="area in trips" :key="area.title"
+                                        @click="moveCenter(area.mapy, area.mapx)">
+
+                                        <td><img :src="area.firstimage" width="100px"></td>
+                                        <td>{{ area.title }}</td>
+                                        <td>{{ area.addr1 }} {{ area.addr2 }}</td>
+                                        <td><button class="btn btn-secondary" style="width: 7vh;"
+                                                @click="saveTrip(area)">추가</button></td>
+                                        <!-- <td class="table_riches">{{ area.mapy }}</td>
+                            <td class="table_riches">{{ area.mapx }}</td> -->
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
                     </div>
-                    <!-- [S] 관광지 검색 -->
+                </div>
+                <div class="col-md-6">
+                    <div id="map" style="width: 100%; height: 100%;"></div>
 
-                    <!-- kakao map start -->
                 </div>
 
+
+                <div class="col-md-3" style=" background-color: #ffe4e0;">
+                    <div class="row">
+                        <div style="overflow-y: scroll; height: 90vh;">
+                            <draggable v-model="savedTrips" @end="onDragEnd">
+                                <div v-for="(area, index) in savedTrips" :key="area.title"
+                                    class="card mb-3 shadow bg-gray rounded" style="margin-top: 2vh;">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img :src="area.firstimage" class="profile_image"
+                                                style="border-radius: 1vh; width: 12vh; height: 10vh;">
+                                        </div>
+                                        <div class="col-8" style="padding: 1vh;">
+                                            <div class="d-flex" style="justify-content: space-between;">
+                                                <div style="margin-bottom: 1vh;"><strong>{{ area.title }}</strong></div>
+                                                <button class="btn" @click="removeTrip(index)"><img
+                                                        src="@/assets/img/sub.png" style="width: 3vh;"></button>
+
+                                            </div>
+                                            <div>{{ area.addr1 }}</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </draggable>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <!-- [S] 관광지 검색 -->
+
+                <!-- kakao map start -->
             </div>
 
-
-
-       
-        <div class="container" style="height: 77px; margin-bottom: 7vh; background-color: #ffe4e0;">
+        </div>
+        <div class="container" style="height: 77px; margin-bottom: 7vh;">
             <div>
                 <h2 style="font-family: 'Black Han Sans', sans-serif;
-                                                                                                                                                        opacity: 75%;
-                                                                                                                                                        font-size: 50px;
-                                                                                                                    "
+                                                                                                                                                    opacity: 75%;
+                                                                                                                                                    font-size: 50px;
+                                                                                                                "
                     class="m-0 mt-5">
                     여행 타임 라인
                 </h2>
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
         </div>
-       
+        <div class="container">
             <div class="row">
 
                 <div>
@@ -225,10 +209,10 @@
 
             </div>
             <div style="text-align: end; margin-right: 5vh; margin-bottom: 1vh;">
-                <button class="btn btn-outline-secondary" type="button" @click="checkValue">완료</button>
-            </div>
+                    <button class="btn btn-outline-secondary" type="button" @click="checkValue">완료</button>
+                </div>
 
-        
+        </div>
 
 
 
@@ -241,13 +225,13 @@
 // import locationJS from "@/assets/js/location.js"
 import draggable from 'vuedraggable';
 import axios from "axios";
+import { mapState } from "vuex";
 import router from '@/router';
 // import $ from 'jquery';
 // import router from '@/router';
-import { mapState } from "vuex";
 const memberStore = "memberStore";
 export default {
-    name: "travelPlanWrite",
+    name: "travelPlanModify",
     components: {
         draggable
     },
@@ -271,11 +255,35 @@ export default {
             savedTrips: [],
             selectedDay: null,
             saveDay: '',
-            selectedAreaIndex: null
+            selectedAreaIndex: null,
+            articles: [],
+            article:[]
         };
     },
     created() {
 
+        axios.get(`http://localhost:8080/api/travelplan/list/${this.$route.params.articleNo}`)
+            .then(response => {
+                console.log(response.data);
+                this.article = response.data;
+                this.value_start = this.article.startDate;
+                this.value_end = this.article.endDate;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+        axios.get(`http://localhost:8080/api/travelplan/listinfo/${this.$route.params.articleNo}`)
+            .then(response => {
+                console.log(response.data);
+                this.articles = response.data;
+                this.savedTrips=this.articles;
+                // this.drawPath();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+  
     },
     computed: {
         selectedAreaName() {
@@ -324,6 +332,8 @@ export default {
             // console.log(this.userInfo.userId);
 
             var formData = {
+                articleNo: this.article.articleNo,
+                userId: this.userInfo.userId,
                 location: this.selectarea,
                 startDate: this.value_start,
                 endDate: this.value_end,
@@ -331,15 +341,15 @@ export default {
             }
 
             console.log(formData.localDto)
-            axios.post('http://localhost:8081/api/travelplan/write', formData, {
+            axios.put('http://localhost:8081/api/travelplan/modify', formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
                 .then(response => {
-                    console.log('계획 등록 결과:', response.data);
+                    console.log('계획 수정 결과:', response.data);
 
-                    router.push(`/travelplanview/${response.data.articleNo}`);
+                    router.push(`/travelplanview/${this.article.articleNo}`);
                 })
                 .catch(error => {
                     console.log(error);

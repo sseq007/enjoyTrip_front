@@ -29,9 +29,9 @@
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn btn-outline-secondary" style="float: right">
+    <button type="button" class="btn btn-outline-secondary" style="float: right" v-if="userInfo.admin==1">
         <!-- <a href="/notice/write" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</a> -->
-        <router-link :to="'/notice/write'" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</router-link>
+        <router-link :to="'/notice/write'" style="background-color: transparent; color: #000; text-decoration-line: none" >글쓰기</router-link>
     </button>
 </div>
 </template>
@@ -40,6 +40,8 @@
 <script>
 // import axios from "axios";
 // import NoticeListItem from './noticeListItem.vue';
+import { mapState } from "vuex";
+const memberStore = "memberStore";
 export default {
   name: "NodeList",
   components:{
@@ -63,6 +65,10 @@ export default {
 //       console.log(error);
 //     });
   },
+  computed: {
+
+        ...mapState(memberStore, ["userInfo"]),
+    },
   methods: {
     movePage() {
 

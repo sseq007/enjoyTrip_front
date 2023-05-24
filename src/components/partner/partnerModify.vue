@@ -119,7 +119,7 @@
                         <div class="d-flex">
                             <select class="form-select" aria-label="Default select example" v-model="purpose">
                                 <option value="" disabled selected>모집목적</option>
-                                <option value="카플">카플</option>
+                                <option value="카풀">카풀</option>
                                 <option value="맛집">맛집</option>
                                 <option value="기타">기타</option>
 

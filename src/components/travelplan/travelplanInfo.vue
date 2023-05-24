@@ -1,17 +1,15 @@
 <template>
-    <div class="carousel-item active">
+    <div class="carousel-item ">
         <div class="card mb-3 shadow bg-gray rounded">
             <div class="row">
-                <div class="col-4">
-                    <img :src="article.firstimage" class="profile_image"
-                        style="border-radius: 1vh; width: 12vh; height: 10vh;">
-                </div>
-                <div class="col-8" style="padding: 1vh;">
-                    <div class="d-flex" style="justify-content: space-between;">
-                        <div style="margin-bottom: 1vh;"><strong>{{ article.title }}</strong></div>
-                    </div>
-                    <div>{{ article.addr1 }}</div>
-                </div>
+
+                <img :src="article.firstimage" class="profile_image" style="border-radius: 1vh; width: 100%; height:53vh;">
+
+                <div style="margin-bottom: 1vh;"><strong style="font-size: 3vh;">{{ article.title }}</strong></div>
+
+                <div style="font-size: 2vh; margin-bottom: 1vh;">({{ article.addr1 }})</div>
+                <div >{{ article.tel }}</div>
+
 
             </div>
         </div>

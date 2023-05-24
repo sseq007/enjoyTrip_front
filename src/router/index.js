@@ -24,6 +24,7 @@ import hotplaceModify from "../components/hotplace/hotplaceModify";
 import travelplanWrite from "../components/travelplan/travelplanWrite";
 import travelplanMain from "../components/travelplan/travelplanMain";
 import travelplanContent from "../components/travelplan/travelplanContent";
+import travelplanModify from "../components/travelplan/travelplanModify";
 
 import store from "@/store";
 
@@ -192,6 +193,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: travelplanContent,
+  },
+  {
+    path: "/planmodify/:articleNo",
+    name: "travelplanModify",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: travelplanModify,
   },
 ];
 
