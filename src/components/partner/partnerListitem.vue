@@ -10,8 +10,8 @@
                                 style="padding:4px; border-radius: 40%; width: 40px; height: 40px; margin-right: 8px; ">
 
                             <div>
-                                <div>{{ article.userId }}</div>
-                                <div style="color: #80B5ff;">40대 남성</div>
+                                <div>{{ user.userNickname }}</div>
+                                <div style="color: #80B5ff;">{{  user.age }}대 {{  user.gender }}</div>
                             </div>
                         </div>
                     </div>
@@ -84,24 +84,35 @@ export default {
     name: "PartnerListItem",
     props: {
         article: Object,
-        
+
     },
     data() {
         return {
             isHovered: false,
-            sendcount:''
+            sendcount: '',
+            user: [],
         };
     },
     created() {
         axios.get(`http://localhost:8080/api/note/countsend/${this.article.articleNo}`)
             .then(response => {
                 console.log(response.data);
+            
                 this.sendcount = response.data;
             })
             .catch(error => {
                 console.log(error);
             });
+            axios.get(`http://localhost:8080/api/trippartner/user/${this.article.userId}`)
+            .then(response => {
+                this.user = response.data;
+                console.log("user22 정보는"+this.user);
 
+            })
+            .catch(error => {
+                console.log(error);
+            });
+            
 
     },
     methods: {

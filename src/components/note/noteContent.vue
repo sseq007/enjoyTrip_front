@@ -147,6 +147,7 @@ export default {
         },
         registNote(){
             var formData = {
+                articleNo: this.note.articleNo,
                 fromuserId: this.userInfo.userId,
                 touserId: this.note.fromuserId,
                 content: this.text

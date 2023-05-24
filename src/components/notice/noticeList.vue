@@ -7,7 +7,7 @@
         <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
     </div>
     <div>
-        <p style="font-family: 'Noto Sans KR', sans-serif; opacity: 75%">직접 다녀왔던 여행지 중 좋았던 곳에 대한 정보를 공유해 주세요!</p>
+        <p style="font-family: 'Noto Sans KR', sans-serif; opacity: 75%">공지사항입니다!</p>
         <div class="col-lg-8 col-md-12 col-sm-12 align-self-end">
           <div class="row">
 			<div class="col-md-7">

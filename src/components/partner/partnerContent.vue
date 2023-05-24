@@ -116,8 +116,8 @@
                                             style="padding:4px; border-radius: 40%; width: 58px; height: 58px; margin-left: 25px;">
 
                                         <div style="margin-left: 15px;">
-                                            <h5>{{ article.userId }}</h5>
-                                            <div>40대 남성 대한민국</div>
+                                            <h5>{{  user.userNickname }}</h5>
+                                            <div>{{  user.age }}대 {{  user.gender }} 대한민국</div>
                                         </div>
                                     </div>
                                     <div style="padding-top: 20px; margin-left: 25px;">
@@ -222,6 +222,7 @@ export default {
             keywordOne: [],
             keywordTwo: [],
             text: "",
+            user:[]
         };
     },
     created() {
@@ -238,6 +239,15 @@ export default {
                     console.log(this.article.end),
                     this.checked = '모집종료'
                 ]
+                axios.get(`http://localhost:8080/api/trippartner/user/${this.article.userId}`)
+            .then(response => {
+                this.user = response.data;
+                console.log("user 정보는"+this.user);
+
+            })
+            .catch(error => {
+                console.log(error);
+            });
             })
             .catch(error => {
                 console.log(error);
@@ -259,6 +269,7 @@ export default {
             .catch(error => {
                 console.log(error);
             });
+            
 
     },
     methods: {
