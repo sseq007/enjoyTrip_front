@@ -45,5 +45,14 @@ async function registerMember(user, success, fail){
     }).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout, updateMember, deleteMember, registerMember, getUser };
+async function idCheck(id, success, fail) {
+    await api.get(`/api/member/available/${id}`).then(success).catch(fail);
+}
+
+async function nickCheck(nickname, success, fail) {
+    await api.get(`/api/member/nickavailable/${nickname}`).then(success).catch(fail);
+}
+
+export { login, findById, tokenRegeneration, logout, updateMember,
+     deleteMember, registerMember, getUser, idCheck, nickCheck };
 

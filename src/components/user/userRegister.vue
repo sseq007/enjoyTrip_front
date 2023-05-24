@@ -22,10 +22,15 @@
                     <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 20px; font-weight: 600;">
                         * 아이디
                     </label>
-                    <input type="text" v-model="userId" style="margin-top: 8px; font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 60%; 
-                    width:760px; height:55px; padding-left: 15px; background-color: transparent;
-                    border:4px solid #85c6d7; float:left; font-size: 28px" placeholder="ID"
-                    required/>
+                    <div style="display: flex; margin-top: 8px;">
+                        <input type="text" v-model="userId" style=" font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 60%; 
+                        width:760px; height:55px; padding-left: 15px; background-color: transparent;
+                        border:4px solid #85c6d7; float:left; font-size: 28px" placeholder="ID" @input="checkId"
+                        required/>
+                    </div>
+                    <label v-if="idInput" style="font-family: 'Nixgon, sans-serif; opacity: 70%; font-size: 15px; font-weight: 600;">
+                        {{this.idMessage}}
+                    </label>
                 </div>
                 <div style="display: flex; flex-direction: column; margin-left: 3%; margin-top: 15px; height: 95px;">
                     <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 20px; font-weight: 600;">
@@ -60,8 +65,11 @@
                     </label>
                     <input type="text" v-model="userNickname" style="margin-top: 8px; font-family: 'Nixgon, sans-serif; font-weight:600; opacity: 60%; 
                     width:760px; height:55px; padding-left: 15px; background-color: transparent;
-                    border:4px solid #85c6d7; float:left; font-size: 28px" placeholder="Nickname"
+                    border:4px solid #85c6d7; float:left; font-size: 28px" placeholder="Nickname" @input="checkNickname"
                     required/>
+                    <label v-if="nickInput" style="font-family: 'Nixgon, sans-serif; opacity: 70%; font-size: 15px; font-weight: 600;">
+                        {{this.nickMessage}}
+                    </label>
                 </div>
                 <div style="display: flex; flex-direction: column; margin-left: 3%; margin-top: 15px; height: 95px;">
                     <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 20px; font-weight: 600;">
@@ -110,7 +118,7 @@
 							<option value="gmail.com">gmail.com</option>
 							<option value="daum.net">daum.net</option>
                         </select>
-                        <button class="button" style="margin-left: 10px; height: 60px; width: 145px; background-color: transparent; border-radius: 20px; 
+                        <button class="button" style="margin-left: 10px; height: 55px; width: 145px; background-color: transparent; border-radius: 20px; 
                         opacity: 60%; border:4px solid #85c6d7;">
                             <span style="font-family: 'Nixgon, sans-serif; color: #85c6d7; font-weight:600; font-size: 30px;">인증</span>
                         </button>
@@ -128,7 +136,7 @@
 </template>
 
 <script>
-import { registerMember } from "@/api/member";
+import { registerMember, idCheck, nickCheck } from "@/api/member";
 
 export default {
     name: "userRegister",
@@ -145,6 +153,10 @@ export default {
             birth: '',
             emailId: '',
             image: '',
+            idMessage: '',
+            idInput: false,
+            nickMessage: '',
+            nickInput: false,
         }
     },
     created(){
@@ -162,16 +174,40 @@ export default {
 			let msg = "";
 
 			if(err && !this.userId){
-                msg = "ID를 입력해주세요"
-                err = false
-            }
-
-			if (err && this.userPw != this.pwCheck) {
+                msg = "ID를 입력해 주세요";
+                err = false;
+            }else if(err && this.idMessage != "사용 가능한 ID입니다."){
+                msg = "다른 ID를 입력해 주세요";
+                err = false;
+            }else if(err && !this.userPw){
+                msg = "비밀번호를 입력해 주세요";
+                err = false;
+            }else if (err && this.userPw != this.pwCheck) {
 				err = false;
 				msg = "비밀번호를 다시 확인해 주세요";
-			}
+			}else if(err && !this.userName){
+                msg = "이름을 입력해 주세요";
+                err = false;
+            }else if(err && !this.userNickname){
+                msg = "닉네임을 입력해 주세요";
+                err = false;
+            }else if(err && this.nickMessage != "사용 가능한 닉네임입니다."){
+                msg = "다른 닉네임을 입력해 주세요";
+                err = false;
+            }else if(err && !this.$refs.gender.value){
+                msg = "성별을 선택해 주세요";
+                err = false;
+            }else if(err && !this.birth){
+                msg = "생년월일을 선택해 주세요";
+                err = false;
+            }else if(err && (!this.emailId || !this.$refs.emailDomain.value)){
+                msg = "이메일을 입력해 주세요";
+                err = false;
+            }
+            
+
+			
 			if (!err) alert(msg);
-			// 만약, 내용이 다 입력되어 있다면 registArticle 호출
 			else this.register();
 		},
         async register() {
@@ -206,6 +242,50 @@ export default {
 				}
 			);
 		},
+        checkId(){
+            if(!this.idInput) this.idInput = !this.idInput;
+            if(this.userId == '') this.idInput = false;
+            idCheck(
+                this.userId,
+                ({data}) => {
+                    this.idMessage = "사용 불가능한 ID입니다."
+                    if(data === 0 ){
+                        this.idMessage = "사용 가능한 ID입니다."
+                    }
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        },
+        checkNickname(){
+            if(!this.nickInput) this.nickInput = !this.nickInput;
+            if(this.userNickname == '') this.nickInput = false;
+            nickCheck(
+                this.userNickname,
+                ({data}) => {
+                    this.nickMessage = "사용 불가능한 닉네임입니다."
+                    if(data === 0 ){
+                        this.nickMessage = "사용 가능한 닉네임입니다."
+                    }
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        }
     }
 }
 </script>
+
+<style scoped>
+input:focus {outline: 2px solid #ffb5a7;}
+textarea:focus {outline: 2px solid #ffb5a7;}
+select:focus {outline: 2px solid #ffb5a7;}
+.select option{
+    background-color: #FFE4E0;
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600;
+    color: #939393;
+}
+</style>

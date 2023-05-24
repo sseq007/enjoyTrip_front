@@ -1,17 +1,17 @@
 <template>
     <div style="margin: auto; margin-top: 100px; margin-bottom: 100px; width: 50%; height: auto; border: 3px solid #ffb5a7; border-radius: 10px; background-color: #ffe4e0; " class="text-center">
             <nav class="navbar navbar-expand-sm" style="width: 100%; background-color: #ffb5a7; font-family: 'Black Han Sans', sans-serif; text-align: center; font-size: 20px;">
-                <div class="collpase navbar-collapse height: 80px; width: 100%;">
-                    <ul class="navbar-nav">
-                        <img :src="profileImage" style="border-radius: 50%; width: 80px; height: 80px; margin-left: 30%; margin-top: 1%; margin-bottom: 1%;">
-                        <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 30px; width: 100%; font-weight: 600; margin-top: 20px; margin-left: 15px;"
+                <div class="height: 80px; width: 100%;">
+                    <ul style="width: 50vmin; display: flex;">
+                        <img :src="profileImage" style="border-radius: 50%; width: 80px; height: 80px; margin-left: 1vmin; margin-top: 1%; float:left;">
+                        <label style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 30px; font-weight: 600; margin-top: 22px; margin-left: 13px; float: left;"
                         >{{this.user.userNickname}}</label>
                     </ul>
                 </div>
             </nav>
-            <div style=" margin-left: 7%;">
+            <div style=" margin-left: 5vmin;">
                 <h2 style="font-family: 'Nixgon, sans-serif; opacity: 60%; font-size: 50px; font-weight: 600; margin-top: 20px; margin-left: 15px; text-align: left" class="m-0 mt-2">{{this.hotplace.subject}}</h2>
-                <hr class="mb-2 mt-0" align="left" style="border: solid 3px #ffb5a7; width: 30%; opacity: 100%" />
+                <hr class="mb-2 mt-0" align="left" style="border: solid 3px #ffb5a7; width: 70%; opacity: 100%" />
             </div>
             
             <div id="Contents">
@@ -66,8 +66,8 @@
                             </div>
                         </div>
                         
-                        <div style="text-align: center; margin-top: 30px; display: flex;">
-                            <div v-if="userInfo">
+                        <div style="justify-content: center; margin-top: 30px; display: flex;">
+                            <div v-if="userInfo" style="display:flex;">
                                 <button v-if="userInfo.userId == this.hotplace.userId" type="button" style="margin-right: 30px; height: 55px; width: 145px; background-color: transparent; border-radius: 20px; 
                                 opacity: 100%; border:4px solid #ffb5a7;" @click="moveModify">
                                     <span style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px;" >수정</span>
@@ -128,6 +128,7 @@ export default {
                     ({ data }) => {
                         if(data.message === "success"){
                             this.user = data.userInfo;
+                            console.log(this.user);
                             if(this.user.profileImage == null){
                                 this.profileImage = require('@/assets/img/none_profile_image.jpg');
                             }else{

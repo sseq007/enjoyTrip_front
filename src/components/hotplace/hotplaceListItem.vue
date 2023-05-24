@@ -1,7 +1,7 @@
 <template>
     <div style="text-align:center; width: 285px;  height: 320px; margin-right: 3%; margin-top: 3%; background-color: #ffe4e0;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); border: solid 5px #ffb5a7; border-radius: 5%; text-decoration: none;" display="inline-block">
-        <div style="width: 40%; margin-top: 10px; margin-left: 40px; overflow: hidden; ">
+        <div style="margin-top: 10px; margin-left: 40px; overflow: hidden; ">
             <div><img :src="profileImage" style="width: 40px; height: 40px; border-radius: 60%; float: left;"></div>
             <div><p style="font-family: 'Nixgon, sans-serif; color: #000000; opacity: 60%; font-size: 17px; font-weight: 600; float:left; margin-left: 10px; padding-top:7px;">{{ this.user.userNickname }}</p></div>
         </div>
