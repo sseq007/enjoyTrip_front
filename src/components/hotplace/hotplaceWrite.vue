@@ -124,7 +124,7 @@ export default {
                 err = false;
             }
             err && !this.subject && ((msg = "제목을 입력해 주세요"), (err = false));
-            err && !this.content && ((msg = "제목을 입력해 주세요"), (err = false));
+            err && !this.content && ((msg = "내용을 입력해 주세요"), (err = false));
 
             if(!err) alert(msg);
             else this.registerHotplace();

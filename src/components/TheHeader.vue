@@ -131,24 +131,26 @@ export default {
 		};
 	},
 	created() {
-		axios.get(`http://localhost:8080/api/note/list/${this.userInfo.userId}`)
-			.then(response => {
-				console.log(response.data);
-				this.notes = response.data;
-			})
-			.catch(error => {
-				console.log(error);
-			});
+		if(this.userInfo != null){
+			axios.get(`http://localhost:8080/api/note/list/${this.userInfo.userId}`)
+				.then(response => {
+					console.log(response.data);
+					this.notes = response.data;
+				})
+				.catch(error => {
+					console.log(error);
+				});
 
-			axios.get(`http://localhost:8080/api/note/countisread/${this.userInfo.userId}`)
-			.then(response => {
-				this.isreadCount = response.data;
-				console.log("isReadcount"+response.data);
-				
-			})
-			.catch(error => {
-				console.log(error);
-			});
+				axios.get(`http://localhost:8080/api/note/countisread/${this.userInfo.userId}`)
+				.then(response => {
+					this.isreadCount = response.data;
+					console.log("isReadcount"+response.data);
+					
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		}
 
 	},
 	computed: {
