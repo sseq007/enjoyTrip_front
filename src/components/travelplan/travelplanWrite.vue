@@ -57,160 +57,163 @@
 
         </div> -->
         <div>
-            
 
 
-                <div class="row" >
 
-                    <div class="col-md-3">
-                        <div style="margin-left: 1vh;">
-                            <div style="margin-bottom: 3vh; margin-top: 2vh;">
+            <div class="row">
 
-                                <select id="search-area" class="form-select" @change="handleAreaChange"
-                                    v-model="selectarea">
-                                    <option value="0" selected>검색 할 지역 선택</option>
-                                    <option v-for="area in areas" :value="area.code" :key="area.code">{{ area.name }}
-                                    </option>
-                                </select>
+                <div class="col-md-3">
+                    <div style="margin-left: 1vh;">
+                        <div style="margin-bottom: 3vh; margin-top: 2vh;">
 
-                            </div>
+                            <select id="search-area" class="form-select" @change="handleAreaChange" v-model="selectarea">
+                                <option value="0" selected>검색 할 지역 선택</option>
+                                <option v-for="area in areas" :value="area.code" :key="area.code">{{ area.name }}
+                                </option>
+                            </select>
 
-                            <div class="d-flex">
-                                <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2" :min="today"
-                                    date-format="MM-dd"></b-form-datepicker>
+                        </div>
 
-                                <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2"
-                                    :min="value_start" date-format="MM-dd"></b-form-datepicker>
+                        <div class="d-flex">
+                            <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2" :min="today"
+                                date-format="MM-dd"></b-form-datepicker>
+
+                            <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2" :min="value_start"
+                                date-format="MM-dd"></b-form-datepicker>
 
 
-                            </div>
-                            <form class="d-flex my-3" @submit="search" role="search">
+                        </div>
+                        <form class="d-flex my-3" @submit="search" role="search">
 
-                                <!-- <select id="search-area" class="form-select me-2">
+                            <!-- <select id="search-area" class="form-select me-2">
                     <option value="0" selected>검색 할 지역 선택</option>
                 </select> -->
-                                <select id="search-content-id" class="form-select me-2">
-                                    <option value="0" selected>관광지 유형</option>
-                                    <option value="12">관광지</option>
-                                    <option value="14">문화시설</option>
-                                    <option value="15">축제공연행사</option>
-                                    <option value="25">여행코스</option>
-                                    <option value="28">레포츠</option>
-                                    <option value="32">숙박</option>
-                                    <option value="38">쇼핑</option>
-                                    <option value="39">음식점</option>
-                                </select>
-                                <input id="search-keyword" class="form-control me-2" type="search" placeholder="검색어"
-                                    aria-label="검색어" style="width: 26vh;" />
-                                <button id="btn-search" class="btn btn-outline-success" type="button" @click="search"
-                                    style="width: 15vh; ">
-                                    검색
-                                </button>
-                            </form>
+                            <select id="search-content-id" class="form-select me-2">
+                                <option value="0" selected>관광지 유형</option>
+                                <option value="12">관광지</option>
+                                <option value="14">문화시설</option>
+                                <option value="15">축제공연행사</option>
+                                <option value="25">여행코스</option>
+                                <option value="28">레포츠</option>
+                                <option value="32">숙박</option>
+                                <option value="38">쇼핑</option>
+                                <option value="39">음식점</option>
+                            </select>
+                            <input id="search-keyword" class="form-control me-2" type="search" placeholder="검색어"
+                                aria-label="검색어" style="width: 26vh;" />
+                            <button id="btn-search" class="btn btn-outline-success" type="button" @click="search"
+                                style="width: 15vh; ">
+                                검색
+                            </button>
+                        </form>
 
-                            <div style="overflow-y: scroll; max-height: 70vh; ">
-                                <table class="table table-striped" v-show="showTable">
-                                    <thead>
-                                        <tr>
-                                            <th>대표이미지</th>
-                                            <th>관광지명</th>
-                                            <th>주소</th>
-                                            <!-- <th class="table_riches">위도</th>
+                        <div style="overflow-y: scroll; max-height: 70vh; ">
+                            <table class="table table-striped" v-show="showTable">
+                                <thead>
+                                    <tr>
+                                        <th>대표이미지</th>
+                                        <th>관광지명</th>
+                                        <th>주소</th>
+                                        <!-- <th class="table_riches">위도</th>
                                 <th class="table_riches">경도</th> -->
-                                        </tr>
-                                    </thead>
-                                    <tbody id="trip-list">
-                                        <tr v-for="area in trips" :key="area.title"
-                                            @click="moveCenter(area.mapy, area.mapx)">
+                                    </tr>
+                                </thead>
+                                <tbody id="trip-list">
+                                    <tr v-for="area in trips" :key="area.title" @click="moveCenter(area.mapy, area.mapx)">
 
-                                            <td><img :src="area.firstimage" width="100px"></td>
-                                            <td>{{ area.title }}</td>
-                                            <td>{{ area.addr1 }} {{ area.addr2 }}</td>
-                                            <td><button class="btn btn-secondary" style="width: 7vh;"
-                                                    @click="saveTrip(area)">추가</button></td>
-                                            <!-- <td class="table_riches">{{ area.mapy }}</td>
+                                        <td><img :src="area.firstimage" width="100px"></td>
+                                        <td>{{ area.title }}</td>
+                                        <td>{{ area.addr1 }} {{ area.addr2 }}</td>
+                                        <td><button class="btn btn-secondary" style="width: 7vh;"
+                                                @click="saveTrip(area)">추가</button></td>
+                                        <!-- <td class="table_riches">{{ area.mapy }}</td>
                                 <td class="table_riches">{{ area.mapx }}</td> -->
-                                        </tr>
-                                    </tbody>
+                                    </tr>
+                                </tbody>
 
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div id="map" style="width: 100%; height: 100%;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="map" style="width: 100%; height: 100%;"></div>
 
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="row">
-                            <div style="overflow-y: scroll; height: 90vh;">
-                                <draggable v-model="savedTrips" @end="onDragEnd">
-                                    <div v-for="(area, index) in savedTrips" :key="area.title"
-                                        class="card mb-3 shadow bg-gray rounded" style="margin-top: 2vh;">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <img :src="area.firstimage" class="profile_image"
-                                                    style="border-radius: 1vh; width: 12vh; height: 10vh;">
-                                            </div>
-                                            <div class="col-8" style="padding: 1vh;">
-                                                <div class="d-flex" style="justify-content: space-between;">
-                                                    <div style="margin-bottom: 1vh;"><strong>{{ area.title }}</strong></div>
-                                                    <button class="btn" @click="removeTrip(index)"><img
-                                                            src="@/assets/img/sub.png" style="width: 3vh;"></button>
-
-                                                </div>
-                                                <div>{{ area.addr1 }}</div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </draggable>
-
-                            </div>
-                        </div>
-
-
-
-
-                    </div>
-                    <!-- [S] 관광지 검색 -->
-
-                    <!-- kakao map start -->
                 </div>
 
+
+                <div class="col-md-3">
+                    <div class="row">
+                        <div style="overflow-y: scroll; height: 90vh;">
+                            <draggable v-model="savedTrips" @end="onDragEnd">
+                                <div v-for="(area, index) in savedTrips" :key="area.title"
+                                    class="card mb-3 shadow bg-gray rounded"
+                                    style="text-align:center; width: 100%;  height: 16vh; margin-right: 3%; margin-top: 3%; background-color: #ffe4e0;
+                box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); border: solid 5px #ffb5a7; border-radius: 5%; text-decoration: none;">
+                                    <div class="row" style="padding: 1vh;">
+                                        <div class="col-4">
+                                            <img :src="area.firstimage" class="profile_image"
+                                                style="border-radius: 1vh; width: 17vh; height: 13vh;">
+                                        </div>
+                                        <div class="col-8" style="padding: 1vh;">
+                                            <div class="d-flex" style="justify-content: space-between; margin-bottom: 2vh;">
+                                                <div style="margin-top: 3px; margin-left: 22px; font-size: 17px;"><strong
+                                                        style="margin-right: 8vh;">{{ area.title }}</strong></div>
+                                                <button class="btn" @click="removeTrip(index)"><img
+                                                        src="@/assets/img/sub.png" style="width: 25px;"></button>
+
+                                            </div>
+                                            <div style="margin-right: 15px; font-size: 14px;">{{ area.addr1 }}</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </draggable>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <!-- [S] 관광지 검색 -->
+
+                <!-- kakao map start -->
             </div>
 
+        </div>
 
 
-       
-        <div class="container" style="height: 77px; margin-bottom: 7vh; background-color: #ffe4e0;">
+
+        <div>
+        <div class="container" style="height: 77px; margin-bottom: 7vh;">
             <div>
                 <h2 style="font-family: 'Black Han Sans', sans-serif;
-                                                                                                                                                        opacity: 75%;
-                                                                                                                                                        font-size: 50px;
-                                                                                                                    "
+                                                                                                                                                                    opacity: 75%;
+                                                                                                                                                                    font-size: 50px;
+                                                                                                                                "
                     class="m-0 mt-5">
                     여행 타임 라인
                 </h2>
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
+
         </div>
-       
+        <div class="container">
             <div class="row">
 
                 <div>
                     <div v-for="(area, index) in savedTrips" :key="area.title"
                         :class="index % 2 === 0 ? 'card-left' : 'card-right'" class="card shadow bg-gray rounded"
-                        style="width: 47vh; margin-bottom: 2vh;">
-                        <div class="row">
+                        style="text-align:center; width: 50vh;  height: 320px; margin-right: 3%; margin-top: 3%; background-color: #ffe4e0;
+                box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); border: solid 5px #ffb5a7; border-radius: 5%; text-decoration: none;">
+                        <div class="row" style="padding: 1vh;">
                             <div class="col-4">
                                 <img :src="area.firstimage" class="profile_image"
-                                    style="border-radius: 1vh; width: 15vh; height: 12vh;">
+                                    style=" width: 15vh; height: 12vh; border-radius: 1vh;">
                             </div>
                             <div class="col-8" style="padding: 1vh;">
-                                <div class="d-flex" style="justify-content: space-between;">
+                                <div style="font-size: 28px; margin-bottom: 2vh;">
                                     <div style="margin-bottom: 1vh;"><strong>{{ area.title }}</strong></div>
 
                                 </div>
@@ -221,17 +224,24 @@
                             name="board-write-content" placeholder="장소 계획을 적어주세요" ref="tel"
                             v-model="savedTrips[index].tel"></textarea>
                     </div>
+
                 </div>
 
             </div>
             <div style="text-align: end; margin-right: 5vh; margin-bottom: 1vh;">
-                <button class="btn btn-outline-secondary" type="button" @click="checkValue">완료</button>
+                <div class="d-flex">
+                    <button class="btn btn-outline-secondary" type="button" @click="checkValue" style="margin-right: 1vh;">취소</button>
+                    <button class="btn btn-outline-secondary" type="button" @click="checkValue">확인</button>
+    
+    
+                </div>
             </div>
-
-        
-
+        </div>
 
 
+
+
+    </div>
 
     </div>
 </template>
@@ -324,6 +334,7 @@ export default {
             // console.log(this.userInfo.userId);
 
             var formData = {
+                userId: this.userInfo.userId,
                 location: this.selectarea,
                 startDate: this.value_start,
                 endDate: this.value_end,
