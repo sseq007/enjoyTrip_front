@@ -127,6 +127,9 @@ export default {
             this.image = url;
             console.log(url);           
         },
+        clickFileInput() {
+    this.$refs.fileInput.click();
+  },
         checkValue(){
             let err = true;
             let msg = "";

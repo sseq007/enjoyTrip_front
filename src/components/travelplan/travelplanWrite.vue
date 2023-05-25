@@ -75,10 +75,10 @@
                         </div>
 
                         <div class="d-flex">
-                            <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2" :min="today"
+                            <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2 custom-datepicker" :min="today"
                                 date-format="MM-dd"></b-form-datepicker>
 
-                            <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2" :min="value_start"
+                            <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2 custom-datepicker" :min="value_start"
                                 date-format="MM-dd"></b-form-datepicker>
 
 
@@ -156,13 +156,13 @@
                                         </div>
                                         <div class="col-8" style="padding: 1vh;">
                                             <div class="d-flex" style="justify-content: space-between; margin-bottom: 2vh;">
-                                                <div style="margin-top: 3px; margin-left: 22px; font-size: 17px;"><strong
-                                                        style="margin-right: 8vh;">{{ area.title }}</strong></div>
+                                                <div style="padding-top: 9px; padding-left: 2vh; font-size: 17px;"><strong
+                                                        style="text-align: start; margin-left: 2vh;">{{ area.title }}</strong></div>
                                                 <button class="btn" @click="removeTrip(index)"><img
                                                         src="@/assets/img/sub.png" style="width: 25px;"></button>
 
                                             </div>
-                                            <div style="margin-right: 15px; font-size: 14px;">{{ area.addr1 }}</div>
+                                            <div style=" font-size: 14px;">{{ area.addr1 }}</div>
                                         </div>
 
                                     </div>
@@ -229,8 +229,8 @@
 
             </div>
             <div style="text-align: end; margin-right: 5vh; margin-bottom: 1vh;">
-                <div class="d-flex">
-                    <button class="btn btn-outline-secondary" type="button" @click="checkValue" style="margin-right: 1vh;">취소</button>
+                <div class="d-flex" style="margin-top: 10vh; justify-content: end;" >
+                    <button class="btn btn-outline-secondary" type="button" @click="movego" style="margin-right: 1vh;">취소</button>
                     <button class="btn btn-outline-secondary" type="button" @click="checkValue">확인</button>
     
     
@@ -350,7 +350,7 @@ export default {
                 .then(response => {
                     console.log('계획 등록 결과:', response.data);
 
-                    router.push(`/travelplanview/${response.data.articleNo}`);
+                    router.push(`/travelplan/view/${response.data.articleNo}`);
                 })
                 .catch(error => {
                     console.log(error);
@@ -427,11 +427,17 @@ export default {
             fetch(searchUrl)
                 .then((response) => response.json())
                 .then((data) => {
-
+                
                     this.makeList(data);
+                    console.log("data는 뭘까"+data);
                 });
         },
         makeList(data) {
+            
+            if (!data.response.body.items) {
+        alert("검색되는 정보가 없습니다!");
+        return;
+    }
             this.showTable = true;
             this.trips = data.response.body.items.item;
             this.positions = [];
@@ -510,6 +516,9 @@ export default {
             }
 
 
+        },
+        movego(){
+            router.push("/travelplan/list");
         }
 
     }
@@ -521,11 +530,58 @@ export default {
 
 <style scoped>
 .card-left {
-    margin-left: 20vh;
 }
 
 .card-right {
     /* CSS styles for right-positioned cards */
-    margin-left: 75vh;
+    margin-left: 50vh;
+}
+input,select {
+    /* margin-top: 4px;  */
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    opacity: 80%; 
+    border-radius: 5px;
+    width:100%;
+    height:45px;
+    padding-left: 15px;
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    /* float:left; */
+    font-size: 15px;
+  }
+  textarea{
+    margin-top: 4px; 
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    opacity: 80%; 
+    border-radius: 5px;
+    width:100%;
+    height:180px;
+    padding-left: 15px;
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    float:left;
+    font-size: 20px;
+  }
+  label{
+    font-family: 'Nixgon, sans-serif'; opacity: 60%; font-size: 17px; font-weight: 600;
+  }
+  input:focus {outline: 2px solid #85c6d7;}
+  textarea:focus {outline: 2px solid #85c6d7;}
+
+  .custom-datepicker {
+    /* margin-top: 4px;  */
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    /* opacity: 80%;  */
+    border-radius: 5px;
+    /* width:100%;
+    height:45px; */
+    /* padding-left: 15px; */
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    /* float:left; */
+    font-size: 14px;
 }
 </style>

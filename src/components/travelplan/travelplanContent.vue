@@ -12,39 +12,39 @@
                 <div class="d-flex" style="margin-bottom: 2vh;">
 
                     <img src="@/assets/img/user.png" style="width: 3vh; height: 3vh;">
-                    <div style="margin-left: 2vh; font-size: 2vh;">{{ article.userId }}</div>
+                    <div class="info" style="margin-left: 2vh; font-size: 2vh;">{{ article.userId }}</div>
                 </div>
                 <div class="d-flex" style="margin-bottom: 2vh;">
 
                     <img src="@/assets/img/marker.png" style="width: 3vh; height: 3vh;">
-                    <div style="margin-left: 2vh; font-size: 2vh;">{{ article.location }}</div>
+                    <div class="info" style="margin-left: 2vh; font-size: 2vh;">{{ article.location }}</div>
                 </div>
 
                 <div class="d-flex" style="margin-bottom: 2vh;">
 
                     <img src="@/assets/img/calendar.png" style="width: 3vh; height: 3vh;">
-                    <div style="margin-left: 2vh; font-size: 2vh;"> {{ article.startDate }} ~ {{
+                    <div class="info" style="margin-left: 2vh; font-size: 2vh;"> {{ article.startDate }} ~ {{
                         article.endDate }} </div>
                 </div>
 
             </div>
 
-            <div class="row">
+            <div class="row" style="background-color: #ffb5a7; padding: 2vh; border-radius: 2vh;">
 
                 <div class="col-6">
                     <div id="map" style="width: 100%; height: 100%;"></div>
 
                 </div>
 
-                <div class="col-6">
+                <div class="col-6" >
                     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" style="height: 70vh;">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="card shadow bg-gray rounded">
-                                    <div class="row">
-                                        <img src="@/assets/img/line.png" style="width: 100%; height: 62vh;">
+                                    <div class="row" style="background-color: #ffe4e0; padding: 9vh;">
+                                        <img src="@/assets/img/route.png" style="width: 100%; height: 40vh;">
                                         
-                                        <div style="text-align: center; font-size: 5vh;">나의 여행 계획 타임라인</div>
+                                        <div style="text-align: center; font-size: 4vh; margin-top: 5vh; font-family:'Black Han Sans', sans-serif; opacity: 75%;">여행 계획 타임라인</div>
                                         
     
     
@@ -72,9 +72,9 @@
             <div class="col text-center" style="margin-top: 2vh;">
                 <button type="button" class="btn btn-outline-secondary"
                     onclick="location.href='/travelplan/list'">글목록</button>
-                <router-link :to="'/planmodify/' + article.articleNo" class="btn btn-outline-secondary">글수정</router-link>
+                <router-link :to="'/travelplan/modify/' + article.articleNo" class="btn btn-outline-secondary"  v-if="userInfo.userId == this.article.userId">글수정</router-link>
                 <!-- <button type="button" class="btn btn-outline-secondary">글수정</button> -->
-                <button type="button" id="btn-delete" class="btn btn-outline-secondary" @click="deleteArticle">글삭제</button>
+                <button type="button" id="btn-delete" class="btn btn-outline-secondary" @click="deleteArticle" v-if="userInfo.userId == this.article.userId">글삭제</button>
 
             </div>
         </div>
@@ -84,6 +84,9 @@
 <script>
 import axios from "axios";
 import PlanInfoItem from './travelplanInfo.vue';
+import { mapState } from "vuex";
+
+const memberStore = "memberStore";
 export default {
     name: "PlanView",
     data() {
@@ -96,6 +99,9 @@ export default {
     components: {
         PlanInfoItem
     },
+    computed: {
+    ...mapState(memberStore, ["userInfo"]),
+  },
     created() {
         // 비동기
         // TODO : 글번호에 해당하는 글정보 얻기.
@@ -134,11 +140,15 @@ export default {
         
         drawMarkers() {
             this.articles.forEach((localDto) => {
+
+                const firstMarkerPosition = new window.kakao.maps.LatLng(this.articles[0].mapy, this.articles[0].mapx);
       const imageSrc = `/assets/img/location.png`;
           const imageSize = new window.kakao.maps.Size(30, 30);
           const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
                 const markerPosition = new window.kakao.maps.LatLng(localDto.mapy, localDto.mapx);
                 console.log(markerPosition);
+                this.map.setCenter(firstMarkerPosition);
+    this.map.setLevel(10);
     const marker = new window.kakao.maps.Marker({
         position: markerPosition,
         image: markerImage,
@@ -171,3 +181,11 @@ export default {
 };
 </script>
 
+<style scoped>
+#info{
+  font-family: 'Nixgon, sans-serif';
+  opacity: 80%;
+  font-size: 17px;
+  font-weight: 600;
+}
+</style>

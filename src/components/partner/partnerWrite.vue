@@ -15,7 +15,8 @@
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
             <div style="height: 20px"></div>
-            <div class="row p-3" style="background-color: whitesmoke; border-radius: 1vh;" >
+            
+            <div class="row p-3" style="border-radius: 1vh; background-color: #ffe4e0; border: 4px solid #ffb5a7; padding: 3vmin;" >
                 <div class="col-2">
 
                     <div class="list-group" id="list-tab" role="tablist" style="text-align: center;">
@@ -143,10 +144,10 @@
                         <label for="example-datepicker" style="margin-left: 275px;">종료일</label>
                         <div class="d-flex">
                             <b-form-datepicker id="example-datepicker" v-model="value_start"
-                                class="mb-2" :min="today"></b-form-datepicker>
+                                class="mb-2 custom-datepicker" :min="today"></b-form-datepicker>
 
                             <b-form-datepicker id="example-datepicker" v-model="value_end"
-                                class="mb-2 ms-1" :min="today"></b-form-datepicker>
+                                class="mb-2 custom-datepicker" :min="today"></b-form-datepicker>
 
 
                         </div>
@@ -157,13 +158,22 @@
 
 
                 </div>
-            </div>
             <div style="height: 77px"></div>
-            <div class="mb-3 file btn btn-lg  d-flex align-items-center justify-content-center"
-     style="width: 100%; height: 350px; overflow: hidden; background-color: white; position: relative;">
-  <input style="opacity: 0; text-align: center; width: 100%; height: 350px;" type="file" name="file" ref="fileInput" @change="handleFileUpload" />
-  <img src="@/assets/img/picture.png" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 9vh;" @click="clickFileInput">
-</div>
+            
+<div class="mb-3 mt-3" align="center" style="position: relative">
+                                <div class="hotpleImg mb-3 mt-3">
+                                    <img :src="image" class="hotple_image" style="border-radius: 5%; width: 100%; height: 100%;">
+                                </div>
+                                <div>
+                                    <label className="input-file-button" for="uploadHotplace"
+                            style="left: 103vh; bottom: -1vh; height: 5vh; width: 5vh; background-color: #FFE4E0; border-radius: 40%;
+                                        border:3.5px solid #ffb5a7; text-align: center; padding-top: 2px; position: absolute;
+                                        font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 30px;">
+                            <i class="fi fi-rr-camera" style="font-size: 35px; color: #ffb5a7;"></i>
+                        </label>
+                                    <input ref="fileInput" type="file" id="uploadHotplace" name="file" accept=".jpg, .png, .jpeg" value="" style="display: none" @change="handleFileUpload"/>
+                                </div>                                
+                        </div>
             <div>
 
 
@@ -196,6 +206,8 @@
                 <!-- <button class="btn btn-outline-secondary" style="width: calc(50% - 8px);" @click="showModal">작성완료</button> -->
                 <b-button @click="showModal" class="btn me-2" style="width: calc(50% - 8px);">작성완료</b-button>
             </div>
+        </div>
+
         </div>
         <b-modal id="modal-scrollable" size="lg" scrollable title="" v-model="modalVisible">
 
@@ -338,6 +350,8 @@ export default {
             maxSelection: 3,
             selectedButtons: [],
             selectedButtons2: [],
+            image:'',
+
             buttons: [
                 {
                     id: "noplan",
@@ -456,6 +470,7 @@ export default {
         },
     },
     created() {
+        this.image = require('@/assets/img/carousel-1.png');
         // axios.get(`http://localhost:8080/api/trippartner/findarticleno/`)
         //     .then(response => {
 
@@ -489,6 +504,9 @@ export default {
             this.uploadedFile = file;
             console.log(file);
             // 파일을 데이터에 저장하거나 추가적인 처리 로직을 수행할 수 있습니다.
+            var image = this.$refs['fileInput'].files[0];
+            const url = URL.createObjectURL(image);
+            this.image = url;
         },
         saveData() {
             const data = {
@@ -586,7 +604,7 @@ export default {
                             console.log('키워드 결과:', response2.data);
                             alert('글 등록이 완료되었습니다.');
                             this.isLoading = true;
-                            router.push(`/trippartnerview/${response.data.articleNo}`).then(() => {
+                            router.push(`/trippartner/view/${response.data.articleNo}`).then(() => {
                                 location.reload() // 페이지 새로고침
                                 this.isLoading = false;
                             })
@@ -620,4 +638,67 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+input,select {
+    /* margin-top: 4px;  */
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    opacity: 80%; 
+    border-radius: 5px;
+    width:100%;
+    height:45px;
+    padding-left: 15px;
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    /* float:left; */
+    font-size: 15px;
+  }
+  textarea{
+    margin-top: 4px; 
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    opacity: 80%; 
+    border-radius: 5px;
+    width:100%;
+    height:180px;
+    padding-left: 15px;
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    float:left;
+    font-size: 20px;
+  }
+  label{
+    font-family: 'Nixgon, sans-serif'; opacity: 60%; font-size: 17px; font-weight: 600;
+  }
+  input:focus {outline: 2px solid #85c6d7;}
+  textarea:focus {outline: 2px solid #85c6d7;}
+
+  .custom-datepicker {
+    /* margin-top: 4px;  */
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    /* opacity: 80%;  */
+    border-radius: 5px;
+    /* width:100%;
+    height:45px; */
+    /* padding-left: 15px; */
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    /* float:left; */
+    font-size: 14px;
+}
+a{
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    opacity: 80%; 
+    border-radius: 5px;
+    width:100%;
+    height:45px;
+    padding-left: 15px;
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    /* float:left; */
+    font-size: 15px;
+}
+
 </style>

@@ -64,10 +64,10 @@
                         </div>
 
                         <div class="d-flex">
-                            <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2" :min="today"
+                            <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2 custom-datepicker " :min="today"
                                 date-format="MM-dd"></b-form-datepicker>
 
-                            <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2"
+                            <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2 custom-datepicker"
                                 :min="value_start" date-format="MM-dd"></b-form-datepicker>
 
 
@@ -131,25 +131,28 @@
                 </div>
 
 
-                <div class="col-md-3" style=" background-color: #ffe4e0;">
+                <div class="col-md-3">
                     <div class="row">
                         <div style="overflow-y: scroll; height: 90vh;">
                             <draggable v-model="savedTrips" @end="onDragEnd">
                                 <div v-for="(area, index) in savedTrips" :key="area.title"
-                                    class="card mb-3 shadow bg-gray rounded" style="margin-top: 2vh;">
-                                    <div class="row">
+                                    class="card mb-3 shadow bg-gray rounded"
+                                    style="text-align:center; width: 100%;  height: 16vh; margin-right: 3%; margin-top: 3%; background-color: #ffe4e0;
+                box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); border: solid 5px #ffb5a7; border-radius: 5%; text-decoration: none;">
+                                    <div class="row" style="padding: 1vh;">
                                         <div class="col-4">
                                             <img :src="area.firstimage" class="profile_image"
-                                                style="border-radius: 1vh; width: 12vh; height: 10vh;">
+                                                style="border-radius: 1vh; width: 17vh; height: 13vh;">
                                         </div>
                                         <div class="col-8" style="padding: 1vh;">
-                                            <div class="d-flex" style="justify-content: space-between;">
-                                                <div style="margin-bottom: 1vh;"><strong>{{ area.title }}</strong></div>
+                                            <div class="d-flex" style="justify-content: space-between; margin-bottom: 2vh;">
+                                                <div style="margin-top: 3px; margin-left: 22px; font-size: 17px;"><strong
+                                                        style="margin-right: 8vh;">{{ area.title }}</strong></div>
                                                 <button class="btn" @click="removeTrip(index)"><img
-                                                        src="@/assets/img/sub.png" style="width: 3vh;"></button>
+                                                        src="@/assets/img/sub.png" style="width: 25px;"></button>
 
                                             </div>
-                                            <div>{{ area.addr1 }}</div>
+                                            <div style="margin-right: 15px; font-size: 14px;">{{ area.addr1 }}</div>
                                         </div>
 
                                     </div>
@@ -187,14 +190,15 @@
                 <div>
                     <div v-for="(area, index) in savedTrips" :key="area.title"
                         :class="index % 2 === 0 ? 'card-left' : 'card-right'" class="card shadow bg-gray rounded"
-                        style="width: 47vh; margin-bottom: 2vh;">
-                        <div class="row">
+                        style="text-align:center; width: 50vh;  height: 320px; margin-right: 3%; margin-top: 3%; background-color: #ffe4e0;
+                box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); border: solid 5px #ffb5a7; border-radius: 5%; text-decoration: none;">
+                        <div class="row" style="padding: 1vh;">
                             <div class="col-4">
                                 <img :src="area.firstimage" class="profile_image"
-                                    style="border-radius: 1vh; width: 15vh; height: 12vh;">
+                                    style=" width: 15vh; height: 12vh; border-radius: 1vh;">
                             </div>
                             <div class="col-8" style="padding: 1vh;">
-                                <div class="d-flex" style="justify-content: space-between;">
+                                <div style="font-size: 28px; margin-bottom: 2vh;">
                                     <div style="margin-bottom: 1vh;"><strong>{{ area.title }}</strong></div>
 
                                 </div>
@@ -205,10 +209,12 @@
                             name="board-write-content" placeholder="장소 계획을 적어주세요" ref="tel"
                             v-model="savedTrips[index].tel"></textarea>
                     </div>
+
                 </div>
 
             </div>
-            <div style="text-align: end; margin-right: 5vh; margin-bottom: 1vh;">
+            <div style="text-align: end; margin-right: 5vh; margin-top: 3vh;">
+                <button class="btn btn-outline-secondary" type="button" @click="movego" style="margin-right: 1vh;">취소</button>
                     <button class="btn btn-outline-secondary" type="button" @click="checkValue">완료</button>
                 </div>
 
@@ -264,7 +270,7 @@ export default {
 
         axios.get(`http://localhost:8080/api/travelplan/list/${this.$route.params.articleNo}`)
             .then(response => {
-                console.log(response.data);
+                console.log("여행계회수정DATA"+response.data);
                 this.article = response.data;
                 this.value_start = this.article.startDate;
                 this.value_end = this.article.endDate;
@@ -311,6 +317,7 @@ export default {
         console.log(this.data);
     },
     methods: {
+        
         checkValue() {
             // 사용자 입력값 체크하기
             // 작성자아이디, 제목, 내용이 없을 경우 각 항목에 맞는 메세지를 출력
@@ -431,6 +438,10 @@ export default {
                 });
         },
         makeList(data) {
+            if (!data.response.body.items) {
+        alert("검색되는 정보가 없습니다!");
+        return;
+    }
             this.showTable = true;
             this.trips = data.response.body.items.item;
             this.positions = [];
@@ -509,6 +520,9 @@ export default {
             }
 
 
+        },
+        movego(){
+            router.push(`/travelplan/view/${this.article.articleNo}`);
         }
 
     }
@@ -520,11 +534,58 @@ export default {
 
 <style scoped>
 .card-left {
-    margin-left: 20vh;
 }
 
 .card-right {
     /* CSS styles for right-positioned cards */
-    margin-left: 75vh;
+    margin-left: 50vh;
+}
+input,select {
+    /* margin-top: 4px;  */
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    opacity: 80%; 
+    border-radius: 5px;
+    width:100%;
+    height:45px;
+    padding-left: 15px;
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    /* float:left; */
+    font-size: 15px;
+  }
+  textarea{
+    margin-top: 4px; 
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    opacity: 80%; 
+    border-radius: 5px;
+    width:100%;
+    height:180px;
+    padding-left: 15px;
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    float:left;
+    font-size: 20px;
+  }
+  label{
+    font-family: 'Nixgon, sans-serif'; opacity: 60%; font-size: 17px; font-weight: 600;
+  }
+  input:focus {outline: 2px solid #85c6d7;}
+  textarea:focus {outline: 2px solid #85c6d7;}
+
+  .custom-datepicker {
+    /* margin-top: 4px;  */
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    /* opacity: 80%;  */
+    border-radius: 5px;
+    /* width:100%;
+    height:45px; */
+    /* padding-left: 15px; */
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    /* float:left; */
+    font-size: 14px;
 }
 </style>

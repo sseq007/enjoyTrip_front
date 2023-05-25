@@ -5,9 +5,9 @@
 
                 <img :src="article.firstimage" class="profile_image" style="border-radius: 1vh; width: 100%; height:53vh;">
 
-                <div style="margin-bottom: 1vh;"><strong style="font-size: 3vh;">{{ article.title }}</strong></div>
+                <div style="margin-bottom: 2vh;"><strong style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px; ">{{ article.title }}</strong></div>
 
-                <div style="font-size: 2vh; margin-bottom: 1vh;">({{ article.addr1 }})</div>
+                <div style="font-size: 2vh; margin-bottom: 2vh;">({{ article.addr1 }})</div>
                 <div >{{ article.tel }}</div>
 
 

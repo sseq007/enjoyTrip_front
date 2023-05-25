@@ -1,7 +1,7 @@
 
 <template>
     <div class="col-lg-3 col-md-4 col-sm-12">
-        <div class="card mb-3 shadow bg-gray rounded" :style="{ 'background-color': article.end ? '#ffe4e0' : '#c4c4c4' }">
+        <div class="card mb-3 shadow bg-gray rounded" :style="{ 'background-color': article.end ? '#ffe4e0' : '#c4c4c4' } " style="border: 4px solid #ffb5a7;">
             <div>
                 <div class="row" style="padding-top: 8px; padding-bottom: 8px; padding-left: 14px; padding-right: 14px;">
                     <div class="col-6">
@@ -11,7 +11,7 @@
 
                             <div>
                                 <div>{{ user.userNickname }}</div>
-                                <div style="color: #80B5ff;">{{  user.age }}대 {{  user.gender }}</div>
+                                <div style="color: #80B5ff;">{{  user.age }}세 {{  user.gender }}</div>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                     {{ article.subject }}
                 </p>
                 <p>
-                    {{ article.content }}
+                    {{ article.content.substring(0,20) }}..
                 </p>
             </div>
         </div>

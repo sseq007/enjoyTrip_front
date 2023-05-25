@@ -34,8 +34,8 @@
                     <!-- </div> -->
 
                     <div class="col-md-3 " style="text-align: end;">
-                        <button id="btn-sortNum" class="btn" type="button" style="background-color: white;"
-                            @click="movePartner">
+                        <button id="btn-go"  type="button"  style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none"
+                            @click="movePartner" v-if="userInfo != null">
                             동행 찾기</button>
 
 
@@ -172,5 +172,16 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+
+#btn-go{
+  height: 55px;
+  width: 145px;
+  background-color: transparent;
+  border-radius: 20px; 
+  border:4px solid #ffb5a7;
+}
+</style>
 
 

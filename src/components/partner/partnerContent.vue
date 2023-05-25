@@ -3,7 +3,7 @@
 
         <div class="container">
             <div>
-                <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">여행 동행
+                <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px;" class="m-0 mt-5">여행 동행
                     찾기</h2>
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
@@ -122,7 +122,7 @@
                                     </div>
                                     <div style="padding-top: 20px; margin-left: 25px;">
                                         <i class="fi fi-rr-bulb"></i>
-                                        프로필 사진을 클릭해보세요!
+                                        동행 신청을 클릭해보세요!
                                         <button type="button"
                                             style="width: calc(100% - 15px); height: 60px; background-color: white; margin-top: 17px;"
                                             class="btn" @click="showModal">동행 신청하기</button>
