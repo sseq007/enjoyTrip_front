@@ -64,7 +64,7 @@ export default {
             })
                 .then(response => {
                     console.log('isReadupdate등록 결과:', response.data);
-                    location.href = `/user/note/${this.note.noteNo}`;
+                    location.href = `/note/user/${this.note.noteNo}`;
                 })
                 .catch(error => {
                     console.log(error);

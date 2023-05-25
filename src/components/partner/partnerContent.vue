@@ -90,7 +90,7 @@
                                 <div style="margin-right: 10px;">{{ article.registerTime.substring(0, 10) }} {{
                                     article.registerTime.substring(11, 16) }}</div>
                                 <div style="margin-right: 10px;">조회수 {{ article.hit }}</div>
-                                <div style="margin-right: 10px;" v-if="userInfo.userId === article.userId"><strong> <router-link :to="'/trippartnermodfiy/' + article.articleNo" style="text-decoration: none; color: inherit;">글수정</router-link></strong>
+                                <div style="margin-right: 10px;" v-if="userInfo.userId === article.userId"><strong> <router-link :to="'/trippartner/modfiy/' + article.articleNo" style="text-decoration: none; color: inherit;">글수정</router-link></strong>
                                 </div>
                             
                             <div style="margin-right: 10px;" v-if="userInfo.userId === article.userId">

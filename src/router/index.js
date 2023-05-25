@@ -2,27 +2,39 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import HomeView from "../views/HomeView";
-import notice from "../views/notice/noticeBoard";
-import note from "../views/note/noteBoard";
-import noteContent from "@/components/note/noteContent";
-import location from "../views/location/tripLocation";
+import realHomeView from "../views/realHomeView";
+
+import noticeMain from "../views/noticeView";
+import notice from "../components/notice/noticeList";
 import noticeWrite from "../components/notice/noticeWrite";
 import noticeModify from "../components/notice/noticeModify";
 import noticeContent from "../components/notice/noticeContent";
+
+import noteMain from "../views/noteView";
+import note from "@/components/note/noteMain";
+import noteContent from "@/components/note/noteContent";
+
+import user from "../views/userView";
 import userLogin from "@/components/user/userLogin";
 import userRegister from "@/components/user/userRegister";
 import userPage from "@/components/user/userPage";
 import userDelete from "@/components/user/userDelete";
-import tripPartner from "../views/partner/tripPartner";
+
+import partnerMain from "../views/partnerView";
+import tripPartner from "../components/partner/partnerMain";
 import partnerWrite from "../components/partner/partnerWrite";
 import partnerContent from "../components/partner/partnerContent";
 import partnerModify from "../components/partner/partnerModify";
+
+import hotplaceMain from "../views/hotplaceView";
 import hotplace from "../components/hotplace/hotplaceMain";
 import hotplaceWrite from "../components/hotplace/hotplaceWrite";
 import hotplaceContent from "../components/hotplace/hotplaceContent";
 import hotplaceModify from "../components/hotplace/hotplaceModify";
+
+import planMain from "../views/planView";
 import travelplanWrite from "../components/travelplan/travelplanWrite";
-import travelplanMain from "../components/travelplan/travelplanMain";
+import travelplanList from "../components/travelplan/travelplanMain";
 import travelplanContent from "../components/travelplan/travelplanContent";
 import travelplanModify from "../components/travelplan/travelplanModify";
 
@@ -53,154 +65,175 @@ const onlyAuthUser = async (to, from, next) => {
 
 const routes = [
   {
-    path: "/user/userPage",
-    name: "myPage",
-    beforeEnter: onlyAuthUser,
-    component: userPage,
-  },
-  {
-    path: "/user/userDelete",
-    name: "userDelete",
-    beforeEnter: onlyAuthUser,
-    component: userDelete,
-  },
-  {
-    path: "/user/userLogin",
-    name: "userLogin",
-    component: userLogin,
-  },
-  {
-    path: "/user/userRegister",
-    name: "userRegister",
-    component: userRegister,
-  },
-
-  {
     path: "/",
-    name: "home",
+    name: "main",
     component: HomeView,
   },
   {
-    path: "/triplocation",
-    name: "triplocation",
-    component: location,
+    path: "/main",
+    name: "home",
+    component: realHomeView,
   },
   {
-    path: "/notice/write",
-    name: "noticeWrite",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: noticeWrite,
-  },
-  {
-    path: "/notice/list",
-    name: "notice",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: notice,
-  },
-  {
-    path: "/noticeview/:articleNo",
-    name: "noticeview",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: noticeContent,
-  },
-  {
-    path: "/noticemodify/:articleNo",
-    name: "noticemodify",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: noticeModify,
+    path: "/user",
+    name: "user",
+    component: user,
+    children: [
+      {
+        path: "userPage",
+        name: "myPage",
+        beforeEnter: onlyAuthUser,
+        component: userPage,
+      },
+      {
+        path: "userDelete",
+        name: "userDelete",
+        beforeEnter: onlyAuthUser,
+        component: userDelete,
+      },
+      {
+        path: "userLogin",
+        name: "userLogin",
+        component: userLogin,
+      },
+      {
+        path: "userRegister",
+        name: "userRegister",
+        component: userRegister,
+      }
+    ]
   },
   {
     path: "/trippartner",
-    name: "trippartner",
-    component: tripPartner,
-  },
-  {
-    path: "/trippartner/write",
-    name: "partnerWrite",
-    component: partnerWrite,
-  },
-  {
-    path: "/trippartnerview/:articleNo",
-    name: "partnerContent",
-    component: partnerContent,
-  },
-  {
-    path: "/trippartnermodfiy/:articleNo",
-    name: "partnerModify",
-    component: partnerModify,
+    name: "partnerMain",
+    component: partnerMain,
+    redirect: "/trippartner",
+    children: [
+      {
+        path: "",
+        name: "trippartner",
+        component: tripPartner,
+      },
+      {
+        path: "write",
+        name: "partnerWrite",
+        component: partnerWrite,
+      },
+      {
+        path: "view/:articleNo",
+        name: "partnerContent",
+        component: partnerContent,
+      },
+      {
+        path: "modfiy/:articleNo",
+        name: "partnerModify",
+        component: partnerModify,
+      },
+    ]
   },
   {
     path: "/hotplace",
-    name: "hotplace",
-    component: hotplace,
+    name: "hotplaceMain",
+    component: hotplaceMain,
+    redirect: "/hotplace",
+    children: [
+      {
+        path: "",
+        name: "hotplace",
+        component: hotplace,
+      },
+      {
+        path: "write",
+        name: "hotplaceWrite",
+        beforeEnter: onlyAuthUser,
+        component: hotplaceWrite,
+      },
+      {
+        path: "modify/:articleNo",
+        name: "hotplaceModify",
+        beforeEnter: onlyAuthUser,
+        component: hotplaceModify,
+      },
+      {
+        path: ":articleNo",
+        name: "hotplaceContent",
+        component: hotplaceContent,
+      },
+    ]
   },
   {
-    path: "/hotplace/write",
-    name: "hotplaceWrite",
-    beforeEnter: onlyAuthUser,
-    component: hotplaceWrite,
+    path: "/notice",
+    name: "notice",
+    component: noticeMain,
+    redirect: "/notice/list",
+    children: [
+      {
+        path: "list",
+        name: "noticeList",
+        component: notice
+      },
+      {
+        path: "write",
+        name: "noticeWrite",
+        component: noticeWrite,
+      },
+      {
+        path: "view/:articleNo",
+        name: "noticeview",
+        component: noticeContent,
+      },
+      {
+        path: "modify/:articleNo",
+        name: "noticemodify",
+        component: noticeModify,
+      },
+    ]
   },
   {
-    path: "/hotplaceModify/:articleNo",
-    name: "hotplaceModify",
-    beforeEnter: onlyAuthUser,
-    component: hotplaceModify,
-  },
-  {
-    path: "/hotplace/:articleNo",
-    name: "hotplaceContent",
-    component: hotplaceContent,
-  },
-  {
-    path: "/note/list",
+    path: "/note",
     name: "noteMain",
-    component: note,
+    component: noteMain,
+    redirect: "/note/list",
+    children: [
+      {
+        path: "list",
+        name: "noteList",
+        component: note,
+      },
+      {
+        path: "user/:noteNo",
+        name: "noteView",
+        component: noteContent,
+      },
+    ]
   },
   {
-    path: "/user/note/:noteNo",
-    name: "noteiew",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: noteContent,
-  },
-  {
-    path: "/travelplan/write",
-    name: "travelplanWrite",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: travelplanWrite,
-  },
-  {
-    path: "/travelplan/list",
+    path: "/travelplan",
     name: "travelplanMain",
-
-    component: travelplanMain,
-  },
-  {
-    path: "/travelplanview/:articleNo",
-    name: "travelplanview",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: travelplanContent,
-  },
-  {
-    path: "/planmodify/:articleNo",
-    name: "travelplanModify",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: travelplanModify,
+    component: planMain,
+    redirect: "travelplan/list",
+    children: [
+      {
+        path: "list",
+        name: "travelplanList",
+        component: travelplanList,
+      },
+      {
+        path: "write",
+        name: "travelplanWrite",
+        component: travelplanWrite,
+      },
+      {
+        path: "view/:articleNo",
+        name: "travelplanview",
+        component: travelplanContent, // 경로 수정
+      },
+      {
+        path: "modify/:articleNo",
+        name: "travelplanModify",
+        component: travelplanModify, // 경로 수정
+      },
+    ]
   },
 ];
 

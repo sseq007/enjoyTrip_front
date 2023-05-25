@@ -134,7 +134,7 @@ export default {
                     .then(response => {
                         console.log(response);
                         alert('삭제되었습니다.');
-                        location.href="/"
+                        location.href="/main"
     
     
                     })

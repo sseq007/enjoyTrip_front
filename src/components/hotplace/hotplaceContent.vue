@@ -184,7 +184,7 @@ export default {
             this.$router.push({name: "hotplace"});
         },
         moveModify(){
-            this.$router.push('/hotplaceModify/' + this.hotplace.articleNo);
+            this.$router.push('/hotplace/modify/' + this.hotplace.articleNo);
         },
         deleteHot(){
             deleteHotplace(

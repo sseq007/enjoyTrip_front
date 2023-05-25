@@ -1,29 +1,22 @@
 <template>
   <div id="app">
-    <the-header></the-header>
-    <router-view></router-view>
-    <div style="height: 77px"></div>
-    <!-- <the-footer></the-footer> -->
+
+      <router-view></router-view>
+
   </div>
 </template>
 
 <script>
-import TheHeader from "./components/TheHeader.vue"
-// import TheFooter from "./components/TheFooter.vue"
 
 export default {
   components:{
 
-    TheHeader,
-    // TheFooter,
-}
+  },
+  
 }
 </script>
 
 <style>
-
-
-
 
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

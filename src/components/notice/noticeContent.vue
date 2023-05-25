@@ -26,8 +26,8 @@
 	
         <!-- button -->
         <div class="col text-center">
-            <button type="button" class="btn btn-outline-secondary" onclick="location.href='/notice/list'">글목록</button>
-            <router-link :to="'/noticemodify/' + article.articleNo" class="btn btn-outline-secondary">글수정</router-link>
+            <button type="button" class="btn btn-outline-secondary" onclick="location.href='/notice'">글목록</button>
+            <router-link :to="'/notice/modify/' + article.articleNo" class="btn btn-outline-secondary">글수정</router-link>
             <!-- <button type="button" class="btn btn-outline-secondary">글수정</button> -->
             <button type="button"  id = "btn-delete" class="btn btn-outline-secondary" @click="deleteArticle">글삭제</button>
             
@@ -64,7 +64,7 @@ export default {
     .then(response => {
         console.log(response);
         alert('삭제되었습니다.');
-        this.$router.push('/notice/list');
+        this.$router.push('/notice');
   
 
     })
