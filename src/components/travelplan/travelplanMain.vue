@@ -29,7 +29,7 @@
                 </tbody>
             </table>
         </div>
-        <button type="button" class="btn btn-outline-secondary" style="float: right">
+        <button type="button" class="btn btn-outline-secondary" style="float: right" v-if="userInfo != null">
             <!-- <a href="/notice/write" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</a> -->
             <router-link :to="'/travelplan/write'"
                 style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</router-link>
@@ -41,6 +41,8 @@
 <script>
 import axios from "axios";
 import PlanListItem from './travelplanListItem.vue';
+import { mapState } from "vuex";
+const memberStore = "memberStore";
 export default {
     name: "TravelPlanList",
     components: {
@@ -50,6 +52,9 @@ export default {
         return {
             articles: []
         };
+    },
+    computed: {
+        ...mapState(memberStore, ["userInfo"]),
     },
     created() {
         axios.get('http://localhost:8080/api/travelplan/list')
