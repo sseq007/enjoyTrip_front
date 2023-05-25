@@ -21,7 +21,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+tr{
+  font-family: 'Nixgon, sans-serif';
+  opacity: 80%;
+  font-size: 17px;
+  font-weight: 600;
+}
+</style>
 
 
 

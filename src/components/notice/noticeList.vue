@@ -29,17 +29,21 @@
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn btn-outline-secondary" style="float: right">
-        <!-- <a href="/notice/write" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</a> -->
-        <router-link :to="'/notice/write'" style="background-color: transparent; color: #000; text-decoration-line: none">글쓰기</router-link>
-    </button>
+    <div v-if="userInfo">
+      <button v-if="userInfo.admin == 1" type="button" style="float: right">
+          <router-link :to="'/notice/write'" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">글쓰기</router-link>
+      </button>
+    </div>
 </div>
 </template>
 
 
 <script>
 import axios from "axios";
+import { mapState } from "vuex";
 import NoticeListItem from './noticeListItem.vue';
+
+const memberStore = "memberStore";
 export default {
   name: "NoticeList",
   components:{
@@ -49,6 +53,9 @@ export default {
     return {
       articles :[]
     };
+  },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
   },
   created() {
     // 비동기
@@ -72,4 +79,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+table{
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border: solid 4px #ffb5a7;
+  border-collapse: separate;
+  border-radius: 10px;
+  background-color: #ffe4e0;
+}
+button{
+  height: 55px;
+  width: 145px;
+  background-color: transparent;
+  border-radius: 20px; 
+  border:4px solid #ffb5a7;
+}
+</style>
 

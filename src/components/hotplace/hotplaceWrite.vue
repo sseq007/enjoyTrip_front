@@ -66,7 +66,7 @@
                             </button>
                             <button type="button" style=" height: 55px; width: 145px; background-color: transparent; border-radius: 20px; 
                             opacity: 100%; border:4px solid #ffb5a7;">
-                                <span style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px;">취소</span>
+                                <span style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px;" @click="goList">취소</span>
                             </button>
                         </div>
                     </div>
@@ -156,6 +156,9 @@ export default {
                     console.log(error);
                 }
             )
+        },
+        goList(){
+            this.$route.push({name:"hotplace"});
         }
     }
 }

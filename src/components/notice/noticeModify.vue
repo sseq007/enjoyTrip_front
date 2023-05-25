@@ -5,20 +5,30 @@
         <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 50px" class="m-0 mt-5">공지 사항</h2>
         <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
     </div>
-        <div class="mb-3">
-            <input type="hidden" class="form-control" id="board-write-title" placeholder="제목을 입력하세요" name="board-write-title" ref="userid" />
-            <label for="board-write-title" class="form-label">제목: </label>
-            <input type="text" class="form-control" id="board-write-title" placeholder="제목을 입력하세요" name="board-write-title" ref="subject" :value="article.subject" />
+    <div style="margin-top: 5vmin; justify-content: center; align-items: center; display: flex;">
+      <div style="width: 80%; padding: 3%; border: 4px solid #ffb5a7; border-radius: 10px; background-color: #ffe4e0;">
+        <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; font-size: 20px; text-align: left" class="m-0 mt-4">공지 사항 수정</h2>
+        <hr class="mb-3 mt-0" align="left" style="border: solid 2px #ffb5a7; width: 30%; opacity: 100%" />
+        <div style="margin-top: 2vmin;">
+            <label >* 제목: </label>
+            <input type="text" placeholder="Subject" name="board-write-title" ref="subject" :value="article.subject" />
         </div>
-        <div class="mb-3">
-            <label for="board-write-content" class="form-label">내용:</label>
-            <textarea class="form-control" rows="5" id="board-write-content" name="board-write-content" placeholder="내용을 입력하세요" ref="content" :value="article.content"> </textarea>
+        <div style="margin-top: 10vmin;">
+          <label>* 내용:</label>
+          <textarea rows="5" id="board-write-content" name="board-write-content" placeholder="Content" ref="content" :value="article.content"></textarea>
         </div>
 
-
-    <div class="col text-center">
-        <button type="button" class="btn btn-outline-secondary" id="btn-board-write" @click="checkValue">글수정</button>
-        <button type="button" class="btn btn-outline-secondary">초기화</button>
+        <div style="text-align: center; margin-top: 25vmin;">
+          <button type="button" style="margin-right: 30px; height: 55px; width: 145px; background-color: transparent; border-radius: 20px; 
+          border:4px solid #ffb5a7;" id="btn-write" @click="checkValue">
+            <span style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px;">수정</span>
+          </button>
+          <button type="button" style=" height: 55px; width: 145px; background-color: transparent; border-radius: 20px; 
+          border:4px solid #ffb5a7;">
+            <span style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px;" @click="goList">취소</span>
+          </button>
+        </div>
+      </div>
     </div>
 </div>
 </template>
@@ -50,24 +60,17 @@ export default {
   },
   methods: {
     checkValue() {
-      // 사용자 입력값 체크하기
-      // 작성자아이디, 제목, 내용이 없을 경우 각 항목에 맞는 메세지를 출력
       let err = true;
       let msg = "";
-    //   !this.$refs.userid.value && ((msg = "작성자 입력해주세요"), (err = false), this.$refs.userid.focus());
-      err && !this.$refs.subject.value && ((msg = "제목 입력해주세요"), (err = false), this.$refs.subject.focus());
-      err && !this.$refs.content.value && ((msg = "내용 입력해주세요"), (err = false), this.$refs.content.focus());
+      err && !this.$refs.subject.value && ((msg = "제목을 입력해 주세요."), (err = false), this.$refs.subject.focus());
+      err && !this.$refs.content.value && ((msg = "내용을 입력해 주세요."), (err = false), this.$refs.content.focus());
       if (!err) alert(msg);
-      // 만약, 내용이 다 입력되어 있다면 registArticle 호출
       else this.modifyArticle();
     },
     modifyArticle() {
-      // 비동기
-      // TODO : 글번호에 해당하는 글정보 등록.
-      console.log("글수정 하러가자!!!!");
       var formData = {
         articleNo : this.$route.params.articleNo,
-        userId : "ssafy",
+        userId : this.article.userId,
         subject : this.$refs.subject.value,
         content: this.$refs.content.value
       }
@@ -81,11 +84,11 @@ export default {
 .then(response => {
     console.log('등록 결과:', response.data);
     alert('글 수정이 완료되었습니다.');
-    location.href = `/noticeview/${this.$route.params.articleNo}`;
+    location.href = `/notice/view/${this.$route.params.articleNo}`;
 })
 .catch(error => {
     console.log(error);
-    alert('글 수정이 실패하였습니다.');
+    alert('글 수정을 실패하였습니다.');
 });
 
 
@@ -94,7 +97,38 @@ export default {
 };
 </script>
 
-<style>
-  /* @import '@/assets/css/index_style.css';
-  @import '@/assets/css/style.css'; */
+<style scoped>
+  input{
+    margin-top: 4px; 
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    opacity: 80%; 
+    border-radius: 5px;
+    width:100%;
+    height:45px;
+    padding-left: 15px;
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    float:left;
+    font-size: 20px;
+  }
+  textarea{
+    margin-top: 4px; 
+    font-family: 'Nixgon, sans-serif';
+    font-weight:600; 
+    opacity: 80%; 
+    border-radius: 5px;
+    width:100%;
+    height:180px;
+    padding-left: 15px;
+    background-color: transparent;
+    border:4px solid #ffb5a7;
+    float:left;
+    font-size: 20px;
+  }
+  label{
+    font-family: 'Nixgon, sans-serif'; opacity: 60%; font-size: 17px; font-weight: 600;
+  }
+  input:focus {outline: 2px solid #85c6d7;}
+  textarea:focus {outline: 2px solid #85c6d7;}
 </style>
