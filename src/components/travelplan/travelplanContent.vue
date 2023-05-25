@@ -72,12 +72,13 @@
             <div class="col text-center" style="margin-top: 2vh;">
                 <button type="button" class="btn-go"
                     onclick="location.href='/travelplan/list'" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">글목록</button>
-                <button type="button" class="btn-go"
+                <div v-if="userInfo">
+                    <button type="button" class="btn-go"
                     @click="moveModify"  v-if="userInfo.userId == this.article.userId" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">글수정</button>
                 <!-- <router-link :to="'/travelplan/modify/' + article.articleNo" class="btn-go"  v-if="userInfo.userId == this.article.userId">글수정</router-link> -->
                 <!-- <button type="button" class="btn btn-outline-secondary">글수정</button> -->
                 <button type="button" id="btn-delete" class="btn-go" @click="deleteArticle" v-if="userInfo.userId == this.article.userId" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">글삭제</button>
-
+                 </div>
             </div>
         </div>
     </div>

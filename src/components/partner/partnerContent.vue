@@ -30,8 +30,8 @@
                                         <div class="d-flex">
                                             <h2 style="font-family: Nixgon, sans-serif; font-weight: bold;">{{ checked }}
                                             </h2>
-                                            <div>
-                                                <div class="form-check form-switch" style="margin-left: 1vh;"
+                                            <div v-if="userInfo">
+                                                <div  class="form-check form-switch" style="margin-left: 1vh;"
                                                     v-if="userInfo.userId == article.userId">
                                                     <input class="form-check-input" type="checkbox" role="switch"
                                                         id="flexSwitchCheckChecked" :checked="this.article.end"
@@ -90,13 +90,18 @@
                                 <div style="margin-right: 10px;">{{ article.registerTime.substring(0, 10) }} {{
                                     article.registerTime.substring(11, 16) }}</div>
                                 <div style="margin-right: 10px;">조회수 {{ article.hit }}</div>
+                                <div v-if="userInfo">
+                        
                                 <div style="margin-right: 10px;" v-if="userInfo.userId === article.userId"><strong> <router-link :to="'/trippartner/modfiy/' + article.articleNo" style="text-decoration: none; color: inherit;">글수정</router-link></strong>
+                                
                                 </div>
-                            
+                            </div>
+                            <div v-if="userInfo">
                             <div style="margin-right: 10px;" v-if="userInfo.userId === article.userId">
                                 <strong> <a href="#" @click="deleteArticle"
                                         style="text-decoration: none; color: inherit;">삭제하기</a></strong>
                             </div>
+                        </div>
                             <div><a href="" style="text-decoration: none;">신고하기</a></div>
 
                         </div>
