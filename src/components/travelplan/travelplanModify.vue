@@ -214,8 +214,8 @@
 
             </div>
             <div style="text-align: end; margin-right: 5vh; margin-top: 3vh;">
-                <button class="btn btn-outline-secondary" type="button" @click="movego" style="margin-right: 1vh;">취소</button>
-                    <button class="btn btn-outline-secondary" type="button" @click="checkValue">완료</button>
+                <button class="btn btn-outline-secondary" type="button" @click="movego" style="margin-right: 1vh; font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none" >취소</button>
+                    <button class="btn btn-outline-secondary" type="button" @click="checkValue" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">수정완료</button>
                 </div>
 
         </div>
@@ -534,11 +534,12 @@ export default {
 
 <style scoped>
 .card-left {
+    margin-left: 10vh;
 }
 
 .card-right {
     /* CSS styles for right-positioned cards */
-    margin-left: 50vh;
+    margin-left: 85vh;
 }
 input,select {
     /* margin-top: 4px;  */

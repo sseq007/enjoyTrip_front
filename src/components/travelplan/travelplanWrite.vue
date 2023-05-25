@@ -230,8 +230,8 @@
             </div>
             <div style="text-align: end; margin-right: 5vh; margin-bottom: 1vh;">
                 <div class="d-flex" style="margin-top: 10vh; justify-content: end;" >
-                    <button class="btn btn-outline-secondary" type="button" @click="movego" style="margin-right: 1vh;">취소</button>
-                    <button class="btn btn-outline-secondary" type="button" @click="checkValue">확인</button>
+                    <button class="btn-go" type="button" @click="movego" style="margin-right: 1vh; font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">취소</button>
+                    <button class="btn-go" type="button" @click="checkValue" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">글쓰기</button>
     
     
                 </div>
@@ -530,11 +530,12 @@ export default {
 
 <style scoped>
 .card-left {
+    margin-left: 10vh;
 }
 
 .card-right {
     /* CSS styles for right-positioned cards */
-    margin-left: 50vh;
+    margin-left: 85vh;
 }
 input,select {
     /* margin-top: 4px;  */
@@ -583,5 +584,12 @@ input,select {
     border:4px solid #ffb5a7;
     /* float:left; */
     font-size: 14px;
+}
+.btn-go{
+  height: 55px;
+  width: 145px;
+  background-color: transparent;
+  border-radius: 20px; 
+  border:4px solid #ffb5a7;
 }
 </style>

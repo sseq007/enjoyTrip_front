@@ -48,13 +48,13 @@
 						</li> -->
 						</ul>
 						<div class="notification-badge" style="margin-right: 43vh; margin-top: 1vh;" v-if="userInfo !== null&&isreadCount!==0">{{ isreadCount}}</div>
-						<div style="margin-right: 3vh;">
+						<div style="margin-right: 3vh;" >
 							<b-dropdown size="lg" right text="Right align" variant="link" toggle-class="text-decoration-none"
 								no-caret scrollable>
 								<template #button-content>
 									<i class="fi fi-rr-envelope"></i>
 								</template>
-								<div class="container">
+								<div class="container " >
 									<div class="d-flex" style="justify-content: center; ">
 										
 										<h5 class="mb-4" style="text-align: center; margin-right: 1vh;">
@@ -205,4 +205,12 @@ export default {
   align-items: center;
   justify-content: center;
 }
+.btn-go{
+  /* height: 55px; */
+  /* width: 145px; */
+  background-color: transparent;
+  border-radius: 20px; 
+  border:4px solid #ffb5a7;
+}
 </style>
+

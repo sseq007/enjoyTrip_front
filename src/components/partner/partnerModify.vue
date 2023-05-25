@@ -165,12 +165,11 @@
                         <img :src="image" class="hotple_image" style="border-radius: 5%; width: 100%; height: 100%;">
                     </div>
                     <div>
-                        <label className="input-file-button" for="uploadHotplace"
-                            style="left: 103vh; bottom: -1vh; height: 5vh; width: 5vh; background-color: #FFE4E0; border-radius: 40%;
-                                        border:3.5px solid #ffb5a7; text-align: center; padding-top: 2px; position: absolute;
-                                        font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 30px;">
-                            <i class="fi fi-rr-camera" style="font-size: 35px; color: #ffb5a7;"></i>
-                        </label>
+                        <label className="input-file-button" for="uploadHotplace" style="left: 126vh; bottom: -9px; height: 60px; width: 60px; background-color: #FFE4E0; border-radius: 40%;
+                                    border:3.5px solid #ffb5a7; text-align: center; padding-top: 2px; position: absolute;
+                                    font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 30px;">
+                                        <i class="fi fi-rr-camera" style="font-size: 35px; color: #ffb5a7;"></i>
+                                    </label>
                         <input ref="fileInput" type="file" id="uploadHotplace" name="file" accept=".jpg, .png, .jpeg"
                             value="" style="display: none" @change="handleFileUpload" />
                     </div>

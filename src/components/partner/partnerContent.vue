@@ -28,7 +28,7 @@
                                     <h2>{{ article.subject }}</h2>
                                     <div>
                                         <div class="d-flex">
-                                            <h2 style="font-family: 'Nixgon, sans-serif; font-weight:300;">{{ checked }}
+                                            <h2 style="font-family: Nixgon, sans-serif; font-weight: bold;">{{ checked }}
                                             </h2>
                                             <div>
                                                 <div class="form-check form-switch" style="margin-left: 1vh;"
@@ -48,9 +48,9 @@
                                     <div
                                         style="padding-left: 30px; padding-top: 20px; padding-right: 30px; padding-bottom: 20px;">
                                         <div class="d-flex">
-                                            <p style="margin-right: 8px;">지역</p>
+                                            <p style="margin-right: 8px; font-family: Nixgon, sans-serif; font-weight: bold;">지역</p>
                                             <span style="margin-right: 8px;">{{ article.location }}</span>
-                                            <p style="margin-right: 8px;">모집인원 </p>
+                                            <p style="margin-right: 8px; font-family: Nixgon, sans-serif; font-weight: bold;" >모집인원 </p>
                                             <span>{{ article.partnerCount }}</span>
 
                                         </div>
@@ -112,12 +112,12 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="d-flex" style="margin-bottom: 15px;">
-                                        <img src="@/assets/img/noimg.jpg" class="profile_image"
+                                        <img :src="profileImage" class="profile_image"
                                             style="padding:4px; border-radius: 40%; width: 58px; height: 58px; margin-left: 25px;">
 
                                         <div style="margin-left: 15px;">
                                             <h5>{{  user.userNickname }}</h5>
-                                            <div>{{  user.age }}대 {{  user.gender }} 대한민국</div>
+                                            <div>{{  user.age }}세 {{  user.gender }} 대한민국</div>
                                         </div>
                                     </div>
                                     <div style="padding-top: 20px; margin-left: 25px;">
@@ -164,7 +164,7 @@
                     <div class="d-flex mb-3">
 
                         <img src="@/assets/img/user.png" style="width: 3vh; height: 3vh;">
-                        <div style="margin-left: 2vh; font-size: 2vh;">{{ article.userId }}</div>
+                        <div style="margin-left: 2vh; font-size: 2vh;">{{ user.userNickname }}</div>
                     </div>
                     <div class="d-flex mb-3">
 
@@ -222,7 +222,8 @@ export default {
             keywordOne: [],
             keywordTwo: [],
             text: "",
-            user:[]
+            user: [],
+            profileImage:''
         };
     },
     created() {
@@ -242,7 +243,12 @@ export default {
                 axios.get(`http://localhost:8080/api/trippartner/user/${this.article.userId}`)
             .then(response => {
                 this.user = response.data;
-                console.log("user 정보는"+this.user);
+                console.log("user 정보는" + this.user);
+                if(this.user.profileImage == null){
+                        this.profileImage = require('@/assets/img/none_profile_image.jpg');
+                    }else{
+                        this.profileImage = "http://localhost:8081/upload/" + this.user.profileImage;
+                    }
 
             })
             .catch(error => {

@@ -6,7 +6,7 @@
         <div class="row mb-4" @click="navigateToPage">
 
             <div class="col-2">
-                <img src="@/assets/img/noimg.jpg" class="profile_image"
+                <img  :src="profileImage" class="profile_image"
                     style=" border-radius: 40%; width: 6vh; margin-right: 8px; ">
 
             </div>
@@ -40,11 +40,30 @@ import axios from "axios";
 export default {
     name: "noteListItem",
     props: {
-        note: Object
+        note: Object,
+        
     },
     data() {
         return {
+            user: [],
+            profileImage:''
         }
+    },
+    created() {
+        axios.get(`http://localhost:8080/api/trippartner/user/${this.note.fromuserId}`)
+            .then(response => {
+                this.user = response.data;
+                console.log("user22 정보는" + this.user);
+                if(this.user.profileImage == null){
+                        this.profileImage = require('@/assets/img/none_profile_image.jpg');
+                    }else{
+                        this.profileImage = "http://localhost:8081/upload/" + this.user.profileImage;
+                    }
+
+            })
+            .catch(error => {
+                console.log(error);
+            });
     },
     methods: {
         navigateToPage() {

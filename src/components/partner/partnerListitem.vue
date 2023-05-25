@@ -6,7 +6,7 @@
                 <div class="row" style="padding-top: 8px; padding-bottom: 8px; padding-left: 14px; padding-right: 14px;">
                     <div class="col-6">
                         <div class="d-flex">
-                            <img src="@/assets/img/noimg.jpg" class="profile_image"
+                            <img  :src="profileImage" class="profile_image"
                                 style="padding:4px; border-radius: 40%; width: 40px; height: 40px; margin-right: 8px; ">
 
                             <div>
@@ -63,10 +63,10 @@
             <!-- <img src="..." class="card-img-top" alt="Card image cap"> -->
             <div class="p-2">
 
-                <p>
+                <p style="font-family: Nixgon, sans-serif; font-weight: bold; margin-left: 1vh; font-size: 25px;">
                     {{ article.subject }}
                 </p>
-                <p>
+                <p style="margin-left: 1vh;">
                     {{ article.content.substring(0,20) }}..
                 </p>
             </div>
@@ -91,6 +91,7 @@ export default {
             isHovered: false,
             sendcount: '',
             user: [],
+            profileImage:''
         };
     },
     created() {
@@ -106,7 +107,12 @@ export default {
             axios.get(`http://localhost:8080/api/trippartner/user/${this.article.userId}`)
             .then(response => {
                 this.user = response.data;
-                console.log("user22 정보는"+this.user);
+                console.log("user22 정보는" + this.user);
+                if(this.user.profileImage == null){
+                        this.profileImage = require('@/assets/img/noimg.jpg');
+                    }else{
+                        this.profileImage = "http://localhost:8081/upload/" + this.user.profileImage;
+                    }
 
             })
             .catch(error => {

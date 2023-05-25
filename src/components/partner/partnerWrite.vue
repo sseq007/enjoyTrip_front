@@ -5,7 +5,7 @@
 
         <div class="container">
             <div v-if="isLoading" class="spinner-container">
-                <b-spinner label="Spinning" ></b-spinner>
+                <b-spinner label="Spinning"></b-spinner>
                 <div>잠시만 기다려주세요</div>
 
             </div>
@@ -15,8 +15,9 @@
                 <hr class="mb-3 mt-0" align="left" style="border: solid 3px brown; width: 50%" />
             </div>
             <div style="height: 20px"></div>
-            
-            <div class="row p-3" style="border-radius: 1vh; background-color: #ffe4e0; border: 4px solid #ffb5a7; padding: 3vmin;" >
+
+            <div class="row p-3"
+                style="border-radius: 1vh; background-color: #ffe4e0; border: 4px solid #ffb5a7; padding: 3vmin;">
                 <div class="col-2">
 
                     <div class="list-group" id="list-tab" role="tablist" style="text-align: center;">
@@ -28,33 +29,33 @@
                                     서울
                                 </a>
                                 <a class="list-group-item list-group-item-action list-group-item-light"
-                                    :class="{ active: selectedTab === '인천시' }" @click="selectTab('인천시')" href="#list-profile"
-                                    role="tab" aria-controls="list-profile">
+                                    :class="{ active: selectedTab === '인천시' }" @click="selectTab('인천시')"
+                                    href="#list-profile" role="tab" aria-controls="list-profile">
                                     인천
                                 </a>
                                 <a class="list-group-item list-group-item-action list-group-item-light"
-                                    :class="{ active: selectedTab === '대전시' }" @click="selectTab('대전시')" href="#list-messages"
-                                    role="tab" aria-controls="list-messages">
+                                    :class="{ active: selectedTab === '대전시' }" @click="selectTab('대전시')"
+                                    href="#list-messages" role="tab" aria-controls="list-messages">
                                     대전
                                 </a>
                                 <a class="list-group-item list-group-item-action list-group-item-light"
-                                    :class="{ active: selectedTab === '대구시' }" @click="selectTab('대구시')" href="#list-settings"
-                                    role="tab" aria-controls="list-settings">
+                                    :class="{ active: selectedTab === '대구시' }" @click="selectTab('대구시')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
                                     대구
                                 </a>
                                 <a class="list-group-item list-group-item-action list-group-item-light"
-                                    :class="{ active: selectedTab === '광주시' }" @click="selectTab('광주시')" href="#list-settings"
-                                    role="tab" aria-controls="list-settings">
+                                    :class="{ active: selectedTab === '광주시' }" @click="selectTab('광주시')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
                                     광주
                                 </a>
                                 <a class="list-group-item list-group-item-action list-group-item-light"
-                                    :class="{ active: selectedTab === '부산시' }" @click="selectTab('부산시')" href="#list-settings"
-                                    role="tab" aria-controls="list-settings">
+                                    :class="{ active: selectedTab === '부산시' }" @click="selectTab('부산시')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
                                     부산
                                 </a>
                                 <a class="list-group-item list-group-item-action list-group-item-light"
-                                    :class="{ active: selectedTab === '울산시' }" @click="selectTab('울산시')" href="#list-settings"
-                                    role="tab" aria-controls="list-settings">
+                                    :class="{ active: selectedTab === '울산시' }" @click="selectTab('울산시')"
+                                    href="#list-settings" role="tab" aria-controls="list-settings">
                                     울산
                                 </a>
                                 <a class="list-group-item list-group-item-action list-group-item-light"
@@ -138,16 +139,16 @@
 
                         </div>
                     </div>
-                    
+
                     <div class="col-8 mt-5">
                         <label for="example-datepicker">시작일</label>
                         <label for="example-datepicker" style="margin-left: 275px;">종료일</label>
                         <div class="d-flex">
-                            <b-form-datepicker id="example-datepicker" v-model="value_start"
-                                class="mb-2 custom-datepicker" :min="today"></b-form-datepicker>
+                            <b-form-datepicker id="example-datepicker" v-model="value_start" class="mb-2 custom-datepicker"
+                                :min="today"></b-form-datepicker>
 
-                            <b-form-datepicker id="example-datepicker" v-model="value_end"
-                                class="mb-2 custom-datepicker" :min="today"></b-form-datepicker>
+                            <b-form-datepicker id="example-datepicker" v-model="value_end" class="mb-2 custom-datepicker"
+                                :min="today"></b-form-datepicker>
 
 
                         </div>
@@ -158,55 +159,55 @@
 
 
                 </div>
-            <div style="height: 77px"></div>
-            
-<div class="mb-3 mt-3" align="center" style="position: relative">
-                                <div class="hotpleImg mb-3 mt-3">
-                                    <img :src="image" class="hotple_image" style="border-radius: 5%; width: 100%; height: 100%;">
-                                </div>
-                                <div>
-                                    <label className="input-file-button" for="uploadHotplace"
-                            style="left: 103vh; bottom: -1vh; height: 5vh; width: 5vh; background-color: #FFE4E0; border-radius: 40%;
-                                        border:3.5px solid #ffb5a7; text-align: center; padding-top: 2px; position: absolute;
-                                        font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 30px;">
-                            <i class="fi fi-rr-camera" style="font-size: 35px; color: #ffb5a7;"></i>
-                        </label>
-                                    <input ref="fileInput" type="file" id="uploadHotplace" name="file" accept=".jpg, .png, .jpeg" value="" style="display: none" @change="handleFileUpload"/>
-                                </div>                                
-                        </div>
-            <div>
+                <div style="height: 77px"></div>
+
+                <div class="mb-3 mt-3" align="center" style="position: relative">
+                    <div class="hotpleImg mb-3 mt-3">
+                        <img :src="image" class="hotple_image" style="border-radius: 5%; width: 100%; height: 100%;">
+                    </div>
+                    <div>
+                        <label className="input-file-button" for="uploadHotplace" style="left: 126vh; bottom: -9px; height: 60px; width: 60px; background-color: #FFE4E0; border-radius: 40%;
+                                    border:3.5px solid #ffb5a7; text-align: center; padding-top: 2px; position: absolute;
+                                    font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 30px;">
+                                        <i class="fi fi-rr-camera" style="font-size: 35px; color: #ffb5a7;"></i>
+                                    </label>
+                        <input ref="fileInput" type="file" id="uploadHotplace" name="file" accept=".jpg, .png, .jpeg"
+                            value="" style="display: none" @change="handleFileUpload" />
+                    </div>
+                </div>
+                <div>
 
 
-                <input type="hidden" class="form-control" id="board-write-title"
-                    placeholder="ex) 12월 3박4일 제주 바다 보러갈 동행 3명 구해요" name="board-write-title" ref="userid" />
+                    <input type="hidden" class="form-control" id="board-write-title"
+                        placeholder="ex) 12월 3박4일 제주 바다 보러갈 동행 3명 구해요" name="board-write-title" ref="userid" />
 
-                <input type="text" class="form-control" id="board-write-title"
-                    placeholder="ex) 6월 1일 제주에서 카풀 할 동행 3명 구해요" name="board-write-title" ref="subject" />
-            </div>
-            <div style="height: 40px"></div>
-            <div class="mb-3">
+                    <input type="text" class="form-control" id="board-write-title"
+                        placeholder="ex) 6월 1일 제주에서 카풀 할 동행 3명 구해요" name="board-write-title" ref="subject" />
+                </div>
+                <div style="height: 40px"></div>
+                <div class="mb-3">
 
-                <textarea style="height: 450px;" class="form-control" rows="5" id="board-write-content"
-                    name="board-write-content" placeholder="1. 현재 동행이 있나요? 
-        ex) 혼자에요 / 동행 1명이 있어요 
+                    <textarea style="height: 450px;" class="form-control" rows="5" id="board-write-content"
+                        name="board-write-content" placeholder="1. 현재 동행이 있나요? 
+            ex) 혼자에요 / 동행 1명이 있어요 
      
     
-2.어떤 동행을 찾고 있나요? 
-        ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
-        ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
+    2.어떤 동행을 찾고 있나요? 
+            ex) 맛집 탐방을 좋아하는 20대 여성 동행을 찾아요!
+            ex) 같이 여행지까지 타고 갈 동행 찾아요!! 
 
 
-3. 원하는 여행 코스가 있다면 알려주세요!
-    (1000자 이내) " ref="content"></textarea>
+    3. 원하는 여행 코스가 있다면 알려주세요!
+        (1000자 이내) " ref="content"></textarea>
+                </div>
+
+                <div class="mb-3" style="margin-top: 7px;">
+                    <button class="btn-go me-2" @click="movepartnerList"
+                        style="width: calc(50% - 8px);">취소</button>
+                    <!-- <button class="btn btn-outline-secondary" style="width: calc(50% - 8px);" @click="showModal">작성완료</button> -->
+                    <button @click="showModal" class="btn-go me-2" style="width: calc(50% - 8px);">작성완료</button>
+                </div>
             </div>
-
-            <div class="mb-3" style="margin-top: 7px;">
-                <button class="btn btn-outline-secondary me-2" @click="movepartnerList"
-                    style="width: calc(50% - 8px);">취소</button>
-                <!-- <button class="btn btn-outline-secondary" style="width: calc(50% - 8px);" @click="showModal">작성완료</button> -->
-                <b-button @click="showModal" class="btn me-2" style="width: calc(50% - 8px);">작성완료</b-button>
-            </div>
-        </div>
 
         </div>
         <b-modal id="modal-scrollable" size="lg" scrollable title="" v-model="modalVisible">
@@ -311,7 +312,7 @@
         </b-modal>
 
 
-        
+
 
     </div>
 </template>
@@ -350,7 +351,7 @@ export default {
             maxSelection: 3,
             selectedButtons: [],
             selectedButtons2: [],
-            image:'',
+            image: '',
 
             buttons: [
                 {
@@ -485,14 +486,14 @@ export default {
 
     methods: {
         clickFileInput() {
-    this.$refs.fileInput.click();
-  },
+            this.$refs.fileInput.click();
+        },
         selectTab(tab) {
             this.selectedTab = tab;
             console.log("내가 선택한 지역은" + this.selectedTab)
         },
         showModal() {
-            if (this.purpose && this.recruitment && this.value_start && this.value_end && this.$refs.subject.value && this.$refs.content.value&& this.selectedTab) {
+            if (this.purpose && this.recruitment && this.value_start && this.value_end && this.$refs.subject.value && this.$refs.content.value && this.selectedTab) {
                 this.modalVisible = true; // 모달 표시 여부 변경
             } else {
                 // 필수 입력 항목이 하나 이상 누락되었을 때 처리
@@ -633,72 +634,92 @@ export default {
 
 <style scoped>
 .spinner-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-input,select {
+input,
+select {
     /* margin-top: 4px;  */
     font-family: 'Nixgon, sans-serif';
-    font-weight:600; 
-    opacity: 80%; 
+    font-weight: 600;
+    opacity: 80%;
     border-radius: 5px;
-    width:100%;
-    height:45px;
+    width: 100%;
+    height: 45px;
     padding-left: 15px;
     background-color: transparent;
-    border:4px solid #ffb5a7;
+    border: 4px solid #ffb5a7;
     /* float:left; */
     font-size: 15px;
-  }
-  textarea{
-    margin-top: 4px; 
+}
+
+textarea {
+    margin-top: 4px;
     font-family: 'Nixgon, sans-serif';
-    font-weight:600; 
-    opacity: 80%; 
+    font-weight: 600;
+    opacity: 80%;
     border-radius: 5px;
-    width:100%;
-    height:180px;
+    width: 100%;
+    height: 180px;
     padding-left: 15px;
     background-color: transparent;
-    border:4px solid #ffb5a7;
-    float:left;
+    border: 4px solid #ffb5a7;
+    float: left;
     font-size: 20px;
-  }
-  label{
-    font-family: 'Nixgon, sans-serif'; opacity: 60%; font-size: 17px; font-weight: 600;
-  }
-  input:focus {outline: 2px solid #85c6d7;}
-  textarea:focus {outline: 2px solid #85c6d7;}
+}
 
-  .custom-datepicker {
+label {
+    font-family: 'Nixgon, sans-serif';
+    opacity: 60%;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+input:focus {
+    outline: 2px solid #85c6d7;
+}
+
+textarea:focus {
+    outline: 2px solid #85c6d7;
+}
+
+.custom-datepicker {
     /* margin-top: 4px;  */
     font-family: 'Nixgon, sans-serif';
-    font-weight:600; 
+    font-weight: 600;
     /* opacity: 80%;  */
     border-radius: 5px;
     /* width:100%;
     height:45px; */
     /* padding-left: 15px; */
     background-color: transparent;
-    border:4px solid #ffb5a7;
+    border: 4px solid #ffb5a7;
     /* float:left; */
     font-size: 14px;
 }
-a{
+
+a {
     font-family: 'Nixgon, sans-serif';
-    font-weight:600; 
-    opacity: 80%; 
+    font-weight: 600;
+    opacity: 80%;
     border-radius: 5px;
-    width:100%;
-    height:45px;
+    width: 100%;
+    height: 45px;
     padding-left: 15px;
     background-color: transparent;
-    border:4px solid #ffb5a7;
+    border: 4px solid #ffb5a7;
     /* float:left; */
     font-size: 15px;
 }
 
+.btn-go{
+  height: 55px;
+  width: 145px;
+  background-color: transparent;
+  border-radius: 20px; 
+  border:4px solid #ffb5a7;
+}
 </style>

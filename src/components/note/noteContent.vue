@@ -10,8 +10,8 @@
 
                 <h2 style="font-family: 'Black Han Sans', sans-serif; opacity: 75%; margin-bottom: 3vh;">쪽지 정보</h2>
                 <div>
-                    <b-button variant="outline-secondary" @click="showModal">답장</b-button>
-                    <b-button variant="outline-secondary" style="margin-left: 1vh; margin-right: 3vh;" @click="deleteNote">삭제</b-button>
+                    <button class="btn-go" variant="outline-secondary" @click="showModal" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">답장</button>
+                    <button class="btn-go" variant="outline-secondary" style="margin-left: 1vh; margin-right: 3vh; font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none" @click="deleteNote">삭제</button>
                 </div>
             </div>
             <div class="d-flex mb-4">
@@ -53,15 +53,18 @@
 
                         <h2 style="font-family: 'Black Han Sans',sans-serif; opacity: 75%; margin-bottom: 3vh;">받는 사람 정보</h2>
                         <div class="d-flex mb-3">
-
+                            <img src="@/assets/img/user.png" style="width: 3vh; height: 3vh;">
+                    <div style="margin-left: 2vh; font-size: 2vh;">{{ user.userNickname }}</div>
                            
                         </div>
                         <div class="d-flex mb-3">
-
+                            <img src="@/assets/img/age.png" style="width: 3vh; height: 3vh;">
+                    <div style="margin-left: 2vh; font-size: 2vh;">{{ user.age }}세</div>
                            
                         </div>
                         <div class="d-flex mb-3">
-
+                            <img src="@/assets/img/email.png" style="width: 3vh; height: 3vh;">
+                    <div style="margin-left: 2vh; font-size: 2vh;">{{ user.emailId }}@{{ user.emailDomain }}</div>
                             
                         </div>
                         <div class="d-flex mb-3">
@@ -78,10 +81,10 @@
                 </div>
                 <template #modal-footer="{ hide }">
                 <button type="button" @click="hide"
-                    style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px;" id="btn-login"
+                    style="width: calc(50% - 15px); background-color: #d3d3d3; height: 60px; " id="btn-login"
                     class="btn">취소</button>
-                <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;" class="btn"
-                 @click="registNote"   >보내기</button>
+                <button type="button" style="width: calc(50% - 15px); height: 60px; background-color: #79CF9F;" class="btn "
+                 @click="registNote"  >보내기</button>
 
 
             </template>
@@ -103,18 +106,29 @@ export default {
         return {
             note: Object,
             modalVisible: false,
-            text:''
+            text: '',
+            user:[]
         };
     },
     created() {
         axios.get(`http://localhost:8080/api/note/view/${this.$route.params.noteNo}`)
             .then(response => {
                 this.note = response.data;
-                console.log("쪽지보기 내용정보" + this.note.content);
+                console.log("쪽지보기 내용정보" + this.note.fromuserId);
+                axios.get(`http://localhost:8080/api/note/user/${this.note.fromuserId}`)
+            .then(response => {
+                this.user = response.data;
+                console.log("답장유저 내용정보" + this.user);
             })
             .catch(error => {
                 console.log(error);
             });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+            
+            
 
     },
     methods: {
@@ -177,3 +191,12 @@ export default {
 };
 </script>
 
+<style scoped>
+.btn-go{
+  height: 55px;
+  width: 145px;
+  background-color: transparent;
+  border-radius: 20px; 
+  border:4px solid #ffb5a7;
+}
+</style>

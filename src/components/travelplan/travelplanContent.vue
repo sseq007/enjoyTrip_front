@@ -12,7 +12,7 @@
                 <div class="d-flex" style="margin-bottom: 2vh;">
 
                     <img src="@/assets/img/user.png" style="width: 3vh; height: 3vh;">
-                    <div class="info" style="margin-left: 2vh; font-size: 2vh;">{{ article.userId }}</div>
+                    <div class="info" style="margin-left: 2vh; font-size: 2vh;">{{ user.userNickname }}</div>
                 </div>
                 <div class="d-flex" style="margin-bottom: 2vh;">
 
@@ -70,11 +70,13 @@
             </div>
 
             <div class="col text-center" style="margin-top: 2vh;">
-                <button type="button" class="btn btn-outline-secondary"
-                    onclick="location.href='/travelplan/list'">글목록</button>
-                <router-link :to="'/travelplan/modify/' + article.articleNo" class="btn btn-outline-secondary"  v-if="userInfo.userId == this.article.userId">글수정</router-link>
+                <button type="button" class="btn-go"
+                    onclick="location.href='/travelplan/list'" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">글목록</button>
+                <button type="button" class="btn-go"
+                    @click="moveModify"  v-if="userInfo.userId == this.article.userId" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">글수정</button>
+                <!-- <router-link :to="'/travelplan/modify/' + article.articleNo" class="btn-go"  v-if="userInfo.userId == this.article.userId">글수정</router-link> -->
                 <!-- <button type="button" class="btn btn-outline-secondary">글수정</button> -->
-                <button type="button" id="btn-delete" class="btn btn-outline-secondary" @click="deleteArticle" v-if="userInfo.userId == this.article.userId">글삭제</button>
+                <button type="button" id="btn-delete" class="btn-go" @click="deleteArticle" v-if="userInfo.userId == this.article.userId" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none">글삭제</button>
 
             </div>
         </div>
@@ -85,7 +87,7 @@
 import axios from "axios";
 import PlanInfoItem from './travelplanInfo.vue';
 import { mapState } from "vuex";
-
+import router from '@/router';
 const memberStore = "memberStore";
 export default {
     name: "PlanView",
@@ -93,7 +95,8 @@ export default {
         return {
             article: [],
             articles: [],
-            map:null
+            map: null,
+            user:[]
         };
     },
     components: {
@@ -109,6 +112,14 @@ export default {
             .then(response => {
                 console.log(response.data);
                 this.article = response.data;
+                axios.get(`http://localhost:8080/api/note/user/${this.article.userId}`)
+            .then(response => {
+                this.user = response.data;
+                console.log("답장유저 내용정보" + this.user);
+            })
+            .catch(error => {
+                console.log(error);
+            });
             })
             .catch(error => {
                 console.log(error);
@@ -124,8 +135,8 @@ export default {
             .catch(error => {
                 console.log(error);
             });
-
-
+            
+            
 
     },
     mounted() {
@@ -174,6 +185,9 @@ export default {
                     });
 
             }
+        },
+        moveModify() {
+            router.push(`/travelplan/modify/${this.article.articleNo}`)
         }
     }
 
@@ -187,5 +201,12 @@ export default {
   opacity: 80%;
   font-size: 17px;
   font-weight: 600;
+}
+.btn-go{
+  height: 55px;
+  width: 145px;
+  background-color: transparent;
+  border-radius: 20px; 
+  border:4px solid #ffb5a7;
 }
 </style>

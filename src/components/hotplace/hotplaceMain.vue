@@ -9,9 +9,9 @@
                 </div>
                 
                 <div style="margin-bottom: 5%;">
-                    <div style="display: flex">
+                    <div style="display: flex; justify-content: space-between;">
                     <div><p style="font-family: 'Noto Sans KR', sans-serif; opacity: 75%">다녀왔던 여행지 중 좋았던 곳의 사진을 보여 주세요!</p></div>
-                    <div v-if="userInfo != null" style="float: left;"><button type="button" class="btn btn-outline-secondary mb-3" style="text-align:right; align-items: right"  @click="moveWrite()">글쓰기</button></div>
+                    <div v-if="userInfo != null" style="float: left;"><button type="button" class="btn-go mb-3" style="font-family: 'Nixgon, sans-serif; color: #ffb5a7; font-weight:600; font-size: 25px; text-decoration-line: none"  @click="moveWrite()">글쓰기</button></div>
                     </div>            
                     <div style="display: flex; flex-wrap: wrap;">
                         <hotplace-list-item v-for="hotplace in hotplaces" :key="hotplace.articleNo" :hotplace="hotplace">
@@ -57,3 +57,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.btn-go{
+  height: 55px;
+  width: 145px;
+  background-color: transparent;
+  border-radius: 20px; 
+  border:4px solid #ffb5a7;
+}
+</style>
